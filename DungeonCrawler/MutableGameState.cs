@@ -17,11 +17,11 @@ namespace SDSMTGDT.DungeonCrawler
             this.drawListeners = new LinkedList<DrawListener>();
         }
 
-        public override void draw(GameTime gameTime)
+        public override void draw(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             foreach (DrawListener dl in drawListeners)
             {
-                dl.draw(gameTime);
+                dl.draw(gameTime, graphics);
             }
         }
 
@@ -35,7 +35,19 @@ namespace SDSMTGDT.DungeonCrawler
 
         public void addDrawListener(DrawListener dl)
         {
-            drawListeners.AddLast(dl);
+            LinkedListNode<DrawListener> dlNode = drawListeners.First;
+            while(dlNode != null && dlNode.Value.getZIndex() > dl.getZIndex())
+            {
+                dlNode = dlNode.Next;
+            }
+            if (dlNode != null)
+            {
+                drawListeners.AddBefore(dlNode, dl);
+            }
+            else
+            {
+                drawListeners.AddFirst(dl);
+            }
         }
 
         public bool removeDrawListener(DrawListener dl)

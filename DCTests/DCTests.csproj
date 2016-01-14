@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="Settings\SettingsTest.cs" />
     <Compile Include="TestGame.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="BootstrapTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

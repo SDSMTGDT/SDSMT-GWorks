@@ -11,7 +11,6 @@ namespace SDSMTGDT.DungeonCrawler
     public class DungeonCrawler : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
         GameStateManager manager;
 
         public DungeonCrawler()
@@ -44,8 +43,6 @@ namespace SDSMTGDT.DungeonCrawler
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -80,8 +77,7 @@ namespace SDSMTGDT.DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            manager.draw(gameTime);
-
+            manager.draw(gameTime, graphics);
             base.Draw(gameTime);
         }
     }

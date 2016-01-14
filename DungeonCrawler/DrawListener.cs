@@ -8,6 +8,10 @@ namespace SDSMTGDT.DungeonCrawler
 {
     public interface DrawListener
     {
-        void draw(GameTime gameTime);
+        //Draws components to the screen
+        void draw(GameTime gameTime, GraphicsDeviceManager graphics);
+   
+        //Returns the depth at which to draw, lower is closer to the screen
+        int getZIndex();
     }
 }

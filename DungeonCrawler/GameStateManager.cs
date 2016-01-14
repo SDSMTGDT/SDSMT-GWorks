@@ -47,11 +47,11 @@ namespace SDSMTGDT.DungeonCrawler
             states.Peek().update(gameTime);
         }
 
-        public void draw(GameTime gameTime)
+        public void draw(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             if (states.Count == 0)
                 return;
-            states.Peek().draw(gameTime);
+            states.Peek().draw(gameTime, graphics);
         }
         public Settings.SettingsManager getSettingsManager()
         {

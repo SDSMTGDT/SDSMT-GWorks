@@ -15,7 +15,10 @@ namespace SDSMTGDT.DungeonCrawler
             this.manager = manager;
         }
  
-        public abstract void draw(GameTime gameTime);
+        public abstract void draw (
+            GameTime gameTime,
+            GraphicsDeviceManager graphics
+        );
 
         public abstract void update(GameTime gameTime);
 

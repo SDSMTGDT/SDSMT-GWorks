@@ -16,14 +16,17 @@ namespace SDSMTGDT.DungeonCrawler
             GameStateManager manager) : base(manager)
         {
             this.updateListeners = updateListeners;
-            this.drawListeners = drawListeners;
+            // Sorts by z level with lower z indexes last
+            this.drawListeners = drawListeners.OrderByDescending(
+                (drawListener) => drawListener.getZIndex()
+            );
         }
 
-        public override void draw(GameTime gameTime)
+        public override void draw(GameTime gameTime, GraphicsDeviceManager graphics)
         {
             foreach(DrawListener dl in drawListeners)
             {
-                dl.draw(gameTime);
+                dl.draw(gameTime, graphics);
             }
         }
 
