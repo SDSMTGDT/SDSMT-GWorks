@@ -32,8 +32,8 @@ namespace SDSMTGDT.DungeonCrawler
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            manager.getSettingsManager().update(SettingIndexes.WINDOW_HEIGHT, (uint)0);
-            manager.getSettingsManager().update(SettingIndexes.WINDOW_WIDTH, (uint)0);
+            manager.getSettingsManager().update(EngineSettings.WINDOW_HEIGHT, (uint)0);
+            manager.getSettingsManager().update(EngineSettings.WINDOW_WIDTH, (uint)0);
 
             // TODO: Research back buffer vs viewport
         }

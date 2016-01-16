@@ -7,11 +7,13 @@ namespace SDSMTGDT.GWorks.Settings
 {
     public class SettingsManager
     {
+        // ISetting allows for storing settings of different datatypes in the same list
         private interface ISetting { }
+
+        // Setting stores a generic value, and fires an event when the value is updated
         private class Setting<T> : ISetting
         {
             private T _value = default(T);
-            public Type type { get; private set; } = typeof(T);
             public T value {
                 get { return _value; }
                 set { _value = value; settingUpdated?.Invoke(value); }
@@ -19,16 +21,23 @@ namespace SDSMTGDT.GWorks.Settings
             public event Action<T> settingUpdated;
         }
 
+        // Contains the settings associated with the game
         private List<ISetting> settings;
+
+        // Contains the indexes for the default game settings
+        private EngineSettings defaultSettings;
 
         public SettingsManager()
         {
             settings = new List<ISetting>();
-            settings.Capacity = SettingIndexes.SETTINGS_SIZE;
-            for (int i = 0; i < SettingIndexes.SETTINGS_SIZE; i++)
-            {
-                settings.Add(null);
-            }
+            defaultSettings = new EngineSettings(this);
+        }
+
+        public SettingIndex<T> addSetting<T>()
+        {
+            settings.Add(null);
+            SettingIndex<T> newSetting = settings.Count - 1;
+            return newSetting;
         }
 
         public void update<T>(SettingIndex<T> index, T value)
