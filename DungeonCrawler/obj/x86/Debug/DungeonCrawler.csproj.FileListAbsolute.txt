@@ -22,11 +22,11 @@ C:\Users\7280320\Source\Repos\DungeonCrawler\bin\Windows\Debug\SharpDX.RawInput.
 C:\Users\7280320\Source\Repos\DungeonCrawler\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\7280320\Source\Repos\DungeonCrawler\obj\x86\Debug\DungeonCrawler.exe
 C:\Users\7280320\Source\Repos\DungeonCrawler\obj\x86\Debug\DungeonCrawler.pdb
-C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\obj\x86\Debug\DungeonCrawler.exe
-C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\obj\x86\Debug\DungeonCrawler.pdb
+C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\DungeonCrawler.exe.config
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\DungeonCrawler.exe
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\DungeonCrawler.pdb
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\MonoGame.Framework.dll
+C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SDSMT_GWorks.dll
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.MediaFoundation.dll
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.dll
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.XAudio2.dll
@@ -36,6 +36,7 @@ C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\Sh
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.XInput.dll
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.RawInput.dll
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.Direct3D9.dll
+C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SDSMT_GWorks.pdb
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\MonoGame.Framework.xml
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.MediaFoundation.xml
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.xml
@@ -47,3 +48,5 @@ C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\Sh
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\obj\x86\Debug\DungeonCrawler.csprojResolveAssemblyReference.cache
+C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\obj\x86\Debug\DungeonCrawler.exe
+C:\Users\7280320\Source\Repos\DungeonCrawler\DungeonCrawler\obj\x86\Debug\DungeonCrawler.pdb

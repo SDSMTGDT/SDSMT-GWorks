@@ -1,22 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SDSMTGDT.GWorks.Settings;
-using SDSMTGDT.GWorks.GameStates;
 
-namespace SDSMTGDT.DungeonCrawler
+namespace SDSMTGWORKS
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class DungeonCrawler : Game
+    public class Engine
     {
         GraphicsDeviceManager graphics;
-        GameStateManager manager;
+        SpriteBatch spriteBatch;
 
-        public DungeonCrawler()
+        public Game1()
         {
-            manager = new GameStateManager();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -32,10 +29,6 @@ namespace SDSMTGDT.DungeonCrawler
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            manager.getSettingsManager().update(SettingIndexes.WINDOW_HEIGHT, (uint)0);
-            manager.getSettingsManager().update(SettingIndexes.WINDOW_WIDTH, (uint)0);
-
-            // TODO: Research back buffer vs viewport
         }
 
         /// <summary>
@@ -44,6 +37,8 @@ namespace SDSMTGDT.DungeonCrawler
         /// </summary>
         protected override void LoadContent()
         {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -66,7 +61,7 @@ namespace SDSMTGDT.DungeonCrawler
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            manager.update(gameTime);
+
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -78,7 +73,10 @@ namespace SDSMTGDT.DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            manager.draw(gameTime, graphics);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+
             base.Draw(gameTime);
         }
     }
