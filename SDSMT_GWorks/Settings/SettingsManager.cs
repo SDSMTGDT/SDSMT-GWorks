@@ -25,12 +25,12 @@ namespace SDSMTGDT.GWorks.Settings
         private List<ISetting> settings;
 
         // Contains the indexes for the default game settings
-        private EngineSettings defaultSettings;
+        private EngineSettings engineSettings;
 
         public SettingsManager()
         {
             settings = new List<ISetting>();
-            defaultSettings = new EngineSettings(this);
+            engineSettings = new EngineSettings(this);
         }
 
         public SettingIndex<T> addSetting<T>()
@@ -66,5 +66,10 @@ namespace SDSMTGDT.GWorks.Settings
             }
             ((Setting<T>)settings[index]).settingUpdated += updateListener;
         }        
+
+        public EngineSettings getEngineSettings()
+        {
+            return engineSettings;
+        }
     }
 }

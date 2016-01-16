@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using static SDSMTGDT.GWorks.Settings.SettingIndexes;
 
 namespace SDSMTGDT.GWorks.Settings
 {
@@ -11,19 +10,22 @@ namespace SDSMTGDT.GWorks.Settings
     public class SettingsTest
     {
         private SettingsManager manager;
+        private EngineSettings engineSettings;
+
         //called to create a new manager before each test.
         [SetUp]
         public void setup()
         {
             manager = new SettingsManager();
+            engineSettings = manager.getEngineSettings();
         }
 
         //This function Loads 100 into VOLUME_MASTER and checks it was done
         [Test]
         public void updateFromNull()
         {
-            manager.update<uint>(VOLUME_MASTER, 100);
-            Assert.AreEqual(manager.access(VOLUME_MASTER), 100);
+            manager.update<uint>(engineSettings.VOLUME_MASTER, 100);
+            Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 100);
         }
 
         //This function tests to see if the master volume has been 
@@ -32,8 +34,8 @@ namespace SDSMTGDT.GWorks.Settings
         public void updateFromInitialized()
         {
             updateFromNull();
-            manager.update<uint>(VOLUME_MASTER, 0);
-            Assert.AreEqual(manager.access(VOLUME_MASTER), 0);
+            manager.update<uint>(engineSettings.VOLUME_MASTER, 0);
+            Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 0);
         }
 
         //Tests for settings updates
@@ -42,8 +44,8 @@ namespace SDSMTGDT.GWorks.Settings
         [Test]
         public void testEvents()
         {
-            manager.addUpdateListener(VOLUME_MASTER, (value) => { Assert.AreEqual(value, 50); });
-            manager.update<uint>(VOLUME_MASTER, 50);
+            manager.addUpdateListener(engineSettings.VOLUME_MASTER, (value) => { Assert.AreEqual(value, 50); });
+            manager.update<uint>(engineSettings.VOLUME_MASTER, 50);
         }
     }
 }

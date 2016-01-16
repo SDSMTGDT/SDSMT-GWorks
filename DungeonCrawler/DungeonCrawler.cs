@@ -13,10 +13,12 @@ namespace SDSMTGDT.DungeonCrawler
     {
         GraphicsDeviceManager graphics;
         GameStateManager manager;
+        EngineSettings engineSettings;
 
         public DungeonCrawler()
         {
             manager = new GameStateManager();
+            engineSettings = manager.getSettingsManager().getEngineSettings();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -32,8 +34,8 @@ namespace SDSMTGDT.DungeonCrawler
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            manager.getSettingsManager().update(EngineSettings.WINDOW_HEIGHT, (uint)0);
-            manager.getSettingsManager().update(EngineSettings.WINDOW_WIDTH, (uint)0);
+            manager.getSettingsManager().update(engineSettings.WINDOW_HEIGHT, (uint)0);
+            manager.getSettingsManager().update(engineSettings.WINDOW_WIDTH, (uint)0);
 
             // TODO: Research back buffer vs viewport
         }
