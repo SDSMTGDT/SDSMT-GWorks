@@ -31,5 +31,15 @@ namespace SDSMTGDT.GWorks.GameStates
         {
 
         }
+
+        public virtual void onLoadState()
+        {
+
+        }
+
+        public virtual void onUnloadState()
+        {
+
+        }
     }
 }
