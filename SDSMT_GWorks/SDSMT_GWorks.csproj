@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\EventProducer.cs" />
+    <Compile Include="Events\Generic\OneArgument.cs" />
+    <Compile Include="Events\Generic\TwoArgument.cs" />
     <Compile Include="GameStates\DrawListener.cs" />
     <Compile Include="GameStates\GameState.cs" />
     <Compile Include="GameStates\GameStateManager.cs" />

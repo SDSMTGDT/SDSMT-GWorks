@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BootstrapTests.cs" />
+    <Compile Include="Events\TestGenericEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\SettingsTest.cs" />
     <Compile Include="TestGame.cs" />
