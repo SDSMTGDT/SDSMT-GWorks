@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.Gworks.Events
 {
-    // Defines the method signature for consuming a game event
+    // Defines the method signature for subscribing to a game event
     public delegate void GameEvent<eventType>(object sender, eventType eventInfo);
     
     // An interface which all information passed through game events should conform to

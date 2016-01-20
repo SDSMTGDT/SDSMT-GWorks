@@ -16,7 +16,7 @@ namespace SDSMTGDT.Gworks.Events
         public T1 item1 { get; set; }
     }
 
-    public class GenericGameEventProducer<T1> : GameEventPublisher<GenericGameEventInfo<T1>>
+    public class GenericGameEventPublisher<T1> : GameEventPublisher<GenericGameEventInfo<T1>>
     {
         public void publish(T1 item1)
         {
@@ -25,5 +25,5 @@ namespace SDSMTGDT.Gworks.Events
         }
     }
 
-    public interface GenericGameEventConsumer<T1> : GameEventSubscriber<GenericGameEventInfo<T1>> { }
+    public interface GenericGameEventSubscriber<T1> : GameEventSubscriber<GenericGameEventInfo<T1>> { }
 }
