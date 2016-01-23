@@ -18,6 +18,12 @@ namespace SDSMTGDT.Gworks.Events
 
     public class GenericGameEventProducer<T1> : GameEventPublisher<GenericGameEventInfo<T1>>
     {
+        public GenericGameEventProducer(EventManager manager, string description) 
+            : base(manager, description)
+        {
+
+        }
+
         public void publish(T1 item1)
         {
             GenericGameEventInfo<T1> info = new GenericGameEventInfo<T1>(item1);

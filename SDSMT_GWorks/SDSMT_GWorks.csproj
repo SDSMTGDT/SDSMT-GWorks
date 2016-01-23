@@ -44,7 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\EventProducer.cs" />
+    <Compile Include="Events\EventManager.cs" />
+    <Compile Include="Events\EventType.cs" />
+    <Compile Include="Events\GameEventPublisher.cs" />
+    <Compile Include="Events\GameEvent.cs" />
+    <Compile Include="Events\GameEventInfo.cs" />
+    <Compile Include="Events\GameEventSubscriber.cs" />
     <Compile Include="Events\Generic\OneArgument.cs" />
     <Compile Include="Events\Generic\TwoArgument.cs" />
     <Compile Include="GameStates\DrawListener.cs" />
