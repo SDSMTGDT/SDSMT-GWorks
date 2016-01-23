@@ -14,14 +14,14 @@ namespace SDSMTGDT.Gworks.Events
         [Test]
         public void testGenericOneItemEvent()
         {
-            var stringPublisher = new GenericGameEventPublisher<string>();
+            var stringProducer = new GenericGameEventProducer<string>();
             string testValue = "test";
-            stringPublisher.addListener((sender, info) => Assert.AreEqual(testValue, info.item1));
-            stringPublisher.publish(testValue);
-            var intPublisher = new GenericGameEventPublisher<int>();
+            stringProducer.addListener((sender, info) => Assert.AreEqual(testValue, info.item1));
+            stringProducer.publish(testValue);
+            var intProducer = new GenericGameEventProducer<int>();
             int testInteger = 23;
-            intPublisher.addListener((sender, info) => Assert.AreEqual(testInteger, info.item1));
-            intPublisher.publish(testInteger);
+            intProducer.addListener((sender, info) => Assert.AreEqual(testInteger, info.item1));
+            intProducer.publish(testInteger);
         }
     }
 }
