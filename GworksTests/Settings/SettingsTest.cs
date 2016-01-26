@@ -22,7 +22,7 @@ namespace SDSMTGDT.GWorks.Settings
 
         //This function Loads 100 into VOLUME_MASTER and checks it was done
         [Test]
-        public void updateFromNull()
+        public void updateSettingFromNull()
         {
             manager.update<uint>(engineSettings.VOLUME_MASTER, 100);
             Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 100);
@@ -31,9 +31,9 @@ namespace SDSMTGDT.GWorks.Settings
         //This function tests to see if the master volume has been 
         //updated from the existing value
         [Test]
-        public void updateFromInitialized()
+        public void updateSettingFromInitialized()
         {
-            updateFromNull();
+            updateSettingFromNull();
             manager.update<uint>(engineSettings.VOLUME_MASTER, 0);
             Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 0);
         }
@@ -42,7 +42,7 @@ namespace SDSMTGDT.GWorks.Settings
         //When update is called, the corresponding lamdba should be
         //executed
         [Test]
-        public void testEvents()
+        public void testSettingEvents()
         {
             manager.addUpdateListener(engineSettings.VOLUME_MASTER, (value) => { Assert.AreEqual(value, 50); });
             manager.update<uint>(engineSettings.VOLUME_MASTER, 50);
