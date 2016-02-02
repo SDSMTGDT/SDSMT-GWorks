@@ -16,6 +16,10 @@ namespace SDSMTGDT.Gworks.Events
         EventManager eventManager;
         GameStateManager gameStateManager;
 
+        /// <summary>
+        /// Defines the objects to create and functions to run before each
+        /// test is run.
+        /// </summary>
         [SetUp]
         public void initEventManager()
         {
@@ -23,6 +27,10 @@ namespace SDSMTGDT.Gworks.Events
             eventManager = gameStateManager.getEventManager();
         }
 
+        /// <summary>
+        /// This test registers an event with one piece of information and
+        /// then updates a listener.
+        /// </summary>
         [Test]
         public void testGenericOneItemEvent()
         {
@@ -47,6 +55,10 @@ namespace SDSMTGDT.Gworks.Events
                 Assert.Fail();
         }
 
+        /// <summary>
+        /// This test registers an event with two pieces of information and
+        /// then updates a listener with this information.
+        /// </summary>
         [Test]
         public void testGenericTwoItemEvent()
         {
@@ -75,6 +87,9 @@ namespace SDSMTGDT.Gworks.Events
                 Assert.Fail();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [Test]
         public void testGenericOneItemDelayedEvent()
         {
