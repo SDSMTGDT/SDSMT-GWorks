@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDSMTGDT.Gworks.Events
+namespace SDSMTGDT.GWorks.Events
 {
     //Provides an object oriented way to deal with event listeners
     public interface GameEventSubscriber<T> where T : GameEventInfo

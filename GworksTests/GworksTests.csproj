@@ -8,8 +8,8 @@
     <ProjectGuid>{F47BB1F9-DFE3-4689-9AF6-1B7C5769ED79}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SDSMTGDT.Gworks</RootNamespace>
-    <AssemblyName>GworksTests</AssemblyName>
+    <RootNamespace>SDSMTGDT.GWorks</RootNamespace>
+    <AssemblyName>GWorksTests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <MonoGameContentBuilderExe>

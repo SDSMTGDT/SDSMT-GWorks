@@ -1,15 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SDSMTGDT.GWorks.GameStates;
 
 namespace SDSMTGDT.DungeonCrawler
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// 
     /// </summary>
     public class TestGame : Game
     {
         GraphicsDeviceManager graphics;
+        GameStateManager gStateManager;
         SpriteBatch spriteBatch;
 
         public TestGame()
@@ -27,7 +29,7 @@ namespace SDSMTGDT.DungeonCrawler
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            gStateManager = new GameStateManager();
             base.Initialize();
         }
 

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using SDSMTGDT.GWorks.GameStates;
-using SDSMTGDT.Gworks.Events.Generic;
+using SDSMTGDT.GWorks.Events.Generic;
 
-namespace SDSMTGDT.Gworks.Events
+namespace SDSMTGDT.GWorks.Events
 {
     //TODO: write more tests
     [TestFixture]

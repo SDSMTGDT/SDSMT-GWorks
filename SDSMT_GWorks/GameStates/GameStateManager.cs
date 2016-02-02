@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using SDSMTGDT.GWorks.Graphics;
 using SDSMTGDT.GWorks.Settings;
-using SDSMTGDT.Gworks.Events;
+using SDSMTGDT.GWorks.Events;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace SDSMTGDT.GWorks.GameStates
