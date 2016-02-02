@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDSMTGDT.Gworks.Events
+namespace SDSMTGDT.GWorks.Events
 {
     // Descending classes must implement a publish method which calls fireEvent
     public abstract class GameEventPublisher<T> where T : GameEventInfo

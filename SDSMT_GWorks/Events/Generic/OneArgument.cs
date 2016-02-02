@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDSMTGDT.Gworks.Events
+namespace SDSMTGDT.GWorks.Events
 {
     public class GenericGameEventInfo<T1> : GameEventInfo
     {

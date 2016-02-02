@@ -5,7 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using SDSMTGDT.GWorks.Graphics;
 using SDSMTGDT.GWorks.Settings;
-using SDSMTGDT.Gworks.Events;
+using SDSMTGDT.GWorks.Events;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SDSMTGDT.GWorks.GameStates
 {
@@ -52,7 +53,7 @@ namespace SDSMTGDT.GWorks.GameStates
             eventManager.processQueuedEvents();
         }
 
-        public void draw(GameTime gameTime, GraphicsDeviceManager graphics)
+        public void draw(GameTime gameTime, SpriteBatch graphics)
         {
             if (states.Count == 0)
                 return;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDSMTGDT.Gworks.Story
+namespace SDSMTGDT.GWorks.Story
 {
     //TODO: Take in information about the story state
     public class InvalidStoryStateException : Exception

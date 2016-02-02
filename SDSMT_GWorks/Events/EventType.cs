@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDSMTGDT.Gworks.Events
+namespace SDSMTGDT.GWorks.Events
 {
     //Stores information on an event
     //Acts as a connector between publishers and subscribers in the manager
