@@ -12,7 +12,9 @@ namespace SDSMTGDT.GWorks.Settings
         private SettingsManager manager;
         private EngineSettings engineSettings;
 
-        //called to create a new manager before each test.
+        /// <summary>
+        /// called to create a new manager before each test.
+        /// </summary>
         [SetUp]
         public void setup()
         {
@@ -20,7 +22,9 @@ namespace SDSMTGDT.GWorks.Settings
             engineSettings = manager.getEngineSettings();
         }
 
-        //This function Loads 100 into VOLUME_MASTER and checks it was done
+        /// <summary>
+        /// This function Loads 100 into VOLUME_MASTER and checks it was done
+        /// </summary>
         [Test]
         public void updateSettingFromNull()
         {
@@ -28,8 +32,10 @@ namespace SDSMTGDT.GWorks.Settings
             Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 100);
         }
 
-        //This function tests to see if the master volume has been 
-        //updated from the existing value
+        /// <summary>
+        /// This function tests to see if the master volume has been 
+        /// updated from the existing value
+        /// </summary>
         [Test]
         public void updateSettingFromInitialized()
         {
@@ -38,9 +44,11 @@ namespace SDSMTGDT.GWorks.Settings
             Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 0);
         }
 
-        //Tests for settings updates
-        //When update is called, the corresponding lamdba should be
-        //executed
+        /// <summary>
+        /// Tests for settings updates
+        /// When update is called, the corresponding lamdba should be
+        /// executed
+        /// </summary>
         [Test]
         public void testSettingEvents()
         {

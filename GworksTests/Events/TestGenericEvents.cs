@@ -16,6 +16,10 @@ namespace SDSMTGDT.GWorks.Events
         EventManager eventManager;
         GameStateManager gameStateManager;
 
+        /// <summary>
+        /// Creates a new gameStateManager and gives it a new eventManager.
+        /// This is done before each test.
+        /// </summary>
         [SetUp]
         public void initEventManager()
         {
@@ -23,6 +27,10 @@ namespace SDSMTGDT.GWorks.Events
             eventManager = gameStateManager.getEventManager();
         }
 
+        /// <summary>
+        /// Registers an event with one piece of information and then tests
+        /// that a listener was updated correctly with this information.
+        /// </summary>
         [Test]
         public void testGenericOneItemEvent()
         {
@@ -47,6 +55,10 @@ namespace SDSMTGDT.GWorks.Events
                 Assert.Fail();
         }
 
+        /// <summary>
+        /// Registers an event with two pieces of information and tests that
+        /// a listener was updated correctly with this information.
+        /// </summary>
         [Test]
         public void testGenericTwoItemEvent()
         {
@@ -75,6 +87,11 @@ namespace SDSMTGDT.GWorks.Events
                 Assert.Fail();
         }
 
+        /// <summary>
+        /// Registers an event that does not activate immediately. This event
+        /// is then fired and a listener is tested to ensure it updated
+        /// correctly.
+        /// </summary>
         [Test]
         public void testGenericOneItemDelayedEvent()
         {
@@ -102,6 +119,10 @@ namespace SDSMTGDT.GWorks.Events
                 Assert.Fail();
         }
 
+        /// <summary>
+        /// registers an event and then tests to ensure that both of the
+        /// listeners were updated correctly.
+        /// </summary>
         [Test]
         public void testMultipleEventListeners()
         {
@@ -125,6 +146,11 @@ namespace SDSMTGDT.GWorks.Events
                 Assert.Fail();
         }
 
+        /// <summary>
+        /// Registers an event but does not fire it immediately. Then the event
+        /// is fired and multiple listeners are tested to ensure that they
+        /// update correctly.
+        /// </summary>
         [Test]
         public void testMultipleDelayedEventListeners()
         {

@@ -13,6 +13,10 @@ namespace SDSMTGDT.GWorks.Story
     {
         private EventManager eventManager;
         private StoryBoard storyBoard;
+
+        /// <summary>
+        /// creates an eventManager and a storyBoard before each test.
+        /// </summary>
         [SetUp]
         public void setUp()
         {
@@ -20,6 +24,10 @@ namespace SDSMTGDT.GWorks.Story
             storyBoard = new StoryBoard(eventManager, "Main Storyboard");
         }
 
+        /// <summary>
+        /// Tests that an event that has been completed is appropriately
+        /// handled.
+        /// </summary>
         [Test]
         public void testStoryPassedEvent()
         {
@@ -35,6 +43,10 @@ namespace SDSMTGDT.GWorks.Story
             rootNode.setTrue();
         }
 
+        /// <summary>
+        /// Tests that an event that can be completed is correctly marked as
+        /// possible.
+        /// </summary>
         [Test]
         public void testStoryPossibleEvent()
         {
