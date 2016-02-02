@@ -29,6 +29,7 @@ namespace SDSMTGDT.Gworks.Events
             internal T eventInfo { get; private set; }
             internal DelayedEvent(EventManager manager, object sender, EventType<T> eventType, T eventInfo)
             {
+                this.manager = manager;
                 this.sender = sender;
                 this.eventType = eventType;
                 this.eventInfo = eventInfo;

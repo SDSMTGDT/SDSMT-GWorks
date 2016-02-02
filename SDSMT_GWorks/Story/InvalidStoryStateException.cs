@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.Gworks.Story
 {
+    //TODO: Take in information about the story state
     public class InvalidStoryStateException : Exception
     {
         internal InvalidStoryStateException()

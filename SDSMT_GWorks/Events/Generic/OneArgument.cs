@@ -16,9 +16,9 @@ namespace SDSMTGDT.Gworks.Events
         public T1 item1 { get; set; }
     }
 
-    public class GenericGameEventProducer<T1> : GameEventPublisher<GenericGameEventInfo<T1>>
+    public class GenericGameEventPublisher<T1> : GameEventPublisher<GenericGameEventInfo<T1>>
     {
-        public GenericGameEventProducer(EventManager manager, string description) 
+        public GenericGameEventPublisher(EventManager manager, string description) 
             : base(manager, description)
         {
 
@@ -28,6 +28,12 @@ namespace SDSMTGDT.Gworks.Events
         {
             GenericGameEventInfo<T1> info = new GenericGameEventInfo<T1>(item1);
             fireEvent(info);
+        }
+
+        public void publishDelayedEvent(T1 item1)
+        {
+            GenericGameEventInfo<T1> info = new GenericGameEventInfo<T1>(item1);
+            queueEvent(info);
         }
     }
 

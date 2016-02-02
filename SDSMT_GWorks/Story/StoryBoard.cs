@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.Gworks.Story
 {
+    //TODO: Detect cycles in story
     [Serializable]
     public class StoryBoard 
     {
