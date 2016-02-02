@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SDSMTGDT.GWorks.GameStates;
+using SDSMTGDT.GWorks.GameStates.ColorChanger;
 
 namespace SDSMTGDT.DungeonCrawler
 {
@@ -30,6 +31,9 @@ namespace SDSMTGDT.DungeonCrawler
         {
             // TODO: Add your initialization logic here
             gStateManager = new GameStateManager();
+            MutableGameState colorChanger = new MutableGameState(gStateManager);
+            colorChanger.addDrawListener(new ScreenColorChanger());
+            gStateManager.push(colorChanger);
             base.Initialize();
         }
 
@@ -75,10 +79,7 @@ namespace SDSMTGDT.DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-           
-            // TODO: Add your drawing code here
-
+            gStateManager.draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }

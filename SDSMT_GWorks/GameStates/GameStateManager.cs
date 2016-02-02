@@ -57,7 +57,9 @@ namespace SDSMTGDT.GWorks.GameStates
         {
             if (states.Count == 0)
                 return;
+            graphics.Begin();
             states.Peek().draw(gameTime, graphics);
+            graphics.End();
         }
         public Settings.SettingsManager getSettingsManager()
         {
