@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SDSMTGDT.GWorks.GameStates
 {
@@ -17,7 +18,7 @@ namespace SDSMTGDT.GWorks.GameStates
             this.drawListeners = new LinkedList<DrawListener>();
         }
 
-        public override void draw(GameTime gameTime, GraphicsDeviceManager graphics)
+        public override void draw(GameTime gameTime, SpriteBatch graphics)
         {
             foreach (DrawListener dl in drawListeners)
             {

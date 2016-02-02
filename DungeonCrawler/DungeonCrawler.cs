@@ -11,7 +11,7 @@ namespace SDSMTGDT.DungeonCrawler
     /// </summary>
     public class DungeonCrawler : Game
     {
-        GraphicsDeviceManager graphics;
+        SpriteBatch graphics;
         GameStateManager manager;
         EngineSettings engineSettings;
 
@@ -19,7 +19,7 @@ namespace SDSMTGDT.DungeonCrawler
         {
             manager = new GameStateManager();
             engineSettings = manager.getSettingsManager().getEngineSettings();
-            graphics = new GraphicsDeviceManager(this);
+            graphics = new SpriteBatch(GraphicsDevice);
             Content.RootDirectory = "Content";
         }
 
