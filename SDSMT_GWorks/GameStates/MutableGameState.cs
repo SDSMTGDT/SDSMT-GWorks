@@ -37,7 +37,7 @@ namespace SDSMTGDT.GWorks.GameStates
         public void addDrawListener(DrawListener dl)
         {
             LinkedListNode<DrawListener> dlNode = drawListeners.First;
-            while(dlNode != null && dlNode.Value.getZIndex() > dl.getZIndex())
+            while(dlNode != null && dl.getZIndex() < dlNode.Value.getZIndex())
             {
                 dlNode = dlNode.Next;
             }
@@ -47,7 +47,7 @@ namespace SDSMTGDT.GWorks.GameStates
             }
             else
             {
-                drawListeners.AddFirst(dl);
+                drawListeners.AddLast(dl);
             }
         }
 

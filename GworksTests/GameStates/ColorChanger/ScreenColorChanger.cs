@@ -10,13 +10,25 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
 {
     internal class ScreenColorChanger : DrawListener
     {
-        private Random rand = new Random();
-        private Color curr = new Color(0, 0, 0);
-        private Color dest = new Color(255, 255, 255);
+        private Random rand;
+        private Color curr, dest;
         private double speed = 0.2;
+        private Texture2D rectTexture;
+        private Rectangle bounds;
+
+        internal ScreenColorChanger(GraphicsDevice graphicsDevice, Rectangle bounds)
+        {
+            this.rand = new Random();
+            this.curr = new Color(rand.Next(256), rand.Next(256), rand.Next(256));
+            this.dest = new Color(rand.Next(256), rand.Next(256), rand.Next(256));
+            this.rectTexture = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
+            rectTexture.SetData(new Color[] { Color.White });
+            this.bounds = bounds;
+        }
+
         public void draw(GameTime gameTime, SpriteBatch graphics)
         {
-            graphics.GraphicsDevice.Clear(curr);
+            graphics.Draw(rectTexture, bounds, curr);
             byte delta = (byte)Math.Round(gameTime.ElapsedGameTime.Milliseconds * speed);
 
             if (curr.R - dest.R < 0)
@@ -44,7 +56,7 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
 
         public int getZIndex()
         {
-            return 0;
+            return int.MaxValue;
         }
     }
 }
