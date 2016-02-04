@@ -11,15 +11,13 @@ namespace SDSMTGDT.DungeonCrawler
     /// </summary>
     public class DungeonCrawler : Game
     {
-        SpriteBatch graphics;
-        GameStateManager manager;
-        EngineSettings engineSettings;
+        GraphicsDeviceManager graphics;
+        GameStateManager gStateManager;
+        SpriteBatch spriteBatch;
 
         public DungeonCrawler()
         {
-            manager = new GameStateManager();
-            engineSettings = manager.getSettingsManager().getEngineSettings();
-            graphics = new SpriteBatch(GraphicsDevice);
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -32,10 +30,8 @@ namespace SDSMTGDT.DungeonCrawler
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            gStateManager = new GameStateManager();
             base.Initialize();
-            manager.getSettingsManager().update(engineSettings.WINDOW_HEIGHT, (uint)0);
-            manager.getSettingsManager().update(engineSettings.WINDOW_WIDTH, (uint)0);
 
             // TODO: Research back buffer vs viewport
         }
@@ -68,7 +64,7 @@ namespace SDSMTGDT.DungeonCrawler
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            manager.update(gameTime);
+            gStateManager.update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -80,7 +76,7 @@ namespace SDSMTGDT.DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            manager.draw(gameTime, graphics);
+            gStateManager.draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }
