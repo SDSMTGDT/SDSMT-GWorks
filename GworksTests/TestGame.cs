@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SDSMTGDT.GWorks.GameStates;
 using SDSMTGDT.GWorks.GameStates.ColorChanger;
+using SDSMTGDT.GWorks.GameStates.Diagnostic;
+using System;
 
 namespace SDSMTGDT.DungeonCrawler
 {
@@ -14,6 +16,7 @@ namespace SDSMTGDT.DungeonCrawler
         GraphicsDeviceManager graphics;
         GameStateManager gStateManager;
         SpriteBatch spriteBatch;
+        SpriteFont diagnosticFont;
 
         public TestGame()
         {
@@ -29,12 +32,33 @@ namespace SDSMTGDT.DungeonCrawler
         /// </summary>
         protected override void Initialize()
         {
+            base.Initialize();
             // TODO: Add your initialization logic here
             gStateManager = new GameStateManager();
-            MutableGameState colorChanger = new MutableGameState(gStateManager);
-            colorChanger.addDrawListener(new ScreenColorChanger());
-            gStateManager.push(colorChanger);
-            base.Initialize();
+
+            Rectangle first = graphics.GraphicsDevice.Viewport.Bounds;
+            first.Width = first.Width / 2;
+
+            Rectangle second = first;
+            second.X = second.Width;
+
+            MutableGameState testState = new MutableGameState(gStateManager);
+
+            //Create new Screen color changers and add them to the game state
+            //The Graphics Device creates the texture,
+            //The second parameter sets the area to draw in
+            testState.addDrawListener(new ScreenColorChanger(
+                graphics.GraphicsDevice,
+                first
+            ));
+            testState.addDrawListener(new ScreenColorChanger(
+                graphics.GraphicsDevice,
+                second
+            ));
+
+            //Create a new diagnostic display at (20, 20)
+            testState.addDrawListener(new DiagnosticDisplay(20, 20, diagnosticFont));
+            gStateManager.push(testState);
         }
 
         /// <summary>
@@ -45,7 +69,8 @@ namespace SDSMTGDT.DungeonCrawler
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            diagnosticFont = Content.Load<SpriteFont>("diagnostic");
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -79,6 +104,7 @@ namespace SDSMTGDT.DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            graphics.GraphicsDevice.Clear(Color.White);
             gStateManager.draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
