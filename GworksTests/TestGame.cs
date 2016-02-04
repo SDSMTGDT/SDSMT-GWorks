@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using SDSMTGDT.GWorks.GameStates;
 using SDSMTGDT.GWorks.GameStates.ColorChanger;
 using SDSMTGDT.GWorks.GameStates.Diagnostic;
+using SDSMTGDT.GWorks.GameStates.MovingObjects;
 using System;
 
 namespace SDSMTGDT.DungeonCrawler
@@ -43,6 +44,12 @@ namespace SDSMTGDT.DungeonCrawler
             second.X = second.Width;
 
             MutableGameState testState = new MutableGameState(gStateManager);
+
+            MovingObject movingObject = new MovingObject(graphics.GraphicsDevice,
+                new Rectangle(50, 0, 50, 50));
+
+            testState.addUpdateListener(movingObject);
+            testState.addDrawListener(movingObject);
 
             //Create new Screen color changers and add them to the game state
             //The Graphics Device creates the texture,
@@ -94,7 +101,7 @@ namespace SDSMTGDT.DungeonCrawler
                 Exit();
 
             // TODO: Add your update logic here
-
+            gStateManager.update(gameTime);
             base.Update(gameTime);
         }
 

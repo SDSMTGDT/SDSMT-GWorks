@@ -13,7 +13,7 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
         private static Random rand = new Random();
         private static Texture2D rectTexture;
         private Color curr, dest;
-        private double speed = 0.2;
+        private double speed = .2;
         private Rectangle bounds;
 
         //Graphics device is used to create a texture
