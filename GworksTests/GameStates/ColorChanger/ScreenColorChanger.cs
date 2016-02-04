@@ -10,19 +10,23 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
 {
     internal class ScreenColorChanger : DrawListener
     {
-        private Random rand;
+        private static Random rand = new Random();
+        private static Texture2D rectTexture;
         private Color curr, dest;
         private double speed = 0.2;
-        private Texture2D rectTexture;
         private Rectangle bounds;
 
+        //Graphics device is used to create a texture
+        //Bounds defines where the color changer will draw
         internal ScreenColorChanger(GraphicsDevice graphicsDevice, Rectangle bounds)
         {
-            this.rand = new Random();
+            if (rectTexture == null)
+            {
+                rectTexture = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
+                rectTexture.SetData(new Color[] { Color.White });
+            }
             this.curr = new Color(rand.Next(256), rand.Next(256), rand.Next(256));
             this.dest = new Color(rand.Next(256), rand.Next(256), rand.Next(256));
-            this.rectTexture = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
-            rectTexture.SetData(new Color[] { Color.White });
             this.bounds = bounds;
         }
 

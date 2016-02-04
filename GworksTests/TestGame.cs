@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using SDSMTGDT.GWorks.GameStates;
 using SDSMTGDT.GWorks.GameStates.ColorChanger;
 using SDSMTGDT.GWorks.GameStates.Diagnostic;
+using System;
 
 namespace SDSMTGDT.DungeonCrawler
 {
@@ -37,10 +38,15 @@ namespace SDSMTGDT.DungeonCrawler
 
             Rectangle first = graphics.GraphicsDevice.Viewport.Bounds;
             first.Width = first.Width / 2;
+
             Rectangle second = first;
             second.X = second.Width;
 
             MutableGameState testState = new MutableGameState(gStateManager);
+
+            //Create new Screen color changers and add them to the game state
+            //The Graphics Device creates the texture,
+            //The second parameter sets the area to draw in
             testState.addDrawListener(new ScreenColorChanger(
                 graphics.GraphicsDevice,
                 first
@@ -49,6 +55,8 @@ namespace SDSMTGDT.DungeonCrawler
                 graphics.GraphicsDevice,
                 second
             ));
+
+            //Create a new diagnostic display at (20, 20)
             testState.addDrawListener(new DiagnosticDisplay(20, 20, diagnosticFont));
             gStateManager.push(testState);
         }
