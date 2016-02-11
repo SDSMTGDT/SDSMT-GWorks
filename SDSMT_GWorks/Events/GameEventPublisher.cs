@@ -10,7 +10,7 @@ namespace SDSMTGDT.GWorks.Events
     public abstract class GameEventPublisher<T> where T : GameEventInfo
     {
         //The event type which identifies the sink for this publisher
-        public EventType<T> EVENT_TYPE { get; private set; }
+        public EventID<T> EVENT_TYPE { get; private set; }
 
         //The manager to connect the publisher with the subscribers
         private EventManager manager;
@@ -22,7 +22,7 @@ namespace SDSMTGDT.GWorks.Events
         }
 
         //Sets local information
-        public GameEventPublisher(EventManager manager, EventType<T> eventType)
+        public GameEventPublisher(EventManager manager, EventID<T> eventType)
         {
             this.manager = manager;
             EVENT_TYPE = eventType;
@@ -38,43 +38,43 @@ namespace SDSMTGDT.GWorks.Events
         }
 
         //Registers a threaded event listener with this publisher through the manager
-        public void registerAsyncEventListener(EventType<T> eventType, GameEvent<T> eventListener)
+        public void registerAsyncEventListener(GameEvent<T> eventListener)
         {
             manager.registerAsyncEventListener(EVENT_TYPE, eventListener);
         }
 
         //Removes an event listener from the manager corresponding to this publisher
-        public void unregisterEventListener(EventType<T> eventType, GameEvent<T> eventListener)
+        public void unregisterEventListener(GameEvent<T> eventListener)
         {
             manager.unregisterEventListener(EVENT_TYPE, eventListener);
         }
 
         //Removes a threaded event listener from the manager corresponding to this publisher
-        public void unregisterAsyncEventListener(EventType<T> eventType, GameEvent<T> eventListener)
+        public void unregisterAsyncEventListener(GameEvent<T> eventListener)
         {
             manager.unregisterAsyncEventListener(EVENT_TYPE, eventListener);
         }
 
         //Registers an object oriented event listener with this publisher through the manager
-        public void registerEventSubscriber(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void registerEventSubscriber( GameEventSubscriber<T> eventSubscriber)
         {
             manager.registerEventListener(EVENT_TYPE, eventSubscriber.gameEventRecieved);
         }
 
         //Registers an object oriented threaded event listener with this publisher through the manager
-        public void registerAsyncEventSubscriber(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void registerAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
             manager.registerAsyncEventListener(EVENT_TYPE, eventSubscriber.gameEventRecieved);
         }
 
         //Removes an object oriented event listener from the manager corresponding to this publisher
-        public void unregisterEventSubscriber(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void unregisterEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
             manager.registerEventListener(EVENT_TYPE, eventSubscriber.gameEventRecieved);
         }
 
         //Removes an object oriented threaded event listener from the manager corresponding to this publisher
-        public void unregisterAsyncEventSubscriber(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void unregisterAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
             manager.unregisterAsyncEventListener(EVENT_TYPE, eventSubscriber.gameEventRecieved);
         }

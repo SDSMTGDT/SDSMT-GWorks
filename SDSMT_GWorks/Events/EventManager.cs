@@ -25,9 +25,9 @@ namespace SDSMTGDT.GWorks.Events
         {
             private EventManager manager;
             internal object sender { get; private set; }
-            internal EventType<T> eventType { get; private set; }
+            internal EventID<T> eventType { get; private set; }
             internal T eventInfo { get; private set; }
-            internal DelayedEvent(EventManager manager, object sender, EventType<T> eventType, T eventInfo)
+            internal DelayedEvent(EventManager manager, object sender, EventID<T> eventType, T eventInfo)
             {
                 this.manager = manager;
                 this.sender = sender;
@@ -45,9 +45,9 @@ namespace SDSMTGDT.GWorks.Events
         private class EventTypeFactory
         {
             uint eventIdCounter = 0;
-            internal EventType<T> createEventType<T>(string description) where T : GameEventInfo
+            internal EventID<T> createEventType<T>(string description) where T : GameEventInfo
             {
-                return new EventType<T>(eventIdCounter++, description);
+                return new EventID<T>(eventIdCounter++, description);
             }
         }
 
@@ -68,71 +68,71 @@ namespace SDSMTGDT.GWorks.Events
         }
 
         //Creates and registers a new event type into the eventMap
-        internal EventType<T> registerEventType<T>(string description) where T : GameEventInfo
+        internal EventID<T> registerEventType<T>(string description) where T : GameEventInfo
         {
-            EventType<T> eventType = eventTypeFactory.createEventType<T>(description);
+            EventID<T> eventType = eventTypeFactory.createEventType<T>(description);
             eventMap.Add(eventType.id, new EventActions<T>());
             return eventType;
         }
 
         //Registers an event type with an event listener
-        public void registerEventListener<T>(EventType<T> eventType, GameEvent<T> eventListener)
+        public void registerEventListener<T>(EventID<T> eventType, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).listeners += eventListener;
         }
 
         //Registers an event type with an asynchronous event listener
-        public void registerAsyncEventListener<T>(EventType<T> eventType, GameEvent<T> eventListener)
+        public void registerAsyncEventListener<T>(EventID<T> eventType, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).asyncListeners += eventListener;
         }
 
         //Unregisters an event listener from an event type
-        public void unregisterEventListener<T>(EventType<T> eventType, GameEvent<T> eventListener)
+        public void unregisterEventListener<T>(EventID<T> eventType, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).listeners -= eventListener;
         }
 
         //Unregisters a threaded event listener from an event type
-        public void unregisterAsyncEventListener<T>(EventType<T> eventType, GameEvent<T> eventListener)
+        public void unregisterAsyncEventListener<T>(EventID<T> eventType, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).asyncListeners -= eventListener;
         }
 
         //Registers an event type with an event subscriber
-        public void registerEventSubscriber<T>(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void registerEventSubscriber<T>(EventID<T> eventType, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).listeners += eventSubscriber.gameEventRecieved;
         }
 
         //Registers an event type with an asynchronous event subscriber
-        public void registerAsyncEventSubscriber<T>(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void registerAsyncEventSubscriber<T>(EventID<T> eventType, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).asyncListeners += eventSubscriber.gameEventRecieved;
         }
 
         //Unregisters an event subscriber from an event type
-        public void unregisterEventSubscriber<T>(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void unregisterEventSubscriber<T>(EventID<T> eventType, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).listeners -= eventSubscriber.gameEventRecieved;
         }
 
         //Unregisters a threaded event subscriber from an event type
-        public void unregisterAsyncEventSubscriber<T>(EventType<T> eventType, GameEventSubscriber<T> eventSubscriber)
+        public void unregisterAsyncEventSubscriber<T>(EventID<T> eventType, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
             ((EventActions<T>)eventMap[eventType.id]).asyncListeners -= eventSubscriber.gameEventRecieved;
         }
 
         //Pushes an event info object through to the listeners and subscribers associated with the event type
-        internal void fireEvent<T>(object sender, EventType<T> eventType, T eventInfo)
+        internal void fireEvent<T>(object sender, EventID<T> eventType, T eventInfo)
             where T : GameEventInfo
         {
             EventActions<T> actions = (EventActions<T>)eventMap[eventType.id];
@@ -141,7 +141,7 @@ namespace SDSMTGDT.GWorks.Events
         }
 
         //Queues an event for later execution
-        internal void queueEvent<T>(object sender, EventType<T> eventType, T eventInfo)
+        internal void queueEvent<T>(object sender, EventID<T> eventType, T eventInfo)
             where T : GameEventInfo
         {
             delayedEvents.Enqueue(new DelayedEvent<T>(this, sender, eventType, eventInfo));
