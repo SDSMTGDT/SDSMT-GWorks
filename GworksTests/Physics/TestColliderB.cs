@@ -9,13 +9,16 @@ using SDSMTGDT.GWorks.Physics.Collisions.Routes;
 
 namespace SDSMTGDT.GWorks.Physics
 {
+    /// <summary>
+    /// Object designed to test the Physics Manager's Collision system
+    /// </summary>
     public class TestColliderB : Collidable
     {
         public TestColliderB(PhysicsManager soc)
         {
             var publisher = soc.getCollisionPublisher(this);
             var router = new CollisionEventRouter();
-            router.addCollisionRoute(new TypeCollisionRoute<TestColliderA>(testACollision));
+            router.addCollisionRoute(new TypeCollisionRoute<TestColliderB, TestColliderA>(testACollision));
             publisher.registerEventSubscriber(router);
         }
         public Rectangle getBounds()
@@ -23,7 +26,7 @@ namespace SDSMTGDT.GWorks.Physics
             throw new NotImplementedException();
         }
 
-        public void testACollision(Collidable A, Collidable B)
+        public void testACollision(TestColliderB thisInstance, Collidable collided)
         {
 
         }
