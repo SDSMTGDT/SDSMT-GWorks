@@ -8,7 +8,7 @@ namespace SDSMTGDT.GWorks.Events
 {
     //Stores information on an event
     //Acts as a connector between publishers and subscribers in the manager
-    //Only created by the EventType factory in the EventManager
+    //Only created by the EventID factory in the EventManager
     public class EventID<T> where T : GameEventInfo
     {
         public uint id { get; private set; }
