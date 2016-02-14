@@ -46,16 +46,14 @@
   <ItemGroup>
     <Compile Include="Events\EventManager.cs" />
     <Compile Include="Events\EventType.cs" />
-    <Compile Include="Events\Experimental\Collidable.cs" />
-    <Compile Include="Events\Experimental\CollisionEventInfo.cs" />
-    <Compile Include="Events\Experimental\CollisionEventPublisher.cs" />
-    <Compile Include="Events\Experimental\CollisionReaction.cs" />
-    <Compile Include="Events\Experimental\CollisionRoute.cs" />
-    <Compile Include="Events\Experimental\CollsionEventRouter.cs" />
-    <Compile Include="Events\Experimental\SmallObjectCollider.cs" />
-    <Compile Include="Events\Experimental\TestColliderA.cs" />
-    <Compile Include="Events\Experimental\TestColliderB.cs" />
-    <Compile Include="Events\Experimental\TypeCollisionRoute.cs" />
+    <Compile Include="Physics\Collisions\Collidable.cs" />
+    <Compile Include="Physics\Collisions\CollisionEventInfo.cs" />
+    <Compile Include="Physics\Collisions\CollisionEventPublisher.cs" />
+    <Compile Include="Physics\Collisions\Routes\CollisionReaction.cs" />
+    <Compile Include="Physics\Collisions\Routes\CollisionRoute.cs" />
+    <Compile Include="Physics\Collisions\Routes\CollsionEventRouter.cs" />
+    <Compile Include="Physics\PhysicsManager.cs" />
+    <Compile Include="Physics\Collisions\Routes\TypeCollisionRoute.cs" />
     <Compile Include="Events\GameEventPublisher.cs" />
     <Compile Include="Events\GameEvent.cs" />
     <Compile Include="Events\GameEventInfo.cs" />
