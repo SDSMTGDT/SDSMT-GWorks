@@ -10,6 +10,9 @@ using SDSMTGDT.GWorks.Events.Generic;
 namespace SDSMTGDT.GWorks.Events
 {
     //TODO: write more tests
+    /// <summary>
+    /// This class contains the tests we have written with Nunit.
+    /// </summary>
     [TestFixture]
     public class TestGenericEvents
     {

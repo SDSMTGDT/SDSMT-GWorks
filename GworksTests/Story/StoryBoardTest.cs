@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.GWorks.Story
 {
+    /// <summary>
+    /// The tests for our story board class written in Nunit.
+    /// </summary>
     [TestFixture]
     public class StoryBoardTest
     {

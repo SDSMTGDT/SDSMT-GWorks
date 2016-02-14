@@ -6,6 +6,9 @@ using NUnit.Framework;
 
 namespace SDSMTGDT.GWorks.Settings
 {
+    /// <summary>
+    /// This class contains the tests for the settings manager written in Nunit.
+    /// </summary>
     [TestFixture]
     public class SettingsTest
     {

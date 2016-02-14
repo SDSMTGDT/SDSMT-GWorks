@@ -10,7 +10,7 @@ using System;
 namespace SDSMTGDT.DungeonCrawler
 {
     /// <summary>
-    /// 
+    /// A game class that will host all of our tests.
     /// </summary>
     public class TestGame : Game
     {
@@ -19,6 +19,9 @@ namespace SDSMTGDT.DungeonCrawler
         SpriteBatch spriteBatch;
         SpriteFont diagnosticFont;
 
+        /// <summary>
+        /// constructor for our test game.
+        /// </summary>
         public TestGame()
         {
             graphics = new GraphicsDeviceManager(this);

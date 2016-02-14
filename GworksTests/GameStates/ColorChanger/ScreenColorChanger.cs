@@ -8,6 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SDSMTGDT.GWorks.GameStates.ColorChanger
 {
+    /// <summary>
+    /// The ScreenColorChanger is a test for drawing to the screen. The class
+    /// creates a rectangle with a 1x1 texture the size of bounds. the color
+    /// can then be changed with the draw logic.
+    /// </summary>
     internal class ScreenColorChanger : DrawListener
     {
         private static Random rand = new Random();
@@ -15,9 +20,13 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
         private Color curr, dest;
         private double speed = .2;
         private Rectangle bounds;
-
-        //Graphics device is used to create a texture
-        //Bounds defines where the color changer will draw
+        ///<summary>
+        ///This is the constructor for our ScreenColorChanger graphics test.
+        ///</summary>
+        ///<param name="graphicsDevice">
+        ///Graphics device is used to create a texture</param>
+        ///<param name="bounds">
+        ///Bounds defines where the color changer will draw</param>
         internal ScreenColorChanger(GraphicsDevice graphicsDevice, Rectangle bounds)
         {
             if (rectTexture == null)
@@ -30,6 +39,14 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
             this.bounds = bounds;
         }
 
+        /// <summary>
+        /// handles the drawing of our test.
+        /// </summary>
+        /// <param name="gameTime">This class tracks the time that the game has
+        /// been running, as well as the time since the last check.</param>
+        /// <param name="graphics">This class handles the drawing of a group
+        /// of images in an efficient manner.It will handle drawing our
+        /// colorChanger to the screen.</param>
         public void draw(GameTime gameTime, SpriteBatch graphics)
         {
             graphics.Draw(rectTexture, bounds, curr);
@@ -58,6 +75,12 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
             }
         }
 
+        /// <summary>
+        /// Returns the ZIndex of our color changer, it is set to int.MaxValue
+        /// to ensure that it is drawn in the background.
+        /// </summary>
+        /// <returns>makes sure that the colorChanger is in the background
+        /// </returns>
         public int getZIndex()
         {
             return int.MaxValue;

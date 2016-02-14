@@ -17,7 +17,7 @@ namespace SDSMTGDT.GWorks.Events
 
         //Chaining constructor which registers a new event type
         public GameEventPublisher(EventManager manager, string description) : 
-            this(manager, manager.registerEventType<T>(description))
+            this(manager, manager.registerEventID<T>(description))
         {
         }
 
