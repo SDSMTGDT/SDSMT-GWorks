@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.GWorks.Events
 {
-    // An interface which all information passed through game events should conform to
+    /// <summary>
+    /// An interface designed to specify objects which contain event information
+    /// </summary>
     public interface GameEventInfo
     {
     }
