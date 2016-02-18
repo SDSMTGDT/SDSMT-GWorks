@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.GWorks.Events
 {
-    // Defines the method signature for consuming a game event
     /// <summary>
     /// Delegate/ Multicast function pointer to GameEvent Listeners
     /// </summary>
