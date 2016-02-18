@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.GWorks.Events
 {
-    //Stores information on an event
-    //Acts as a connector between publishers and subscribers in the manager
-    //Only created by the EventID factory in the EventManager
+    /// <summary>
+    /// Stores information on an event
+    /// Acts as a connector between publishers and subscribers in the manager
+    /// Only created by the EventID factory in the EventManager
+    /// </summary>
+    /// <typeparam name="T">Type of class info being handled</typeparam>
     public class EventID<T> where T : GameEventInfo
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public uint id { get; private set; }
         public string description { get; private set; }
         internal EventID(uint id, string description)

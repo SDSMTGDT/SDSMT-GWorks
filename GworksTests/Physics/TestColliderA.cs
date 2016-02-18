@@ -28,6 +28,7 @@ namespace SDSMTGDT.GWorks.Physics
 
         /// <summary>
         /// Returns the location, width, and height of the object
+        /// TODO: ACTUALLY IMPLEMENT
         /// </summary>
         /// <returns>An axis aligned bounding box</returns>
         public Rectangle getBounds()
