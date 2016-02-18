@@ -40,7 +40,7 @@ namespace SDSMTGDT.GWorks.Story
             rootNode.addSuccessor(new StoryNode(storyBoard, "secondB"));
             storyBoard.addRootNode(rootNode);
             eventManager.registerEventListener(
-                storyBoard.getStoryNodePassedEventType(),
+                storyBoard.getStoryNodePassedEventID(),
                 (sender, info) => Assert.True(info.storyNode.DESCRIPTION == testDescription)
             );
             rootNode.setTrue();
@@ -58,7 +58,7 @@ namespace SDSMTGDT.GWorks.Story
             rootNode.addSuccessor(new StoryNode(storyBoard, "secondB"));
             storyBoard.addRootNode(rootNode);
             eventManager.registerEventListener(
-                storyBoard.getStoryNodePossibleEventType(),
+                storyBoard.getStoryNodePossibleEventID(),
                 (sender, info) => Assert.Pass()
             );
             rootNode.setTrue();

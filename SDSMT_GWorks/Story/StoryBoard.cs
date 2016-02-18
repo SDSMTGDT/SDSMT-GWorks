@@ -70,14 +70,14 @@ namespace SDSMTGDT.GWorks.Story
             return storyGraph[id];
         }
 
-        public EventID<StoryNodePassedEventInfo> getStoryNodePassedEventType()
+        public EventID<StoryNodePassedEventInfo> getStoryNodePassedEventID()
         {
-            return passedPublisher.EVENT_TYPE;
+            return passedPublisher.EVENT_ID;
         }
 
-        public EventID<StoryNodePossibleEventInfo> getStoryNodePossibleEventType()
+        public EventID<StoryNodePossibleEventInfo> getStoryNodePossibleEventID()
         {
-            return possibilityPublisher.EVENT_TYPE;
+            return possibilityPublisher.EVENT_ID;
         }
     }
 }

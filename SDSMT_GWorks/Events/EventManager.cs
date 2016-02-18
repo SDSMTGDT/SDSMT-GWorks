@@ -39,19 +39,19 @@ namespace SDSMTGDT.GWorks.Events
         {
             private EventManager manager;
             internal object sender { get; private set; }
-            internal EventID<T> eventType { get; private set; }
+            internal EventID<T> eventID { get; private set; }
             internal T eventInfo { get; private set; }
-            internal DelayedEvent(EventManager manager, object sender, EventID<T> eventType, T eventInfo)
+            internal DelayedEvent(EventManager manager, object sender, EventID<T> eventID, T eventInfo)
             {
                 this.manager = manager;
                 this.sender = sender;
-                this.eventType = eventType;
+                this.eventID = eventID;
                 this.eventInfo = eventInfo;
             }
             
             public void fireEvent()
             {
-                manager.fireEvent(sender, eventType, eventInfo);
+                manager.fireEvent(sender, eventID, eventInfo);
             }
         }
 
@@ -61,7 +61,7 @@ namespace SDSMTGDT.GWorks.Events
         private class EventIDFactory
         {
             uint eventIdCounter = 0;
-            internal EventID<T> createEventType<T>(string description) where T : GameEventInfo
+            internal EventID<T> createEventID<T>(string description) where T : GameEventInfo
             {
                 return new EventID<T>(eventIdCounter++, description);
             }
@@ -95,9 +95,9 @@ namespace SDSMTGDT.GWorks.Events
         /// attached.</returns>
         internal EventID<T> registerEventID<T>(string description) where T : GameEventInfo
         {
-            EventID<T> eventType = eventIDFactory.createEventType<T>(description);
-            eventMap.Add(eventType.id, new EventActions<T>());
-            return eventType;
+            EventID<T> eventID = eventIDFactory.createEventID<T>(description);
+            eventMap.Add(eventID.id, new EventActions<T>());
+            return eventID;
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace SDSMTGDT.GWorks.Events
         }
 
         /// <summary>
-        /// Registers an event type with an asynchronous event listener
+        /// Registers an event id with an asynchronous event listener
         /// </summary>
         /// <typeparam name="T">type of event info being handled</typeparam>
         /// <param name="eventID">Contains the id and description of the

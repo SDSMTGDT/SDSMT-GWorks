@@ -39,7 +39,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// If the publisher does not exist, a new one will be created.
         /// </summary>
         /// <param name="collider">The object that will be colliding with others</param>
-        /// <returns></returns>
+        /// <returns>A collision publisher associated with the collider</returns>
         public CollisionEventPublisher getCollisionPublisher(Collidable collider)
         {
             if (publishers[collider] == null)
