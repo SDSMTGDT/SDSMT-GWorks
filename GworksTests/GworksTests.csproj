@@ -43,6 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BootstrapTests.cs" />
+    <Compile Include="Events\TestDisposeEvents.cs" />
     <Compile Include="Events\TestGenericEvents.cs" />
     <Compile Include="GameStates\ColorChanger\ScreenColorChanger.cs" />
     <Compile Include="GameStates\Diagnostic\DiagnosticDisplay.cs" />

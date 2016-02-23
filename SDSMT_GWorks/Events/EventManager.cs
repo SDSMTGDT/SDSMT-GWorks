@@ -276,5 +276,10 @@ namespace SDSMTGDT.GWorks.Events
                 delayedEvents.RemoveFirst();
             }
         }
+
+        public int getEventCount()
+        {
+            return eventMap.Count;
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace SDSMTGDT.GWorks.Events
     /// Main class for firing events. Descending classes must implement a publish method which calls fireEvent
     /// </summary>
     /// <typeparam name="T">The type of GameEventInfo to send with the event</typeparam>
-    public abstract class GameEventPublisher<T> where T : GameEventInfo
+    public abstract class GameEventPublisher<T> : IDisposable where T : GameEventInfo
     {
         /// <summary>
         /// The event id which identifies the sink for this publisher
@@ -38,7 +38,7 @@ namespace SDSMTGDT.GWorks.Events
         /// </summary>
         /// <param name="manager">The Event Manager to publish to</param>
         /// <param name="eventID">An event id to publish to</param>
-        public GameEventPublisher(EventManager manager, EventID<T> eventID)
+        private GameEventPublisher(EventManager manager, EventID<T> eventID)
         {
             this.manager = manager;
             EVENT_ID = eventID;
@@ -135,6 +135,17 @@ namespace SDSMTGDT.GWorks.Events
         protected void queueEvent(T eventInfo)
         {
             manager.queueEvent(this, EVENT_ID, eventInfo);
+        }
+
+        public void Dispose()
+        {
+            manager.removeEvent(EVENT_ID);
+            //this.EVENT_ID = null;
+            //We do not set the event ID to null
+            //if fire is called once this is disposed
+            //the event manager will simply not do anything
+            //due to the checks that are done when the eventid
+            //is used to access the dictionary
         }
     }
 }
