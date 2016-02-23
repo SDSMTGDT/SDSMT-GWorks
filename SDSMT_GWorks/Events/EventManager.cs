@@ -1,15 +1,17 @@
-﻿using System;
+﻿using SDSMTGDT.GWorks.GameStates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
- 
+using Microsoft.Xna.Framework;
+
 namespace SDSMTGDT.GWorks.Events
 {
     /// <summary>
     /// This class handles storing and firing events.
     /// </summary>
-    public class EventManager
+    public class EventManager : UpdateListener
     {
         /// <summary>
         /// Interface to allow EventActions to be stored in the dictionary
@@ -71,7 +73,7 @@ namespace SDSMTGDT.GWorks.Events
         private Dictionary<uint, IEventActions> eventMap;
 
         //Allows for delayed execution of events
-        private Queue<IDelayedEvent> delayedEvents;
+        private LinkedList<IDelayedEvent> delayedEvents;
 
         //Creates eventIDs
         private EventIDFactory eventIDFactory;
@@ -82,7 +84,7 @@ namespace SDSMTGDT.GWorks.Events
         public EventManager()
         {
             eventMap = new Dictionary<uint, IEventActions>();
-            delayedEvents = new Queue<IDelayedEvent>();
+            delayedEvents = new LinkedList<IDelayedEvent>();
             eventIDFactory = new EventIDFactory();
         }
 
@@ -230,6 +232,26 @@ namespace SDSMTGDT.GWorks.Events
         }
 
         /// <summary>
+        /// Removes an eventID from the event map when it is no longer needed
+        /// </summary>
+        /// <typeparam name="T">A type of GameEventInfo associated with the EventID</typeparam>
+        /// <param name="eventID">The eventID to remove from the map</param>
+        internal void removeEvent<T>(EventID<T> eventID) where T : GameEventInfo
+        {
+            eventMap.Remove(eventID.id);
+            var node = delayedEvents.First;
+            while (node != null)
+            {
+                var nextNode = node.Next;
+                if (node.Value is DelayedEvent<T> && ((DelayedEvent<T>)node.Value).eventID.id == eventID.id)
+                {
+                    delayedEvents.Remove(node);
+                }
+                node = nextNode;
+            }
+        }
+
+        /// <summary>
         /// Queues an event for later execution
         /// </summary>
         /// <typeparam name="T">Type of event info being handled</typeparam>
@@ -240,17 +262,18 @@ namespace SDSMTGDT.GWorks.Events
         internal void queueEvent<T>(object sender, EventID<T> eventID, T eventInfo)
             where T : GameEventInfo
         {
-            delayedEvents.Enqueue(new DelayedEvent<T>(this, sender, eventID, eventInfo));
+            delayedEvents.AddLast(new DelayedEvent<T>(this, sender, eventID, eventInfo));
         }
 
         /// <summary>
         /// Handles firing delayed events.
         /// </summary>
-        public void processQueuedEvents()
+        public void update(GameTime gameTime)
         {
             while (delayedEvents.Count != 0)
             {
-                delayedEvents.Dequeue().fireEvent();
+                delayedEvents.First().fireEvent();
+                delayedEvents.RemoveFirst();
             }
         }
     }
