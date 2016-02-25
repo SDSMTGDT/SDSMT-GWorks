@@ -50,7 +50,7 @@ namespace SDSMTGDT.GWorks.GameStates
         {
             if (states.Count != 0)
                 states.Peek().update(gameTime);
-            eventManager.processQueuedEvents();
+            eventManager.update(gameTime);
         }
 
         public void draw(GameTime gameTime, SpriteBatch graphics)
