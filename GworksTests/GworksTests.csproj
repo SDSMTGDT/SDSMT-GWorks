@@ -48,6 +48,8 @@
     <Compile Include="GameStates\ColorChanger\ScreenColorChanger.cs" />
     <Compile Include="GameStates\Diagnostic\DiagnosticDisplay.cs" />
     <Compile Include="GameStates\MovingObjects\MovingObject.cs" />
+    <Compile Include="Physics\BoundsCollidable.cs" />
+    <Compile Include="Physics\QuadTreeTest.cs" />
     <Compile Include="Physics\TestColliderA.cs" />
     <Compile Include="Physics\TestColliderB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

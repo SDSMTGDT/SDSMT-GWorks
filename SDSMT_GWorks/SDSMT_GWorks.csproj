@@ -46,16 +46,13 @@
   <ItemGroup>
     <Compile Include="Events\EventManager.cs" />
     <Compile Include="Events\EventID.cs" />
-    <Compile Include="Physics\Collisions\ColisionTree.cs" />
     <Compile Include="Physics\Collisions\Collidable.cs" />
     <Compile Include="Physics\Collisions\CollisionEventInfo.cs" />
     <Compile Include="Physics\Collisions\CollisionEventPublisher.cs" />
-    <Compile Include="Physics\Collisions\QuadTreeNode.cs" />
-    <Compile Include="Physics\Collisions\LeafNode.cs" />
+    <Compile Include="Physics\Collisions\CollisionQuadTree.cs" />
     <Compile Include="Physics\Collisions\Routes\CollisionReaction.cs" />
     <Compile Include="Physics\Collisions\Routes\CollisionRoute.cs" />
     <Compile Include="Physics\Collisions\Routes\CollsionEventRouter.cs" />
-    <Compile Include="Physics\Collisions\StemNode.cs" />
     <Compile Include="Physics\PhysicsManager.cs" />
     <Compile Include="Physics\Collisions\Routes\TypeCollisionRoute.cs" />
     <Compile Include="Events\GameEventPublisher.cs" />
