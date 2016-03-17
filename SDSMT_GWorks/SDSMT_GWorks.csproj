@@ -49,7 +49,13 @@
     <Compile Include="Physics\Collisions\Collidable.cs" />
     <Compile Include="Physics\Collisions\CollisionEventInfo.cs" />
     <Compile Include="Physics\Collisions\CollisionEventPublisher.cs" />
-    <Compile Include="Physics\Collisions\CollisionQuadTree.cs" />
+    <Compile Include="Physics\Collisions\CollisionGroup.cs" />
+    <Compile Include="Physics\Collisions\DataStructures\CollisionList.cs" />
+    <Compile Include="Physics\Collisions\DataStructures\CollisionQuadTree.cs" />
+    <Compile Include="Physics\Collisions\DataStructures\CollisionStructure.cs" />
+    <Compile Include="Physics\Collisions\DataStructures\Factories\CollisionListFactory.cs" />
+    <Compile Include="Physics\Collisions\DataStructures\Factories\CollisionQuadTreeFactory.cs" />
+    <Compile Include="Physics\Collisions\DataStructures\Factories\CollisionStructureFactory.cs" />
     <Compile Include="Physics\Collisions\Routes\CollisionReaction.cs" />
     <Compile Include="Physics\Collisions\Routes\CollisionRoute.cs" />
     <Compile Include="Physics\Collisions\Routes\CollsionEventRouter.cs" />

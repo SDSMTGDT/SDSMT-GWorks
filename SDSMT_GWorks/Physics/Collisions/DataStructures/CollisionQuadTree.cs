@@ -5,17 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDSMTGDT.GWorks.Physics.Collisions
+namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
 {
-    public class CollisionQuadTree
+    internal class CollisionQuadTree : CollisionStructure
     {
-        private const int CAPACITY = 10;
+        private int CAPACITY = 10;
 
         private CollisionQuadTree northWest, northEast, southWest, southEast;
         private List<Collidable> collidables;
         private Rectangle boundary;
 
-        public CollisionQuadTree(int x, int y, int size)
+        internal CollisionQuadTree(int x, int y, int size)
         {
             int roughGuessPow2 = (int)Math.Log(size, 2);
             int newSize = (int)Math.Pow(2, roughGuessPow2);
@@ -24,10 +24,17 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
                 newSize = newSize * 2;
             }
             this.boundary = new Rectangle(x, y, newSize, newSize);
+
+            //Allow bottom layer pooling
+            if (size == 1)
+            {
+                CAPACITY = int.MaxValue;
+            }
+
             this.collidables = new List<Collidable>(CAPACITY);
         }
 
-        public void insert(Collidable c)
+        void CollisionStructure.insert(Collidable c)
         {
             if (!boundary.Intersects(c.getBounds()))
             {
@@ -44,28 +51,28 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
             {
                 split();
             }
-            
-            northWest.insert(c);
-            northEast.insert(c);
-            southWest.insert(c);
-            southEast.insert(c);
+
+            ((CollisionStructure)northWest).insert(c);
+            ((CollisionStructure)northEast).insert(c);
+            ((CollisionStructure)southWest).insert(c);
+            ((CollisionStructure)southEast).insert(c);
         }
 
-        public bool delete(Collidable c)
+        bool CollisionStructure.delete(Collidable c)
         {
             if(collidables.Remove(c))
             {
                 return true;
             }
             return northWest != null && (
-                   (northWest.boundary.Intersects(c.getBounds()) && northWest.delete(c)) || 
-                   (northEast.boundary.Intersects(c.getBounds()) && northEast.delete(c)) ||
-                   (southWest.boundary.Intersects(c.getBounds()) && southWest.delete(c)) || 
-                   (southEast.boundary.Intersects(c.getBounds()) && southEast.delete(c)));
+                   (northWest.boundary.Intersects(c.getBounds()) && ((CollisionStructure)northWest).delete(c)) || 
+                   (northEast.boundary.Intersects(c.getBounds()) && ((CollisionStructure)northEast).delete(c)) ||
+                   (southWest.boundary.Intersects(c.getBounds()) && ((CollisionStructure)southWest).delete(c)) || 
+                   (southEast.boundary.Intersects(c.getBounds()) && ((CollisionStructure)southEast).delete(c)));
             
         }
 
-        public IEnumerable<Collidable> checkCollision(Collidable c)
+        IEnumerable<Collidable> CollisionStructure.checkCollision(Collidable c)
         {
             List<Collidable> collisions = new List<Collidable>();
             if (!boundary.Intersects(c.getBounds()))
@@ -81,19 +88,19 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
             }
             if (northWest != null)
             {
-                collisions.AddRange(northWest.checkCollision(c));
+                collisions.AddRange(((CollisionStructure)northWest).checkCollision(c));
             }
             if (northEast != null)
             {
-                collisions.AddRange(northEast.checkCollision(c));
+                collisions.AddRange(((CollisionStructure)northEast).checkCollision(c));
             }
             if (southWest != null)
             {
-                collisions.AddRange(southWest.checkCollision(c));
+                collisions.AddRange(((CollisionStructure)southWest).checkCollision(c));
             }
             if (southEast != null)
             {
-                collisions.AddRange(southEast.checkCollision(c));
+                collisions.AddRange(((CollisionStructure)southEast).checkCollision(c));
             }
             
             return collisions.Distinct();

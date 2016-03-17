@@ -137,7 +137,7 @@ namespace SDSMTGDT.GWorks.Events
             manager.queueEvent(this, EVENT_ID, eventInfo);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             manager.removeEvent(EVENT_ID);
             //this.EVENT_ID = null;

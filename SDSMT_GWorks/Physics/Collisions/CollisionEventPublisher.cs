@@ -1,4 +1,5 @@
 ﻿using SDSMTGDT.GWorks.Events;
+using SDSMTGDT.GWorks.Physics.Collisions.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// when a collision event is fired
         /// </summary>
         private Collidable collider;
+        private PhysicsManager physics;
 
         /// <summary>
         /// Create a new CollisionEventPublisher to forward collision events
@@ -25,10 +27,11 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// </summary>
         /// <param name="manager">The EventManager to publish events to</param>
         /// <param name="collider">The Collidable to publish events about</param>
-        public CollisionEventPublisher(EventManager manager, Collidable collider) :
+        public CollisionEventPublisher(EventManager manager, PhysicsManager physics, Collidable collider) :
             base(manager, collider.ToString() + " Collider")
         {
             this.collider = collider;
+            this.physics = physics;
         }
 
         /// <summary>
@@ -39,6 +42,11 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         public void publish(Collidable collided)
         {
             fireEvent(new CollisionEventInfo(collider, collided));
+        }
+
+        public Collidable getCollidable()
+        {
+            return collider;
         }
     }
 }
