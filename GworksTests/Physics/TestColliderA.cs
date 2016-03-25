@@ -41,7 +41,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         /// <param name="thisInstance">Reference to this object</param>
         /// <param name="collided">The object of type TestColliderB this instance collided with</param>
-        public void testBCollision(TestColliderA thisInstance, TestColliderB collided)
+        public void testBCollision(TypedCollisionEventInfo<TestColliderA, TestColliderB> info)
         {
 
         }

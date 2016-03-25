@@ -59,6 +59,7 @@
     <Compile Include="Physics\Collisions\Routes\CollisionReaction.cs" />
     <Compile Include="Physics\Collisions\Routes\CollisionRoute.cs" />
     <Compile Include="Physics\Collisions\Routes\CollsionEventRouter.cs" />
+    <Compile Include="Physics\Collisions\Routes\TypedCollisionEventInfo.cs" />
     <Compile Include="Physics\PhysicsManager.cs" />
     <Compile Include="Physics\Collisions\Routes\TypeCollisionRoute.cs" />
     <Compile Include="Events\GameEventPublisher.cs" />

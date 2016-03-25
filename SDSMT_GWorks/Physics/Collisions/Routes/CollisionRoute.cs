@@ -15,16 +15,14 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// <summary>
         /// Returns whether the route is valid
         /// </summary>
-        /// <param name="collider">First collidable</param>
-        /// <param name="collided">Second collidable</param>
-        /// <returns></returns>
-        bool activate(Collidable collider, Collidable collided);
+        /// <param name="info">Collision info</param>
+        /// <returns>True if this route should handle the info</returns>
+        bool activate(CollisionEventInfo info);
 
         /// <summary>
         /// The action to take if the route is valid
         /// </summary>
-        /// <param name="collider">First collidable</param>
-        /// <param name="collided">Second collidable</param>
-        void run(Collidable collider, Collidable collided);
+        /// <param name="info">Collision info</param>
+        void run(CollisionEventInfo info);
     }
 }

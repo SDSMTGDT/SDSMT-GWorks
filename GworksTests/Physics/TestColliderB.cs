@@ -26,9 +26,8 @@ namespace SDSMTGDT.GWorks.Physics
             throw new NotImplementedException();
         }
 
-        public void testACollision(TestColliderB thisInstance, Collidable collided)
+        public void testACollision(TypedCollisionEventInfo<TestColliderB, TestColliderA> info)
         {
-
         }
     }
 }

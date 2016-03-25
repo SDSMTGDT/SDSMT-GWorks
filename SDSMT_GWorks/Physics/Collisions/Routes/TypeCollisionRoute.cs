@@ -14,6 +14,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
     /// <typeparam name="CollidedType">The type to check the first Collidable against</typeparam>
     /// <typeparam name="CollidedType">The type to check the second Collidable against</typeparam>
     public class TypeCollisionRoute<ColliderType, CollidedType> : CollisionRoute
+        where ColliderType : Collidable where CollidedType : Collidable
     {
         /// <summary>
         /// Function to call when the second Collidable is of type passed in 
@@ -31,6 +32,11 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
             this.reaction = reaction;
         }
 
+        public bool activate(CollisionEventInfo info)
+        {
+            return info.collider is ColliderType && info.collided is CollidedType;
+        }
+
         /// <summary>
         /// Checks the second Collidable (collided) against the Type specified in
         /// the declaration of this class. Returns true if the types match
@@ -43,15 +49,9 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
             return collider is ColliderType && collided is CollidedType;
         }
 
-        /// <summary>
-        /// Passes the Collidable instances to the reaction function
-        /// this instance was initialized with
-        /// </summary>
-        /// <param name="collider">First Collidable</param>
-        /// <param name="collided">Second Collidable</param>
-        public void run(Collidable collider, Collidable collided)
+        public void run(CollisionEventInfo info)
         {
-            reaction((ColliderType)collider, (CollidedType)collider);
+            reaction(new TypedCollisionEventInfo<ColliderType, CollidedType>(info));
         }
     }
 }

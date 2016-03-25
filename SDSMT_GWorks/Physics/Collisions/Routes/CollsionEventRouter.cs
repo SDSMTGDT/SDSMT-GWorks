@@ -37,9 +37,9 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         {
             foreach (CollisionRoute route in routes)
             {
-                if (route.activate(eventInfo.collider, eventInfo.collided))
+                if (route.activate(eventInfo))
                 {
-                    route.run(eventInfo.collider, eventInfo.collided);
+                    route.run(eventInfo);
                     return;
                 }
             }

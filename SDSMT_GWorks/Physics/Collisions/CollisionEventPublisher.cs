@@ -44,6 +44,10 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
             fireEvent(new CollisionEventInfo(collider, collided));
         }
 
+        /// <summary>
+        /// Returns the collidable that this publisher is registered to
+        /// </summary>
+        /// <returns>The collidable this publisher is registered to</returns>
         public Collidable getCollidable()
         {
             return collider;

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures.Factories
 {
+    /// <summary>
+    /// Encapsulates the information needed to create a CollisionQuadTree
+    /// Used by physics manager to create quad tree backed collision groups
+    /// </summary>
     public class CollisionQuadTreeFactory : CollisionStructureFactory
     {
         private int x, y, size;

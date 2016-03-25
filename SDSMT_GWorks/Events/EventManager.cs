@@ -72,6 +72,11 @@ namespace SDSMTGDT.GWorks.Events
         //Maps eventID ids to subscribers
         private Dictionary<uint, IEventActions> eventMap;
 
+        private EventActions<T> getEventActions<T>(EventID<T> eventID) where T : GameEventInfo
+        {
+            return (EventActions<T>)eventMap[eventID.id];
+        }
+
         //Allows for delayed execution of events
         private LinkedList<IDelayedEvent> delayedEvents;
 
@@ -110,10 +115,10 @@ namespace SDSMTGDT.GWorks.Events
         /// of the event</param>
         /// <param name="eventListener">what will be called as a result of
         /// the event firing.</param>
-        public void registerEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
+        internal void registerEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).listeners += eventListener;
+            getEventActions(eventID).listeners += eventListener;
         }
 
         /// <summary>
@@ -124,10 +129,10 @@ namespace SDSMTGDT.GWorks.Events
         /// event</param>
         /// <param name="eventListener">the functions that will be called by
         /// the event</param>
-        public void registerAsyncEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
+        internal void registerAsyncEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).asyncListeners += eventListener;
+            getEventActions(eventID).asyncListeners += eventListener;
         }
 
         /// <summary>
@@ -138,10 +143,10 @@ namespace SDSMTGDT.GWorks.Events
         /// event</param>
         /// <param name="eventListener">the functions that will be called by
         /// the event</param>
-        public void unregisterEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
+        internal void unregisterEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).listeners -= eventListener;
+            getEventActions(eventID).listeners -= eventListener;
         }
 
         /// <summary>
@@ -152,10 +157,10 @@ namespace SDSMTGDT.GWorks.Events
         /// event</param>
         /// <param name="eventListener">the functions that will be called when
         /// the event is fired</param>
-        public void unregisterAsyncEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
+        internal void unregisterAsyncEventListener<T>(EventID<T> eventID, GameEvent<T> eventListener)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).asyncListeners -= eventListener;
+            getEventActions(eventID).asyncListeners -= eventListener;
         }
 
         /// <summary>
@@ -166,10 +171,10 @@ namespace SDSMTGDT.GWorks.Events
         /// event</param>
         /// <param name="eventSubscriber">An interface that contains an
         /// event listener.</param>
-        public void registerEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
+        internal void registerEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).listeners += eventSubscriber.gameEventRecieved;
+            getEventActions(eventID).listeners += eventSubscriber.gameEventRecieved;
         }
 
         /// <summary>
@@ -180,10 +185,10 @@ namespace SDSMTGDT.GWorks.Events
         /// event</param>
         /// <param name="eventSubscriber">An interface that contains an event
         /// listener</param>
-        public void registerAsyncEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
+        internal void registerAsyncEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).asyncListeners += eventSubscriber.gameEventRecieved;
+            getEventActions(eventID).asyncListeners += eventSubscriber.gameEventRecieved;
         }
 
         /// <summary>
@@ -194,10 +199,10 @@ namespace SDSMTGDT.GWorks.Events
         /// event</param>
         /// <param name="eventSubscriber">An interface that contains an event
         /// listener</param>
-        public void unregisterEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
+        internal void unregisterEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).listeners -= eventSubscriber.gameEventRecieved;
+            getEventActions(eventID).listeners -= eventSubscriber.gameEventRecieved;
         }
 
         /// <summary>
@@ -208,10 +213,10 @@ namespace SDSMTGDT.GWorks.Events
         /// event</param>
         /// <param name="eventSubscriber">An interface that contains an event
         /// listener</param>
-        public void unregisterAsyncEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
+        internal void unregisterAsyncEventSubscriber<T>(EventID<T> eventID, GameEventSubscriber<T> eventSubscriber)
             where T : GameEventInfo
         {
-            ((EventActions<T>)eventMap[eventID.id]).asyncListeners -= eventSubscriber.gameEventRecieved;
+            getEventActions(eventID).asyncListeners -= eventSubscriber.gameEventRecieved;
         }
 
         /// <summary>
@@ -277,6 +282,10 @@ namespace SDSMTGDT.GWorks.Events
             }
         }
 
+        /// <summary>
+        /// Returns the amount of registered events in the eventMap.
+        /// </summary>
+        /// <returns>The amount of currently active events</returns>
         public int getEventCount()
         {
             return eventMap.Count;

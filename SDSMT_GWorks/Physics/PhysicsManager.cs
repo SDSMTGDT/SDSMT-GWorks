@@ -26,8 +26,15 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         private Dictionary<Collidable, CollisionEventPublisher> publishers;
 
+        /// <summary>
+        /// Mapping between collidable objects and the groups they are in.
+        /// Its faster maintiaining this dictionary than calling .contains on every group.
+        /// </summary>
         private Dictionary<Collidable, List<CollisionGroup>> collidableToGroups;
 
+        /// <summary>
+        /// Each collision group has a unique id.
+        /// </summary>
         private uint collisionGroupCounter;
 
         /// <summary>
@@ -55,14 +62,12 @@ namespace SDSMTGDT.GWorks.Physics
             return publishers[collider];            
         }
 
-        private List<CollisionGroup> getCollisionGroups(Collidable c)
-        {
-            if (collidableToGroups[c] == null)
-                collidableToGroups[c] = new List<CollisionGroup>();
-            return collidableToGroups[c];
-        }
-
-
+        /// <summary>
+        /// Creates a collision group with a name, unique id, backed by a specific data structure.
+        /// </summary>
+        /// <param name="name">Name of the collision group</param>
+        /// <param name="factory">Factory which provides backing to the collision group</param>
+        /// <returns>A new Collision Group.</returns>
         public CollisionGroup createCollisionGroup(string name, CollisionStructureFactory factory)
         {
             CollisionStructure structure = factory.createCollisionStructure();
@@ -71,33 +76,84 @@ namespace SDSMTGDT.GWorks.Physics
             return group;
         }
         
+        /// <summary>
+        /// Inserts a Collidable into a collision group and records that the collidable
+        /// is in that group
+        /// </summary>
+        /// <param name="c">The collidable to add to the group</param>
+        /// <param name="group">The group to add the collidable to</param>
         public void registerCollidableInGroup(Collidable c, CollisionGroup group)
         {
             group.structure.insert(c);
-            getCollisionGroups(c).Add(group);
+            if (collidableToGroups[c] == null)
+                collidableToGroups[c] = new List<CollisionGroup>();
+            collidableToGroups[c].Add(group);
         }
 
-        public void unregisterCollidableFromGroup(Collidable c, CollisionGroup group)
+        /// <summary>
+        /// Removes a collidable from a collision group if the collision group contains the collidable.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="group"></param>
+        /// <returns>Whether or not the collidable was found in the group and removed.</returns>
+        public bool unregisterCollidableFromGroup(Collidable c, CollisionGroup group)
         {
-            group.structure.delete(c);
-            getCollisionGroups(c).Remove(group);
+            List<CollisionGroup> groups = collidableToGroups[c];
+            if (groups == null || !groups.Contains(group))
+                return false;
+            collidableToGroups[c].Remove(group);
+            return group.structure.delete(c);
         }
 
+        /// <summary>
+        /// Removes a collidable from all collision groups it was registered to.
+        /// </summary>
+        /// <param name="c">The collidable to remove</param>
         private void unregisterCollidableFromAllGroups(Collidable c)
         {
-            foreach(CollisionGroup group in getCollisionGroups(c))
+            List<CollisionGroup> groups = collidableToGroups[c];
+            if (groups == null)
+                return;
+
+            foreach(CollisionGroup group in groups)
             {
                 group.structure.delete(c);
             }
             collidableToGroups.Remove(c);
         }
 
+        /// <summary>
+        /// Removes a collidable from the physics system. Disposes of the associated publisher.
+        /// And unregisters the collidable from its collision groups.
+        /// </summary>
+        /// <param name="c">The collidable to remove</param>
         public void unregisterCollidableFromSystem(Collidable c)
         {
             publishers[c]?.Dispose();
             unregisterCollidableFromAllGroups(c);
         }
 
+        /// <summary>
+        /// Collides a collidable with all of its registered collidable groups
+        /// </summary>
+        /// <param name="c">The collidable to check</param>
+        public void checkCollisions(Collidable c)
+        {
+            List<CollisionGroup> groups = collidableToGroups[c];
+            if (groups == null)
+                return;
+            foreach(CollisionGroup group in groups)
+            {
+                collideWithGroup(c, group);
+            }
+        }
+
+        /// <summary>
+        /// Collides a collidable with all registered collidables in a given collision group.
+        /// The collidable does not have to be registered with the collision group.
+        /// </summary>
+        /// <param name="c">The collidable to check</param>
+        /// <param name="group">The group of other collidables to check</param>
         public void collideWithGroup(Collidable c, CollisionGroup group)
         {
             foreach(Collidable other in group.structure.checkCollision(c))

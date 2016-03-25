@@ -11,14 +11,6 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
     /// </summary>
     /// <param name="collider">First Collidable</param>
     /// <param name="collided">Second Collidable</param>
-    public delegate void CollisionReaction(Collidable collider, Collidable collided);
-
-    /// <summary>
-    /// Function pointer for handling typed collisions
-    /// </summary>
-    /// <typeparam name="ColliderType">Type of the collider</typeparam>
-    /// <typeparam name="CollidedType">Type of  the collided</typeparam>
-    /// <param name="collider">First Collidable</param>
-    /// <param name="collided">Second Collidable</param>
-    public delegate void CollisionReaction<ColliderType, CollidedType>(ColliderType collider, CollidedType collided);
+    public delegate void CollisionReaction<ColliderType, CollidedType>(TypedCollisionEventInfo<ColliderType, CollidedType> info) 
+        where ColliderType : Collidable where CollidedType : Collidable;
 }
