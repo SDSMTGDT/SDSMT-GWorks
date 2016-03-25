@@ -34,18 +34,21 @@ namespace SDSMTGDT.GWorks.Story
         [Test]
         public void testStoryPassedEvent()
         {
-            /*
+            
             var testDescription = "rootA";
             var rootNode = new StoryNode(storyBoard, testDescription);
+            bool listenerRan = false;
             rootNode.addSuccessor(new StoryNode(storyBoard, "secondA"));
             rootNode.addSuccessor(new StoryNode(storyBoard, "secondB"));
             storyBoard.addRootNode(rootNode);
-            eventManager.registerEventListener(
-                storyBoard.getStoryNodePassedEventID(),
-                (sender, info) => Assert.True(info.storyNode.DESCRIPTION == testDescription)
+            storyBoard.getStoryNodePassedEventHook().registerEventListener(
+                (sender, info) => {
+                    Assert.True(info.storyNode.DESCRIPTION == testDescription);
+                    listenerRan = true;
+                }
             );
             rootNode.setTrue();
-            */
+            Assert.True(listenerRan);
         }
 
         /// <summary>
@@ -55,18 +58,15 @@ namespace SDSMTGDT.GWorks.Story
         [Test]
         public void testStoryPossibleEvent()
         {
-            /*
             var rootNode = new StoryNode(storyBoard, "rootA");
             rootNode.addSuccessor(new StoryNode(storyBoard, "secondA"));
             rootNode.addSuccessor(new StoryNode(storyBoard, "secondB"));
             storyBoard.addRootNode(rootNode);
-            eventManager.registerEventListener(
-                storyBoard.getStoryNodePossibleEventID(),
+            storyBoard.getStoryNodePossibleEventHook().registerEventListener(
                 (sender, info) => Assert.Pass()
             );
             rootNode.setTrue();
             Assert.Fail();
-            */
         }
     }
 }

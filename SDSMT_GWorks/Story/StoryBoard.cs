@@ -15,7 +15,9 @@ namespace SDSMTGDT.GWorks.Story
         private uint nodeIdCounter = 0;
         private LinkedList<StoryNode> possibleNodes;
         private StoryNodePassedEventPublisher passedPublisher;
+        private GameEventHook<StoryNodePassedEventInfo> passedHook;
         private StoryNodePossibleEventPublisher possibilityPublisher;
+        private GameEventHook<StoryNodePossibleEventInfo> possibilityHook;
         public readonly string DESCRIPTION;
 
         public StoryBoard(EventManager manager, string description)
@@ -23,7 +25,9 @@ namespace SDSMTGDT.GWorks.Story
             this.storyGraph = new Dictionary<uint, StoryNode>();
             this.possibleNodes = new LinkedList<StoryNode>();
             this.passedPublisher = new StoryNodePassedEventPublisher(manager);
+            this.passedHook = new GameEventHook<StoryNodePassedEventInfo>(manager, passedPublisher.EVENT_ID);
             this.possibilityPublisher = new StoryNodePossibleEventPublisher(manager);
+            this.possibilityHook = new GameEventHook<StoryNodePossibleEventInfo>(manager, possibilityPublisher.EVENT_ID);
             this.DESCRIPTION = description;
         }
 
@@ -69,15 +73,15 @@ namespace SDSMTGDT.GWorks.Story
         {
             return storyGraph[id];
         }
-
-        public EventID<StoryNodePassedEventInfo> getStoryNodePassedEventID()
+        
+        public GameEventHook<StoryNodePassedEventInfo> getStoryNodePassedEventHook()
         {
-            return passedPublisher.EVENT_ID;
+            return passedHook;
         }
 
-        public EventID<StoryNodePossibleEventInfo> getStoryNodePossibleEventID()
+        public GameEventHook<StoryNodePossibleEventInfo> getStoryNodePossibleEventHook()
         {
-            return possibilityPublisher.EVENT_ID;
+            return possibilityHook;
         }
     }
 }

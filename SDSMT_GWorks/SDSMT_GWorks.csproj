@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Events\EventManager.cs" />
     <Compile Include="Events\EventID.cs" />
+    <Compile Include="Events\GameEventHook.cs" />
     <Compile Include="Physics\Collisions\Collidable.cs" />
     <Compile Include="Physics\Collisions\CollisionEventInfo.cs" />
     <Compile Include="Physics\Collisions\CollisionEventPublisher.cs" />
