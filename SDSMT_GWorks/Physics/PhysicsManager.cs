@@ -50,17 +50,21 @@ namespace SDSMTGDT.GWorks.Physics
         }
 
         /// <summary>
-        /// Returns the collision event publisher associated with a given collidable.
+        /// Returns the collision event hook associated with a given collidable.
         /// If the publisher does not exist, a new one will be created.
         /// </summary>
         /// <param name="collider">The object that will be colliding with others</param>
         /// <returns>A collision publisher associated with the collider</returns>
-        public CollisionEventPublisher getCollisionPublisher(Collidable collider)
+        public GameEventHook<CollisionEventInfo> getCollisionHook(Collidable collider)
         {
-            if (publishers[collider] == null)
-                publishers[collider] = new CollisionEventPublisher(eventManager, this, collider);
-            return publishers[collider];            
+            var publisher = publishers[collider];
+            if (publisher == null)
+            {
+                publisher = new CollisionEventPublisher(eventManager, this, collider);
+            }
+            return publisher;
         }
+
 
         /// <summary>
         /// Creates a collision group with a name, unique id, backed by a specific data structure.

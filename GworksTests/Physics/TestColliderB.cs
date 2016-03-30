@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using SDSMTGDT.GWorks.Physics.Collisions;
 using SDSMTGDT.GWorks.Physics.Collisions.Routes;
+using NUnit.Framework;
 
 namespace SDSMTGDT.GWorks.Physics
 {
@@ -14,9 +15,10 @@ namespace SDSMTGDT.GWorks.Physics
     /// </summary>
     public class TestColliderB : Collidable
     {
+        public bool collided { get; private set; } = false;
         public TestColliderB(PhysicsManager soc)
         {
-            var publisher = soc.getCollisionPublisher(this);
+            var publisher = soc.getCollisionHook(this);
             var router = new CollisionEventRouter();
             router.addCollisionRoute(new TypeCollisionRoute<TestColliderB, TestColliderA>(testACollision));
             publisher.registerEventSubscriber(router);
@@ -28,6 +30,7 @@ namespace SDSMTGDT.GWorks.Physics
 
         public void testACollision(TypedCollisionEventInfo<TestColliderB, TestColliderA> info)
         {
+            collided = true;
         }
     }
 }

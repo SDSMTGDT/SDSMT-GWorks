@@ -14,13 +14,10 @@ namespace SDSMTGDT.GWorks.Physics
     /// </summary>
     public class TestColliderA : Collidable
     {
-        /// <summary>
-        /// Creates a new test object using a given physics manager for collisions
-        /// </summary>
-        /// <param name="physics">The physics manager to use for collisions</param>
+        public bool collided { get; private set; } = false;
         public TestColliderA(PhysicsManager physics)
         {
-            var publisher = physics.getCollisionPublisher(this);
+            var publisher = physics.getCollisionHook(this);
             var router = new CollisionEventRouter();
             router.addCollisionRoute(new TypeCollisionRoute<TestColliderA, TestColliderB>(testBCollision));
             publisher.registerEventSubscriber(router);
@@ -43,7 +40,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// <param name="collided">The object of type TestColliderB this instance collided with</param>
         public void testBCollision(TypedCollisionEventInfo<TestColliderA, TestColliderB> info)
         {
-
+            collided = true;
         }
     }
 }
