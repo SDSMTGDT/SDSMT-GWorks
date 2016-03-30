@@ -18,7 +18,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="manager">The Event Manager to publish to</param>
         /// <param name="description">A description of the event being published</param>
         public GameEventPublisher(EventManager manager, string description) : 
-            this(manager, manager.registerEventID<T>(description))
+            this(manager, manager.registerEvent<T>(description))
         {
         }
 
@@ -35,12 +35,22 @@ namespace SDSMTGDT.GWorks.Events
         }
         
         /// <summary>
-        /// Sends GameEventInfo to subscribers/ listeners via the manager
+        /// Sends GameEventInfo to subscribers/ listeners
         /// </summary>
         /// <param name="eventInfo">The event information to send out</param>
         protected void fireEvent(T eventInfo)
         {
-            manager.fireEvent(this, EVENT_ID, eventInfo);
+            EVENT_ACTIONS.listeners?.Invoke(this, eventInfo);
+        }
+
+        /// <summary>
+        /// Sends GameEventInfo to subscribers/ listeners threaded
+        /// </summary>
+        /// <param name="eventInfo">The event information to send out</param>
+        /// <param name="callback">A callback to call whe the event is finished</param>
+        protected void fireAsyncEvent(T eventInfo, AsyncCallback callback)
+        {
+            EVENT_ACTIONS.asyncListeners?.BeginInvoke(this, eventInfo, callback, null);
         }
         
         /// <summary>

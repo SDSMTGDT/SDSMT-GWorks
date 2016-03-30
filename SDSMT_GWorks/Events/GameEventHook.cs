@@ -18,6 +18,7 @@ namespace SDSMTGDT.GWorks.Events
         /// The event id which identifies the sink for this publisher
         /// </summary>
         public EventID<T> EVENT_ID { get; private set; }
+        internal GameEventActions<T> EVENT_ACTIONS;
 
         /// <summary>
         /// The manager to connect the publisher with the subscribers
@@ -28,33 +29,34 @@ namespace SDSMTGDT.GWorks.Events
         {
             this.manager = manager;
             this.EVENT_ID = eventID;
+            this.EVENT_ACTIONS = manager.getEventActions(EVENT_ID);
         }
 
         /// <summary>
-        /// Registers an event listener with this publisher through the manager
+        /// Registers an event listener with this publisher
         /// </summary>
         /// <param name="eventListener">A function to call when the event fires</param>
         public void registerEventListener(GameEvent<T> eventListener)
         {
-            manager.registerEventListener(EVENT_ID, eventListener);
+            EVENT_ACTIONS.listeners += eventListener;
         }
 
         /// <summary>
-        /// Registers a threaded event listener with this publisher through the manager
+        /// Registers a threaded event listener with this publisher
         /// </summary>
         /// <param name="eventListener">A function to call when the event fires</param>
         public void registerAsyncEventListener(GameEvent<T> eventListener)
         {
-            manager.registerAsyncEventListener(EVENT_ID, eventListener);
+            EVENT_ACTIONS.asyncListeners += eventListener;
         }
 
         /// <summary>
-        /// Removes an event listener from the manager corresponding to this publisher
+        /// Removes an event listener corresponding to this publisher
         /// </summary>
         /// <param name="eventListener">A function currently being called when the event fires</param>
         public void unregisterEventListener(GameEvent<T> eventListener)
         {
-            manager.unregisterEventListener(EVENT_ID, eventListener);
+            EVENT_ACTIONS.listeners -= eventListener;
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventListener">A function currently being called when the event fires</param>
         public void unregisterAsyncEventListener(GameEvent<T> eventListener)
         {
-            manager.unregisterAsyncEventListener(EVENT_ID, eventListener);
+            EVENT_ACTIONS.asyncListeners -= eventListener;
         }
 
         /// <summary>
@@ -72,7 +74,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventSubscriber">An object containing a method to call when the event fires</param>
         public void registerEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            manager.registerEventListener(EVENT_ID, eventSubscriber.gameEventRecieved);
+            registerEventListener(eventSubscriber.gameEventRecieved);
         }
 
         /// <summary>
@@ -81,7 +83,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventSubscriber">An object containing a method to call when the event fires</param>
         public void registerAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            manager.registerAsyncEventListener(EVENT_ID, eventSubscriber.gameEventRecieved);
+            registerAsyncEventListener(eventSubscriber.gameEventRecieved);
         }
 
         /// <summary>
@@ -90,7 +92,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventSubscriber">An object containing a method which is being called when the event fires</param>
         public void unregisterEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            manager.registerEventListener(EVENT_ID, eventSubscriber.gameEventRecieved);
+            unregisterEventListener(eventSubscriber.gameEventRecieved);
         }
 
         /// <summary>
@@ -99,7 +101,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventSubscriber">An object containing a method which is being called when the event fires</param>
         public void unregisterAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            manager.unregisterAsyncEventListener(EVENT_ID, eventSubscriber.gameEventRecieved);
+            unregisterAsyncEventListener(eventSubscriber.gameEventRecieved);
         }
 
         public virtual void Dispose()
