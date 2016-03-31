@@ -12,10 +12,9 @@ namespace SDSMTGDT.GWorks.Physics
     /// <summary>
     /// Object designed to test the Physics Manager's Collision system
     /// </summary>
-    public class TestColliderA : Collidable
+    public class TestColliderA : BoundsCollidable
     {
-        public bool collided { get; private set; } = false;
-        public TestColliderA(PhysicsManager physics)
+        public TestColliderA(PhysicsManager physics, Rectangle bounds) : base(bounds)
         {
             var publisher = physics.getCollisionHook(this);
             var router = new CollisionEventRouter();
@@ -24,20 +23,9 @@ namespace SDSMTGDT.GWorks.Physics
         }
 
         /// <summary>
-        /// Returns the location, width, and height of the object
-        /// TODO: ACTUALLY IMPLEMENT
+        /// Code to be called when this object collides with a testColliderB
         /// </summary>
-        /// <returns>An axis aligned bounding box</returns>
-        public Rectangle getBounds()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Code to be called when this object collides with
-        /// </summary>
-        /// <param name="thisInstance">Reference to this object</param>
-        /// <param name="collided">The object of type TestColliderB this instance collided with</param>
+        /// <param name="info">collision information</param>
         public void testBCollision(TypedCollisionEventInfo<TestColliderA, TestColliderB> info)
         {
             collided = true;

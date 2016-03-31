@@ -13,19 +13,14 @@ namespace SDSMTGDT.GWorks.Physics
     /// <summary>
     /// Object designed to test the Physics Manager's Collision system
     /// </summary>
-    public class TestColliderB : Collidable
+    public class TestColliderB : BoundsCollidable
     {
-        public bool collided { get; private set; } = false;
-        public TestColliderB(PhysicsManager soc)
+        public TestColliderB(PhysicsManager soc, Rectangle bounds) : base(bounds)
         {
             var publisher = soc.getCollisionHook(this);
             var router = new CollisionEventRouter();
             router.addCollisionRoute(new TypeCollisionRoute<TestColliderB, TestColliderA>(testACollision));
             publisher.registerEventSubscriber(router);
-        }
-        public Rectangle getBounds()
-        {
-            throw new NotImplementedException();
         }
 
         public void testACollision(TypedCollisionEventInfo<TestColliderB, TestColliderA> info)

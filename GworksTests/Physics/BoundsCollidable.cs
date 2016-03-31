@@ -8,9 +8,10 @@ using Microsoft.Xna.Framework;
 
 namespace SDSMTGDT.GWorks.Physics
 {
-    internal class BoundsCollidable : Collidable
+    public class BoundsCollidable : Collidable
     {
         private Rectangle bounds;
+        public bool collided { get; protected set; } = false;
 
         public BoundsCollidable(Rectangle bounds)
         {
