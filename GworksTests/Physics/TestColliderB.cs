@@ -17,7 +17,7 @@ namespace SDSMTGDT.GWorks.Physics
     {
         public TestColliderB(PhysicsManager soc, Rectangle bounds) : base(bounds)
         {
-            var publisher = soc.getCollisionHook(this);
+            var publisher = soc.obtainCollisionHook(this);
             var router = new CollisionEventRouter();
             router.addCollisionRoute(new TypeCollisionRoute<TestColliderB, TestColliderA>(testACollision));
             publisher.registerEventSubscriber(router);

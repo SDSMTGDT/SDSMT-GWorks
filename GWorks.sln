@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonCrawler", "DungeonCrawler\DungeonCrawler.csproj", "{B6699D8F-A053-4D30-A5E5-E25AE239D6C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDSMT_GWorks", "SDSMT_GWorks\SDSMT_GWorks.csproj", "{F3351C48-81EE-4733-98A4-2DC798574E1F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GworksTests", "GworksTests\GworksTests.csproj", "{F47BB1F9-DFE3-4689-9AF6-1B7C5769ED79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrickBreaker", "BrickBreaker\BrickBreaker.csproj", "{8ED09CBA-27F0-4013-84C0-1A83A4BBB7CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,12 @@ Global
 		{F47BB1F9-DFE3-4689-9AF6-1B7C5769ED79}.Release|Any CPU.ActiveCfg = Release|x86
 		{F47BB1F9-DFE3-4689-9AF6-1B7C5769ED79}.Release|x86.ActiveCfg = Release|x86
 		{F47BB1F9-DFE3-4689-9AF6-1B7C5769ED79}.Release|x86.Build.0 = Release|x86
+		{8ED09CBA-27F0-4013-84C0-1A83A4BBB7CF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8ED09CBA-27F0-4013-84C0-1A83A4BBB7CF}.Debug|x86.ActiveCfg = Debug|x86
+		{8ED09CBA-27F0-4013-84C0-1A83A4BBB7CF}.Debug|x86.Build.0 = Debug|x86
+		{8ED09CBA-27F0-4013-84C0-1A83A4BBB7CF}.Release|Any CPU.ActiveCfg = Release|x86
+		{8ED09CBA-27F0-4013-84C0-1A83A4BBB7CF}.Release|x86.ActiveCfg = Release|x86
+		{8ED09CBA-27F0-4013-84C0-1A83A4BBB7CF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

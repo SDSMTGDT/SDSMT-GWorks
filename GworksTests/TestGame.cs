@@ -38,7 +38,7 @@ namespace SDSMTGDT.DungeonCrawler
         {
             base.Initialize();
             // TODO: Add your initialization logic here
-            gStateManager = new GameStateManager();
+            gStateManager = new GameStateManager(graphics.GraphicsDevice);
 
             Rectangle first = graphics.GraphicsDevice.Viewport.Bounds;
             first.Width = first.Width / 2;

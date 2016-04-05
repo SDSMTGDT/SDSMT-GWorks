@@ -37,7 +37,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
             LinkedList<Collidable> collisions = new LinkedList<Collidable>();
             foreach (Collidable other in collidables)
             {
-                if (other.getBounds().Intersects(c.getBounds()))
+                if (c != other && other.getBounds().Intersects(c.getBounds()))
                 {
                     collisions.AddLast(other);
                 }

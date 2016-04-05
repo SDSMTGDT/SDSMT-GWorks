@@ -19,7 +19,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// <summary>
         /// The event manager to forward collision events to.
         /// </summary>
-        private EventManager eventManager;
+        public EventManager eventManager { get; private set; }
 
         /// <summary>
         /// Mapping between collidable objects and the publishers for their collision events
@@ -36,7 +36,7 @@ namespace SDSMTGDT.GWorks.Physics
 
         /// <summary>
         /// Mapping between collidable objects and the groups they are in.
-        /// Its faster maintiaining this dictionary than calling .contains on every group.
+        /// Its faster maintiaining this dictionary than calling contains on every group.
         /// </summary>
         private Dictionary<Collidable, List<CollisionGroup>> collidableToGroups;
 
@@ -71,7 +71,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         /// <param name="collider">The object that will be colliding with others</param>
         /// <returns>A collision publisher associated with the collider</returns>
-        public GameEventHook<CollisionEventInfo> getCollisionHook(Collidable collider)
+        public GameEventHook<CollisionEventInfo> obtainCollisionHook(Collidable collider)
         {
             CollisionEventPublisher publisher;
             if (!publishers.TryGetValue(collider, out publisher))
@@ -164,6 +164,20 @@ namespace SDSMTGDT.GWorks.Physics
         }
 
         /// <summary>
+        /// Collides all registered collidables
+        /// </summary>
+        public void checkAllCollisions()
+        {
+            foreach (var keyValuePair in collidableToGroups)
+            {
+                foreach (var collidableGroup in keyValuePair.Value)
+                {
+                    collideWithGroup(keyValuePair.Key, collidableGroup);
+                }
+            }
+        }
+
+        /// <summary>
         /// Collides a collidable with all of its registered collidable groups
         /// </summary>
         /// <param name="c">The collidable to check</param>
@@ -188,7 +202,7 @@ namespace SDSMTGDT.GWorks.Physics
         {
             foreach(Collidable other in group.structure.checkCollision(c))
             {
-                collide(c, other);
+                collide(c, other, group);
             }            
         }
 
@@ -198,13 +212,14 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         /// <param name="collider">The first object in the collision</param>
         /// <param name="collided">The second object in the collision</param>
-        internal void collide(Collidable collider, Collidable collided)
+        /// <param name="group">The group containing one or both collidables</param>
+        internal void collide(Collidable collider, Collidable collided, CollisionGroup group)
         {
             CollisionEventPublisher colliderPub, collidedPub;
             if (publishers.TryGetValue(collider, out colliderPub))
-                colliderPub.publish(collided);
+                colliderPub.publish(collided, group);
             if (publishers.TryGetValue(collided, out collidedPub))
-                collidedPub.publish(collider);
+                collidedPub.publish(collider, group);
         }
     }
 }

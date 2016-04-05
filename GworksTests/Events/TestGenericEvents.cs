@@ -26,8 +26,8 @@ namespace SDSMTGDT.GWorks.Events
         [SetUp]
         public void initEventManager()
         {
-            gameStateManager = new GameStateManager();
-            eventManager = gameStateManager.getEventManager();
+            gameStateManager = new GameStateManager(null);
+            eventManager = gameStateManager.events;
         }
 
         /// <summary>

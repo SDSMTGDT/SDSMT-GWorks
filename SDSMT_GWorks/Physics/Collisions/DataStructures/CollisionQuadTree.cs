@@ -147,7 +147,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
             // Test our collidables against c
             foreach (var other in collidables)
             {
-                if (c.getBounds().Intersects(other.getBounds()))
+                if (c != other && c.getBounds().Intersects(other.getBounds()))
                 {
                     collisions.Add(other);
                 }

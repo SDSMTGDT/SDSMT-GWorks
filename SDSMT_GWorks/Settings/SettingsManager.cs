@@ -25,7 +25,7 @@ namespace SDSMTGDT.GWorks.Settings
         private List<ISetting> settings;
 
         // Contains the indexes for the default game settings
-        private EngineSettings engineSettings;
+        public EngineSettings engineSettings { get; private set; }
 
         public SettingsManager()
         {
@@ -35,41 +35,30 @@ namespace SDSMTGDT.GWorks.Settings
 
         public SettingIndex<T> addSetting<T>()
         {
-            settings.Add(null);
+            settings.Add(new Setting<T>());
             SettingIndex<T> newSetting = settings.Count - 1;
             return newSetting;
         }
 
         public void update<T>(SettingIndex<T> index, T value)
         {
-            if (settings[index] == null)
-            {
-                settings[index] = new Setting<T>();
-            }
             ((Setting<T>)settings[index]).value = value;
         }
 
         public T access<T>(SettingIndex<T> index)
         {
-            if (settings[index] == null)
-            {
-                settings[index] = new Setting<T>();
-            }
             return ((Setting<T>)settings[index]).value;
         }
 
         public void addUpdateListener<T>(SettingIndex<T> index, Action<T> updateListener)
         {
-            if (settings[index] == null)
-            {
-                settings[index] = new Setting<T>();
-            }
             ((Setting<T>)settings[index]).settingUpdated += updateListener;
         }        
 
-        public EngineSettings getEngineSettings()
+        public bool removeUpdateListener<T>(SettingIndex<T> index, Action<T> updateListener)
         {
-            return engineSettings;
+            ((Setting<T>)settings[index]).settingUpdated -= updateListener;
+            return true;
         }
     }
 }

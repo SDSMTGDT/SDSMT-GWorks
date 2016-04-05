@@ -7,26 +7,25 @@ using SDSMTGDT.GWorks.Graphics;
 using SDSMTGDT.GWorks.Settings;
 using SDSMTGDT.GWorks.Events;
 using Microsoft.Xna.Framework.Graphics;
+using SDSMTGDT.GWorks.Physics;
 
 namespace SDSMTGDT.GWorks.GameStates
 {
     public class GameStateManager
     {
         private Stack<GameState> states;
-        private SettingsManager settings;
-        private EventManager eventManager;
-        private Camera2d overWorldCamera;
-        private Camera2d dungeonCamera;
-        private Camera2d standardCamera;
+        public SettingsManager settings { get; private set; }
+        public EventManager events { get; private set; }
+        public PhysicsManager physics { get; private set; }
+        public GraphicsDevice graphicsDevice { get; private set; }
 
-        public GameStateManager()
+        public GameStateManager(GraphicsDevice graphics)
         {
             states = new Stack<GameState>();
             settings = new Settings.SettingsManager();
-            eventManager = new EventManager();
-            overWorldCamera = new Camera2d();
-            dungeonCamera = new Camera2d();
-            standardCamera = new Camera2d();
+            events = new EventManager();
+            physics = new PhysicsManager(events);
+            this.graphicsDevice = graphics;
         }
 
         public void push (GameState state)
@@ -50,7 +49,7 @@ namespace SDSMTGDT.GWorks.GameStates
         {
             if (states.Count != 0)
                 states.Peek().update(gameTime);
-            eventManager.update(gameTime);
+            events.update(gameTime);
         }
 
         public void draw(GameTime gameTime, SpriteBatch graphics)
@@ -60,15 +59,6 @@ namespace SDSMTGDT.GWorks.GameStates
             graphics.Begin();
             states.Peek().draw(gameTime, graphics);
             graphics.End();
-        }
-        public Settings.SettingsManager getSettingsManager()
-        {
-            return settings;
-        }
-
-        public EventManager getEventManager()
-        {
-            return eventManager;
         }
     }
 }

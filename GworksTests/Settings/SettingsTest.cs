@@ -22,7 +22,7 @@ namespace SDSMTGDT.GWorks.Settings
         public void setup()
         {
             manager = new SettingsManager();
-            engineSettings = manager.getEngineSettings();
+            engineSettings = manager.engineSettings;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace SDSMTGDT.GWorks.Settings
         [Test]
         public void updateSettingFromNull()
         {
-            manager.update<uint>(engineSettings.VOLUME_MASTER, 100);
+            manager.update(engineSettings.VOLUME_MASTER, 100);
             Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 100);
         }
 
@@ -43,7 +43,7 @@ namespace SDSMTGDT.GWorks.Settings
         public void updateSettingFromInitialized()
         {
             updateSettingFromNull();
-            manager.update<uint>(engineSettings.VOLUME_MASTER, 0);
+            manager.update(engineSettings.VOLUME_MASTER, 0);
             Assert.AreEqual(manager.access(engineSettings.VOLUME_MASTER), 0);
         }
 
@@ -56,7 +56,7 @@ namespace SDSMTGDT.GWorks.Settings
         public void testSettingEvents()
         {
             manager.addUpdateListener(engineSettings.VOLUME_MASTER, (value) => { Assert.AreEqual(value, 50); });
-            manager.update<uint>(engineSettings.VOLUME_MASTER, 50);
+            manager.update(engineSettings.VOLUME_MASTER, 50);
         }
     }
 }

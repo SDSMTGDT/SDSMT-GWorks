@@ -68,6 +68,9 @@ namespace SDSMTGDT.GWorks.Events
         //Allows for delayed execution of events
         private LinkedList<IDelayedEvent> delayedEvents;
 
+        //Allows for changing game states etc after they run
+        private Queue<Action> delayedActions;
+
         //Creates eventIDs
         private EventIDFactory eventIDFactory;
 
@@ -78,6 +81,7 @@ namespace SDSMTGDT.GWorks.Events
         {
             eventMap = new Dictionary<uint, IGameEventAction>();
             delayedEvents = new LinkedList<IDelayedEvent>();
+            delayedActions = new Queue<Action>();
             eventIDFactory = new EventIDFactory();
         }
 
@@ -129,6 +133,11 @@ namespace SDSMTGDT.GWorks.Events
             delayedEvents.AddLast(new DelayedEvent<T>(this, sender, eventID, eventInfo));
         }
 
+        public void queueAction(Action a)
+        {
+            delayedActions.Enqueue(a);
+        }
+
         /// <summary>
         /// Handles firing delayed events.
         /// </summary>
@@ -138,6 +147,11 @@ namespace SDSMTGDT.GWorks.Events
             {
                 delayedEvents.First().fireEvent();
                 delayedEvents.RemoveFirst();
+            }
+
+            while (delayedActions.Count != 0)
+            {
+                delayedActions.Dequeue()();
             }
         }
 

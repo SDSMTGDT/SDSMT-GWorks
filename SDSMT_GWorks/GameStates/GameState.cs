@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace SDSMTGDT.GWorks.GameStates
 {
     public abstract class GameState
     {
-        protected GameStateManager manager;
+        public GameStateManager stateManager;
+        private Queue<Action> afterRunQueue;
 
         public GameState(GameStateManager manager)
         {
-            this.manager = manager;
+            this.stateManager = manager;
+            this.afterRunQueue = new Queue<Action>();
         }
  
         public abstract void draw (
@@ -33,14 +36,14 @@ namespace SDSMTGDT.GWorks.GameStates
 
         }
 
-        public virtual void onLoadState()
+        public virtual void onLoadState(ContentManager content)
         {
 
         }
 
         public virtual void onUnloadState()
         {
-
+            
         }
     }
 }

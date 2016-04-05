@@ -1,25 +1,29 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BrickBreaker.GameStates.PlayStates.Normal;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SDSMTGDT.GWorks.Settings;
+using SDSMTGDT.GWorks.Events;
 using SDSMTGDT.GWorks.GameStates;
+using SDSMTGDT.GWorks.Physics;
+using SDSMTGDT.GWorks.Settings;
 
-namespace SDSMTGDT.DungeonCrawler
+namespace BrickBreaker
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class DungeonCrawler : Game
+    public class BrickBreaker : Game
     {
         GraphicsDeviceManager graphics;
-        GameStateManager gStateManager;
         SpriteBatch spriteBatch;
+        GameStateManager gameStateManager;
 
-        public DungeonCrawler()
+        public BrickBreaker()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -29,11 +33,18 @@ namespace SDSMTGDT.DungeonCrawler
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            gStateManager = new GameStateManager(graphics.GraphicsDevice);
             base.Initialize();
-
-            // TODO: Research back buffer vs viewport
+            gameStateManager = new GameStateManager(graphics.GraphicsDevice);
+            
+            gameStateManager.settings.update(
+                gameStateManager.settings.engineSettings.WINDOW_WIDTH,
+                GraphicsDevice.Viewport.Width
+            );
+            gameStateManager.settings.update(
+                gameStateManager.settings.engineSettings.WINDOW_HEIGHT,
+                GraphicsDevice.Viewport.Height
+            );
+            gameStateManager.push(new NormalPlayState(gameStateManager));
         }
 
         /// <summary>
@@ -42,6 +53,8 @@ namespace SDSMTGDT.DungeonCrawler
         /// </summary>
         protected override void LoadContent()
         {
+            // Create a new SpriteBatch, which can be used to draw textures.
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -64,9 +77,9 @@ namespace SDSMTGDT.DungeonCrawler
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            gStateManager.update(gameTime);
-            // TODO: Add your update logic here
 
+            // TODO: Add your update logic here
+            gameStateManager.update(gameTime);
             base.Update(gameTime);
         }
 
@@ -76,7 +89,10 @@ namespace SDSMTGDT.DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            gStateManager.draw(gameTime, spriteBatch);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+            gameStateManager.draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }

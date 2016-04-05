@@ -23,8 +23,8 @@ namespace SDSMTGDT.GWorks.Events
         [SetUp]
         public void initEventManager()
         {
-            gameStateManager = new GameStateManager();
-            eventManager = gameStateManager.getEventManager();
+            gameStateManager = new GameStateManager(null);
+            eventManager = gameStateManager.events;
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace SDSMTGDT.GWorks.Events
             //create our publisher
             GenericGameEventPublisher<int> myPublisher = 
                 new GenericGameEventPublisher<int>
-                (gameStateManager.getEventManager(), "Test publisher");
+                (gameStateManager.events, "Test publisher");
             //register the listener
             myPublisher.registerEventListener((sender, info) =>
             {

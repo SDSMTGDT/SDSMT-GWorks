@@ -24,6 +24,16 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         public Collidable collided { get; private set; }
 
         /// <summary>
+        /// The physics manager which issued this info
+        /// </summary>
+        public PhysicsManager physicsManager { get; private set; }
+
+        /// <summary>
+        /// The collision group containing both collidables
+        /// </summary>
+        public CollisionGroup collisionGroup { get; private set; }
+
+        /// <summary>
         /// Captures the rectangle of the collider at the time of the collision
         /// </summary>
         public Rectangle colliderBounds { get; private set; }
@@ -38,10 +48,12 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// </summary>
         /// <param name="collider">Collidable 1</param>
         /// <param name="collided">Collidable 2</param>
-        public CollisionEventInfo(Collidable collider, Collidable collided)
+        public CollisionEventInfo(Collidable collider, Collidable collided, CollisionGroup group, PhysicsManager manager)
         {
             this.collider = collider;
             this.collided = collided;
+            this.collisionGroup = group;
+            this.physicsManager = manager;
             this.colliderBounds = new Rectangle(collider.getBounds().Location, collider.getBounds().Size);
             this.collidedBounds = new Rectangle(collided.getBounds().Location, collided.getBounds().Size);
         }

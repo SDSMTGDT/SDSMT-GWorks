@@ -26,6 +26,16 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         public T2 collided { get; private set; }
 
         /// <summary>
+        /// The physics manager which issued this info
+        /// </summary>
+        public PhysicsManager physicsManager { get; private set; }
+
+        /// <summary>
+        /// The collision group containing both collidables
+        /// </summary>
+        public CollisionGroup collisionGroup { get; private set; }
+
+        /// <summary>
         /// Captures the rectangle of the collider at the time of the collision
         /// </summary>
         public Rectangle colliderBounds { get; private set; }
@@ -39,6 +49,8 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         {
             this.collider = (T1)info.collider;
             this.collided = (T2)info.collided;
+            this.physicsManager = info.physicsManager;
+            this.collisionGroup = info.collisionGroup;
             this.colliderBounds = new Rectangle(info.colliderBounds.Location, info.colliderBounds.Size);
             this.collidedBounds = new Rectangle(info.collidedBounds.Location, info.collidedBounds.Size);
         }
