@@ -65,12 +65,12 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         }
 
         /// <summary>
-        /// Calculates the vector from the center of the collider to the center of the intersection
+        /// Calculates the vector from the center of the collider to the center of the collided
         /// </summary>
-        /// <returns>A vector from the center of the collider to the center of the intersection</returns>
+        /// <returns>A vector from the center of the collider to the center of the collided</returns>
         public Vector2 getCollisionVector()
         {
-            return (getIntersection().Center - colliderBounds.Center).ToVector2();
+            return (collidedBounds.Center - colliderBounds.Center).ToVector2();
         }
     }
 }

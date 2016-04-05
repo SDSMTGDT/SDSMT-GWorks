@@ -14,12 +14,14 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
     {
         internal bool destroyed { get; set; }
         internal Color color { get; private set; }
+        internal float upperRightAngle {get; private set;}
 
         internal Brick(GraphicsDevice device, Color color, Rectangle bounds, PhysicsManager physics) : 
             base(bounds, setUpTexture(device, bounds), physics)
         {
             destroyed = false;
             this.color = color;
+            this.upperRightAngle = (float)Math.Atan2(-bounds.Height, bounds.Width);
         }
 
         private static Texture2D setUpTexture(GraphicsDevice device, Rectangle rectangle)

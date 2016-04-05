@@ -20,7 +20,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
         private Brick[,] bricks;
         private Wall north, east, south, west;
         private const int numBricksWide = 20;
-        private const int numBricksHigh = 5;
+        private const int numBricksHigh = 10;
         private int brickWidth;
         private int brickHeight;
         internal int screenWidth { get; private set; }
@@ -62,6 +62,10 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
                     int x = brickWidth * j;
                     bricks[i, j] = new Brick(stateManager.graphicsDevice, Color.Red,
                         new Rectangle(x, y, brickWidth, brickHeight), stateManager.physics);
+                    if (i * j % 2 == 0)
+                        bricks[i, j].destroyed = true;
+                    else
+                        stateManager.physics.registerCollidableInGroup(bricks[i, j], collisionGroup);                   
                 }
             }
 
@@ -76,11 +80,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
             stateManager.physics.registerCollidableInGroup(east, collisionGroup);
             stateManager.physics.registerCollidableInGroup(south, collisionGroup);
             stateManager.physics.registerCollidableInGroup(west, collisionGroup);
-
-            foreach (var brick in bricks)
-            {
-                stateManager.physics.registerCollidableInGroup(brick, collisionGroup);
-            }
+            
             addUpdateListener(new CollisionPumper(stateManager.physics));
         }
     }
