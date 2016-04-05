@@ -12,7 +12,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
     class BallMovement : UpdateListener
     {
         private Ball ball;
-        internal float MAX_SPEED { get; private set; } = 1.0F;
+        internal float MAX_SPEED { get; private set; } = .4F;
 
         internal BallMovement(Ball ball)
         {
