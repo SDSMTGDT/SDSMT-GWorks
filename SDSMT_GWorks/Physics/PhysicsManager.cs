@@ -193,6 +193,24 @@ namespace SDSMTGDT.GWorks.Physics
         }
 
         /// <summary>
+        /// Finds the collidables currently engaged with a given collidable
+        /// </summary>
+        /// <param name="c">A collidable to check</param>
+        /// <returns>A list of other collidables c is colliding with</returns>
+        public List<Collidable> listCurentCollisions(Collidable c)
+        {
+            List<CollisionGroup> groups;
+            List<Collidable> collisions = new List<Collidable>();
+            if (!collidableToGroups.TryGetValue(c, out groups))
+                return collisions;
+            foreach (CollisionGroup group in groups)
+            {
+                collisions.AddRange(group.structure.checkCollision(c));
+            }
+            return collisions;
+        }
+
+        /// <summary>
         /// Collides a collidable with all registered collidables in a given collision group.
         /// The collidable does not have to be registered with the collision group.
         /// </summary>

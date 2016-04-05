@@ -69,6 +69,35 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Events
             {
                 info.physicsManager.unregisterCollidableFromSystem(info.collided);
             });
+            Vector2 collVector = info.getCollisionVector();
+            Vector2 current = info.collider.speedPxPerMillis;
+
+            float angle = (float)(Math.Atan2(collVector.Y, collVector.X) * (180 / Math.PI));
+            if (angle > 45 && angle < 135)
+            {
+                current.Y = -Math.Abs(current.Y);
+            }
+            else if (angle < -45 && angle > -135)
+            {
+                current.Y = Math.Abs(current.Y);
+            }
+            else if (angle > -45 && angle < 45)
+            {
+                current.X = Math.Abs(current.X);
+            }
+            else
+            {
+                current.X = -Math.Abs(current.X);
+            }
+            
+            info.collider.speedPxPerMillis = current;
+
+            while (info.collided.getBounds().Intersects(info.collider.getBounds()))
+            {
+                info.collider.move(current.X, current.Y);
+            }
+
+            //
         }
     }
 }
