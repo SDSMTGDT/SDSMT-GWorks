@@ -53,9 +53,24 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Events
 
         internal static void handleBallPaddleCollision(TypedCollisionEventInfo<Ball, Paddle> info)
         {
+            /*
             var curr = info.collider.speedPxPerMillis;
             curr.Y *= -1;
             info.collider.speedPxPerMillis = curr;
+            */
+
+            var collVector = -info.getCollisionVector(); // paddle to ball
+
+            int paddleWidth = info.collided.getBounds().Width;
+            float maxRotation = (float)(Math.PI / 4);
+
+            float rotation = (-maxRotation + 
+                ((collVector.X + paddleWidth / 2) / (paddleWidth + info.collider.getBounds().Width)) * 
+                (2 * maxRotation));
+            Console.WriteLine(rotation);
+
+            info.collider.speedPxPerMillis = Vector2.Transform(-Vector2.UnitY * info.collider.speedPxPerMillis.Length(), Matrix.CreateRotationZ(rotation));
+
             while(info.collided.getBounds().Intersects(info.collider.getBounds()))
             {
                 info.collider.move(info.collider.speedPxPerMillis.X, info.collider.speedPxPerMillis.Y);

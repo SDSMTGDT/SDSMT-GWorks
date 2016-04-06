@@ -62,9 +62,9 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
                     int x = brickWidth * j;
                     bricks[i, j] = new Brick(stateManager.graphicsDevice, Color.Red,
                         new Rectangle(x, y, brickWidth, brickHeight), stateManager.physics);
-                    if (i * j % 2 == 0)
+                    /*if (i * j % 2 == 0)
                         bricks[i, j].destroyed = true;
-                    else
+                    else*/
                         stateManager.physics.registerCollidableInGroup(bricks[i, j], collisionGroup);                   
                 }
             }
