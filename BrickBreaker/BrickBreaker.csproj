@@ -54,6 +54,7 @@
     <Compile Include="GameStates\PlayStates\Normal\Updates\BallMovement.cs" />
     <Compile Include="GameStates\PlayStates\Normal\Updates\BallStarter.cs" />
     <Compile Include="GameStates\PlayStates\Normal\Updates\CollisionPumper.cs" />
+    <Compile Include="GameStates\PlayStates\Normal\Updates\ManualBallMovement.cs" />
     <Compile Include="GameStates\PlayStates\Normal\Updates\PaddleMovement.cs" />
     <Compile Include="Helpers\CollidableGameObject.cs" />
     <Compile Include="Helpers\CollisionZone.cs" />

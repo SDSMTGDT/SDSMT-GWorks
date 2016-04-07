@@ -42,6 +42,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
                 playState.stateManager.events.queueAction(() => {
                     playState.addDrawListener(ball.artist);
                     playState.addUpdateListener(ball.movement);
+                    //playState.addUpdateListener(new ManualBallMovement(ball));
                     playState.removeUpdateListener(this);
                 });
             }
