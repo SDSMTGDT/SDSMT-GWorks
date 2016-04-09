@@ -53,6 +53,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\GameObject.cs" />
     <Compile Include="GameStates\Drawing\BallArtist.cs" />
     <Compile Include="GameStates\Drawing\PaddleArtist.cs" />
     <Compile Include="GameStates\Drawing\ScoreBoardArtist.cs" />
