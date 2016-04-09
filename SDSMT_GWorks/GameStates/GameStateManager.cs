@@ -26,6 +26,15 @@ namespace SDSMTGDT.GWorks.GameStates
             events = new EventManager();
             physics = new PhysicsManager(events);
             this.graphicsDevice = graphics;
+
+            settings.update(
+                settings.engineSettings.WINDOW_WIDTH,
+                graphics.Viewport.Width
+            );
+            settings.update(
+                settings.engineSettings.WINDOW_HEIGHT,
+                graphics.Viewport.Height
+            );
         }
 
         public void push (GameState state)
