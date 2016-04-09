@@ -8,18 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Pong.BaseClasses
 {
     /// <summary>
-    /// Game object is the super class for all objects. Defines basic movement,
-    /// object position, and texture.
+    /// Game object is an interface that declares methods for obtaining an
+    /// objects texture, velocity, and position.
     /// </summary>
-    class GameObject
+    interface GameObject
     {
-        private Texture2D texture; /*the texture for the object*/
-        private Vector2 velocity; /*the x and y velocities of the object*/
-        private GraphicsDevice graphics; /* */
-        
-        protected GameObject ()
-        {
-            texture = new Texture2D()
-        }
+        Texture2D getTexture();
+        Vector2 getVelocity();
+        Vector2 getPosition();
     }
 }

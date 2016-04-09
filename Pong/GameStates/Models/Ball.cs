@@ -2,10 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Pong.BaseClasses;
+using Microsoft.Xna.Framework;
+using SDSMTGDT.GWorks.Physics;
+using SDSMTGDT.GWorks.Events;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Pong.GameStates.Models
 {
-    class Ball
+    class Ball : CollidableGameObject
     {
+        Ball (Rectangle bounds, PhysicsManager physics, Texture2D texture,
+            Vector2 startingVelocity, Vector2 position, GraphicsDevice graphics)
+            : base(bounds, physics, texture, startingVelocity,position,graphics)
+        {
+
+        }
     }
 }

@@ -53,7 +53,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BaseClasses\CollidableGameObject.cs" />
     <Compile Include="BaseClasses\GameObject.cs" />
+    <Compile Include="BaseClasses\GameObjectCollision.cs" />
     <Compile Include="GameStates\Drawing\BallArtist.cs" />
     <Compile Include="GameStates\Drawing\PaddleArtist.cs" />
     <Compile Include="GameStates\Drawing\ScoreBoardArtist.cs" />
