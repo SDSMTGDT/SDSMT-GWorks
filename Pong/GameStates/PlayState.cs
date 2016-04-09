@@ -7,6 +7,6 @@ namespace Pong.GameStates
 {
     class PlayState
     {
-        private 
+        
     }
 }

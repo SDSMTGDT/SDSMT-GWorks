@@ -10,17 +10,34 @@ using SDSMTGDT.GWorks.Settings;
 namespace BrickBreaker
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// This is the main type for a MonoGame based Game
     /// </summary>
-    public class BrickBreaker : Game
+    public class BrickBreaker : Game //Inherit from Game in order to bring in MonoGame
     {
+        /// <summary>
+        /// Handles drawing to the screen via sprite batches and other objects
+        /// </summary>
         GraphicsDeviceManager graphics;
+
+        /// <summary>
+        /// Essentially a group of draw commands to be executed at once
+        /// </summary>
         SpriteBatch spriteBatch;
+
+        /// <summary>
+        /// SDSMT GWorks Game State Manager. Controls game states, gworks settings, etc.
+        /// </summary>
         GameStateManager gameStateManager;
 
+        /// <summary>
+        /// Constructor for the main game
+        /// </summary>
         public BrickBreaker()
         {
+            //Create a new graphics manager from the information passed into the game by xna
             graphics = new GraphicsDeviceManager(this);
+
+            //Sets up the content directory for images sound etc
             Content.RootDirectory = "Content";
         }
 
@@ -33,17 +50,13 @@ namespace BrickBreaker
         /// </summary>
         protected override void Initialize()
         {
+            //Let monogame initialize the game super class
             base.Initialize();
+
+            //Initialize a new Game State Manager for Gworks with a graphics device
             gameStateManager = new GameStateManager(graphics.GraphicsDevice);
             
-            gameStateManager.settings.update(
-                gameStateManager.settings.engineSettings.WINDOW_WIDTH,
-                GraphicsDevice.Viewport.Width
-            );
-            gameStateManager.settings.update(
-                gameStateManager.settings.engineSettings.WINDOW_HEIGHT,
-                GraphicsDevice.Viewport.Height
-            );
+            
             gameStateManager.push(new NormalPlayState(gameStateManager));
         }
 

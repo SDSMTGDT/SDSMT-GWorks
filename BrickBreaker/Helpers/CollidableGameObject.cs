@@ -10,7 +10,7 @@ using SDSMTGDT.GWorks.Physics;
 namespace BrickBreaker.Helpers
 {
     //pulls in collsion zones and gameobject
-    class CollidableGameObject : CollisionZone, GameObject
+    abstract class CollidableGameObject : CollisionZone, GameObject
     {
         private Texture2D texture;
         private Vector2 location;
