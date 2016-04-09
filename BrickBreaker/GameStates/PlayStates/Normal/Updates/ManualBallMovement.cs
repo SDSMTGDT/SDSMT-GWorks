@@ -10,7 +10,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
 {
-    class ManualBallMovement : UpdateListener
+    /// <summary>
+    /// Cruddy testing class for moving the ball where you want with wasd
+    /// </summary>
+    internal class ManualBallMovement : UpdateListener
     {
         private Ball ball;
         internal float MAX_SPEED { get; private set; } = .5F;

@@ -3,7 +3,7 @@
 namespace BrickBreaker
 {
     /// <summary>
-    /// The main class.
+    /// This class kicks off the program.
     /// </summary>
     public static class Bootstrap
     {
@@ -13,6 +13,7 @@ namespace BrickBreaker
         [STAThread]
         static void Main()
         {
+            // Using disposes the game after its done running
             using (var game = new BrickBreaker())
                 game.Run();
         }

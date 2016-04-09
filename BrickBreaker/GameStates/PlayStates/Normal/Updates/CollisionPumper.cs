@@ -9,7 +9,8 @@ using Microsoft.Xna.Framework;
 
 namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
 {
-    class CollisionPumper : UpdateListener
+    //Pumps collisions because im lazy to do it any other way
+    internal class CollisionPumper : UpdateListener
     {
         private PhysicsManager physics;
         

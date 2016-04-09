@@ -12,22 +12,25 @@ using BrickBreaker.GameStates.PlayStates.Normal.Updates;
 
 namespace BrickBreaker.GameStates.PlayStates.Normal.Model
 {
-    class Paddle : CollidableGameObject
+    internal class Paddle : CollidableGameObject
     {
         private const short WIDTH = 100;
         private const short HEIGHT = 25;
         internal PaddleArtist artist { get; private set; }
         internal PaddleMovement movement { get; private set; }
+        public double speedPxPerMilli { get; private set; }
 
-        internal Paddle(GraphicsDevice device, NormalPlayState playState) : 
-            base (setUpBounds(), setUpTexture(device), playState.stateManager.physics)
+
+        internal Paddle(Rectangle screen, GraphicsDevice graphicsDevice, PhysicsManager physics) : 
+            base (setUpBounds(), setUpTexture(graphicsDevice), physics)
         {
             artist = new PaddleArtist(this);
-            movement = new PaddleMovement(this, playState.screenWidth);
+            movement = new PaddleMovement(this, screen.Width);
             setLocation(
-                (playState.screenWidth - getBounds().Width) / 2,
-                playState.screenHeight - getBounds().Height
+                (screen.Width - getBounds().Width) / 2,
+                screen.Height - getBounds().Height
             );
+            this.speedPxPerMilli = .7;
         }
 
         private static Rectangle setUpBounds()
