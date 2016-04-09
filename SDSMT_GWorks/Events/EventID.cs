@@ -12,7 +12,7 @@ namespace SDSMTGDT.GWorks.Events
     /// Only created by the EventID factory in the EventManager
     /// </summary>
     /// <typeparam name="T">Type of class info being handled</typeparam>
-    public class EventID<T> where T : GameEventInfo
+    public struct EventID<T> where T : GameEventInfo
     {
         /// <summary>
         /// 

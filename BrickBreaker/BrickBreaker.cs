@@ -54,9 +54,11 @@ namespace BrickBreaker
             base.Initialize();
 
             //Initialize a new Game State Manager for Gworks with a graphics device
+            //The graphics device is needed for creating new textures, 
+            //interfacing with the window, etc
             gameStateManager = new GameStateManager(graphics.GraphicsDevice);
             
-            
+            //Create a new play state and push it. This is where the magic happens
             gameStateManager.push(new NormalPlayState(gameStateManager));
         }
 
@@ -88,10 +90,11 @@ namespace BrickBreaker
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // Exit the game if escape key is pressed
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            // Tell the game state manager to update everything
             gameStateManager.update(gameTime);
             base.Update(gameTime);
         }
@@ -104,7 +107,7 @@ namespace BrickBreaker
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            // Tell the game sate manager to draw everything
             gameStateManager.draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }

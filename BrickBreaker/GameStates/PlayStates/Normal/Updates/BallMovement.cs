@@ -9,9 +9,15 @@ using Microsoft.Xna.Framework;
 
 namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
 {
-    class BallMovement : UpdateListener
+    /// <summary>
+    /// Update listener used to move the ball along
+    /// </summary>
+    internal class BallMovement : UpdateListener
     {
+        //reference to the ball its moving
         private Ball ball;
+
+        //the max speed at which the ball should move
         internal float MAX_SPEED { get; private set; } = .5F;
 
         internal BallMovement(Ball ball)

@@ -136,16 +136,11 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Events
                 current.X = -Math.Abs(current.X);
             }
 
-            while (doSegmentsIntersect(
-                info.collider.getBounds().Center,
-                ballBrickVector,
-                new Point(info.collided.getBounds().X, info.collided.getBounds().Y + info.collided.getBounds().Height),
-                new Vector2(info.collided.getBounds().Width, 0)
-            ))
-            {
-                info.collider.move(-info.collider.speedPxPerMillis.X, -info.collider.speedPxPerMillis.Y);
-            }
             info.collider.speedPxPerMillis = current;
+            while (info.collider.getBounds().Intersects(info.collided.getBounds()))
+            {
+                info.collider.move(info.collider.speedPxPerMillis.X, info.collider.speedPxPerMillis.Y);
+            }
         }
     }
 }

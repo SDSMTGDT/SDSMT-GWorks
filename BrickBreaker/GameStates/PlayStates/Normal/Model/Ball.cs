@@ -4,6 +4,7 @@ using BrickBreaker.GameStates.PlayStates.Normal.Updates;
 using BrickBreaker.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SDSMTGDT.GWorks.GameStates;
 using SDSMTGDT.GWorks.Physics;
 using SDSMTGDT.GWorks.Physics.Collisions.Routes;
 using System;
@@ -24,8 +25,8 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
         internal BallMovement movement { get; private set; }
         internal BallStarter starter { get; private set; }
 
-        internal Ball(GraphicsDevice device, NormalPlayState playState) : 
-            base (setUpBounds(), setUpTexture(device), playState.stateManager.physics)
+        internal Ball(MutableGameState gameState, Rectangle screen, GraphicsDevice graphicsDevice, PhysicsManager physics) : 
+            base (setUpBounds(), setUpTexture(graphicsDevice), physics)
         {
             speedPxPerMillis = new Vector2(0, 0);
 
@@ -41,7 +42,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
 
             artist = new BallArtist(this);
             movement = new BallMovement(this);
-            starter = new BallStarter(this, playState);
+            starter = new BallStarter(this, screen, gameState);
             setLocation(-100, -100);
         }
 

@@ -11,16 +11,22 @@ using SDSMTGDT.GWorks.Settings;
 
 namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
 {
-    class PaddleMovement : UpdateListener
+    /// <summary>
+    /// Moves the paddle back and forth
+    /// </summary>
+    internal class PaddleMovement : UpdateListener
     {
         private int screenWidth;
         private Paddle paddle;
-        private double pxPerMilli;
 
+        /// <summary>
+        /// Creates a new update listener for a given paddle
+        /// </summary>
+        /// <param name="paddle">Paddle we're going to move</param>
+        /// <param name="screenWidth">Viewport width</param>
         internal PaddleMovement(Paddle paddle, int screenWidth)
         {
             this.paddle = paddle;
-            this.pxPerMilli = .7;
             this.screenWidth = screenWidth;
         }
 
@@ -31,11 +37,11 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
             if (Keyboard.GetState().IsKeyDown(Keys.Right) &&
                 xLoc + paddle.getBounds().Width < screenWidth)
             {
-                paddle.move((float)(pxPerMilli * gameTime.ElapsedGameTime.Milliseconds), 0);
+                paddle.move((float)(paddle.speedPxPerMilli * gameTime.ElapsedGameTime.Milliseconds), 0);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left) && xLoc > 0)
             {
-                paddle.move(-(float)(pxPerMilli * gameTime.ElapsedGameTime.Milliseconds), 0);
+                paddle.move(-(float)(paddle.speedPxPerMilli * gameTime.ElapsedGameTime.Milliseconds), 0);
             }
         }
     }
