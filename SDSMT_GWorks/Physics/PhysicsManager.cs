@@ -181,15 +181,28 @@ namespace SDSMTGDT.GWorks.Physics
         /// Collides a collidable with all of its registered collidable groups
         /// </summary>
         /// <param name="c">The collidable to check</param>
-        public void checkCollisions(Collidable c)
+        public bool checkCollisions(Collidable c)
         {
             List<CollisionGroup> groups;
             if (!collidableToGroups.TryGetValue(c, out groups))
-                return;
+                return false;
             foreach(CollisionGroup group in groups)
             {
                 collideWithGroup(c, group);
             }
+            return true;
+        }
+
+        public bool updateLocation(Collidable c)
+        {
+            List<CollisionGroup> groups;
+            if (!collidableToGroups.TryGetValue(c, out groups))
+                return false;
+            foreach (CollisionGroup group in groups)
+            {
+                group.structure.update(c);
+            }
+            return true;
         }
 
         /// <summary>

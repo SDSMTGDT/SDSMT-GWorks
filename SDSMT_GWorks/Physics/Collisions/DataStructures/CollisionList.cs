@@ -56,6 +56,16 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         }
 
         /// <summary>
+        /// Meant to update a collidable if the structure relies on location info
+        /// </summary>
+        /// <param name="c">The collidable to update</param>
+        /// <returns>Returns true if the structure contains the collidable</returns>
+        bool CollisionStructure.update(Collidable c)
+        {
+            return collidables.Contains(c);
+        }
+
+        /// <summary>
         /// Adds the passed collidable to the list
         /// </summary>
         /// <param name="c">The passed collidable</param>
