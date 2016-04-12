@@ -126,6 +126,20 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         }
 
         /// <summary>
+        /// Updates the collision structure with a collidables new location and bounds
+        /// </summary>
+        /// <param name="c">The collidable to update</param>
+        /// <returns>Returns true if the collidable was found, deleted, and reinserted</returns>
+        bool CollisionStructure.update(Collidable c)
+        {
+            bool exists = ((CollisionStructure)this).delete(c);
+            if (!exists)
+                return false;
+            ((CollisionStructure)this).insert(c);
+            return true;
+        }
+
+        /// <summary>
         /// Checks a given collidable against all other other collidables for collisions.
         /// Implement the interface explicitly so that the method
         /// is only visible via CollisionStructure (which is internal).

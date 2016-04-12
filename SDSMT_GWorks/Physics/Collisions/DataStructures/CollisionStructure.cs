@@ -27,6 +27,13 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         bool delete(Collidable c);
 
         /// <summary>
+        /// Update a collidable in the structure
+        /// </summary>
+        /// <param name="c">The collidable to update</param>
+        /// <returns>True if the collidable was found and updated, else false</returns>
+        bool update(Collidable c);
+
+        /// <summary>
         /// Collides a collidable with the collidables in the structure.
         /// </summary>
         /// <param name="c">The collidable to check against</param>
