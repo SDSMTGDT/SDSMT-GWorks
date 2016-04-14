@@ -9,13 +9,13 @@ using SDSMTGDT.GWorks.Events;
 
 namespace Pong.BaseClasses
 {
-    abstract class GameObjectCollision : Collidable
+    abstract class CollisionZone : Collidable
     {
-        private Rectangle bounds;
+        protected Rectangle bounds;
         private PhysicsManager physics;
         protected GameEventHook<CollisionEventInfo> hook;
 
-        protected GameObjectCollision(Rectangle bounds, PhysicsManager physics)
+        protected CollisionZone(Rectangle bounds, PhysicsManager physics)
         {
             this.bounds = bounds;
             this.physics = physics;

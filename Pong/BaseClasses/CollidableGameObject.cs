@@ -8,21 +8,16 @@ using SDSMTGDT.GWorks.Physics;
 
 namespace Pong.BaseClasses
 {
-    class CollidableGameObject : GameObjectCollision, GameObject
+    class CollidableGameObject : CollisionZone, GameObject
     {
         protected Texture2D texture; /*the texture for the object*/
-        protected Vector2 velocity; /*the x and y velocities of the object*/
         protected Vector2 position; /* the x and y position of the object*/
-        private GraphicsDevice graphics; /*the graphics device the object uses*/
 
         public CollidableGameObject (Rectangle bounds, PhysicsManager physics,
-            Texture2D texture, Vector2 startingVelocity, Vector2 position,
-            GraphicsDevice graphics) : base(bounds, physics)
+            Texture2D texture, Vector2 position) : base(bounds, physics)
         {
             this.texture = texture;
             this.position = position;
-            this.graphics = graphics;
-            velocity = startingVelocity;
         }
 
         public Texture2D getTexture()
@@ -30,14 +25,28 @@ namespace Pong.BaseClasses
             return texture;
         }
 
-        public Vector2 getVelocity()
+        public void setTexture(Texture2D texture)
         {
-            return velocity;
+            this.texture = texture;
         }
 
         public Vector2 getPosition()
         {
             return position;
+        }
+
+        public void setPosition(Vector2 position)
+        {
+            this.position = position;
+            bounds.Location = position.ToPoint();
+        }
+
+        public void setPosition (int x, int y)
+        {
+            position.X = x;
+            position.Y = y;
+            bounds.X = x;
+            bounds.Y = y;
         }
     }
 }

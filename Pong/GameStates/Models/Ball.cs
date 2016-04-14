@@ -13,39 +13,26 @@ using Pong.GameStates.Updates;
 
 namespace Pong.GameStates.Models
 {
-    class Ball : CollidableGameObject
+    class Ball : MovingCollidableGameObject
     {
+        public const int BALL_SIZE = 10;
+
+        GraphicsDevice graphics;
         BallArtist artist;
         BallMovement movement;
 
-        Ball (Rectangle bounds, PhysicsManager physics, Texture2D texture,
-            Vector2 startingVelocity, Vector2 position, GraphicsDevice graphics)
-            : base(bounds, physics, texture, startingVelocity,position,graphics)
+        Ball(PhysicsManager physics, GraphicsDevice graphics)
+            : base(new Rectangle(0,0,BALL_SIZE,BALL_SIZE), physics,
+                  createBallTexture(graphics) , new Vector2(0,0), new Vector2(0,0))
         {
-            artist = new BallArtist();
+            artist = new BallArtist(this);
             movement = new BallMovement();
         }
 
-        public void setPosition (Vector2 pos)
+        private static Texture2D createBallTexture( GraphicsDevice graphics)
         {
-            position = pos;
+            return new Texture2D(graphics, BALL_SIZE, BALL_SIZE);
         }
 
-        public void setPosition(int x, int y)
-        {
-            position.X = x;
-            position.Y = y;
-        }
-
-        public void setVelocity (Vector2 vel)
-        {
-            velocity = vel;
-        }
-
-        public void setVelocity (int x, int y)
-        {
-            velocity.X = x;
-            velocity.Y = y;
-        }
     }
 }

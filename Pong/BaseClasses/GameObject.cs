@@ -14,7 +14,6 @@ namespace Pong.BaseClasses
     interface GameObject
     {
         Texture2D getTexture();
-        Vector2 getVelocity();
         Vector2 getPosition();
     }
 }
