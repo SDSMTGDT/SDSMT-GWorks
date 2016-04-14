@@ -8,5 +8,11 @@ namespace FallingBricks.GameStates.PlayStates.Normal.Model
 {
     class BrickBrickGraveyard
     {
+        internal List<BrickBrick> bricks { get; private set; }
+
+        internal BrickBrickGraveyard()
+        {
+            bricks = new List<BrickBrick>();
+        }
     }
 }

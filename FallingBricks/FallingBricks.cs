@@ -15,6 +15,8 @@ namespace FallingBricks
         public FallingBricks()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 300;
             Content.RootDirectory = "Content";
         }
 
