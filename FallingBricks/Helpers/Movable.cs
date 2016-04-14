@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FallingBricks.Helpers
 {
-    interface Movable
+    interface Movable : Locatable
     {
         void setVelocity(Vector2 velocity);
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FallingBricks.Helpers
 {
-    interface Prop : Locatable, GraphicsObject
+    interface Prop : GraphicsObject
     {
     }
 }
