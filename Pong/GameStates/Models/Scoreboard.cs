@@ -7,5 +7,12 @@ namespace Pong.GameStates.Models
 {
     class Scoreboard
     {
+        public int scoreLeft { get; set; }
+        public int scoreRight { get; set; }
+
+        public Scoreboard()
+        {
+
+        }
     }
 }

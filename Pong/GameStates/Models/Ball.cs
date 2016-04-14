@@ -26,6 +26,26 @@ namespace Pong.GameStates.Models
             movement = new BallMovement();
         }
 
+        public void setPosition (Vector2 pos)
+        {
+            position = pos;
+        }
 
+        public void setPosition(int x, int y)
+        {
+            position.X = x;
+            position.Y = y;
+        }
+
+        public void setVelocity (Vector2 vel)
+        {
+            velocity = vel;
+        }
+
+        public void setVelocity (int x, int y)
+        {
+            velocity.X = x;
+            velocity.Y = y;
+        }
     }
 }
