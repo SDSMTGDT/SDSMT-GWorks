@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FallingBricks.Helpers
 {
-    abstract class GameObject : Movable, GraphicsObject
+    abstract class GameObject : Movable, Prop
     {
         private Rectangle bounds;
         private Vector2 velocity;

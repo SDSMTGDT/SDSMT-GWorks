@@ -57,10 +57,9 @@
     <Compile Include="Helpers\CollisionZone.cs" />
     <Compile Include="Helpers\GameObject.cs" />
     <Compile Include="Helpers\MovableProp.cs" />
-    <Compile Include="Helpers\GraphicsObject.cs" />
+    <Compile Include="Helpers\Prop.cs" />
     <Compile Include="Helpers\Locatable.cs" />
     <Compile Include="Helpers\Movable.cs" />
-    <Compile Include="Helpers\Prop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
