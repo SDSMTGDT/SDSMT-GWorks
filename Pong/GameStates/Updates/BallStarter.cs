@@ -19,9 +19,35 @@ namespace Pong.GameStates.Updates
         //playstate to alter
         private MutableGameState playState;
 
+        private Scoreboard scoreboard;
+
+        public BallStarter (Ball ball, Rectangle screen, MutableGameState playState,
+            Scoreboard scoreboard)
+        {
+            this.ball = ball;
+            this.screen = screen;
+            this.playState = playState;
+            this.scoreboard = scoreboard;
+        }
+
         public void update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            ball.setPosition(playState.stateManager.graphicsDevice.Viewport.Width / 2,
+                playState.stateManager.graphicsDevice.Viewport.Height / 2);
+
+            if ( chooseDirection() == true)
+            {
+                
+            }
+        }
+
+        private bool chooseDirection()
+        {
+            if (scoreboard.scoreLeft > scoreboard.scoreRight)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
