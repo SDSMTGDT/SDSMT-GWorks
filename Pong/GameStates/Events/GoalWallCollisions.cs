@@ -7,5 +7,6 @@ namespace Pong.GameStates.Events
 {
     class GoalWallCollisions
     {
+
     }
 }

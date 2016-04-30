@@ -10,6 +10,8 @@ namespace Pong.GameStates.Updates
 {
     class BallStarter : UpdateListener
     {
+        public const int START_VELOCITY = 50;
+
         //ball which will begin moving
         private Ball ball;
 
@@ -19,6 +21,7 @@ namespace Pong.GameStates.Updates
         //playstate to alter
         private MutableGameState playState;
 
+        //reference to the object storing the current scores
         private Scoreboard scoreboard;
 
         public BallStarter (Ball ball, Rectangle screen, MutableGameState playState,
@@ -37,7 +40,11 @@ namespace Pong.GameStates.Updates
 
             if ( chooseDirection() == true)
             {
-                
+                ball.setVelocity(START_VELOCITY, 0);
+            }
+            else
+            {
+                ball.setVelocity(-START_VELOCITY, 0);
             }
         }
 

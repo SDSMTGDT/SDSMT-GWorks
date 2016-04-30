@@ -26,7 +26,7 @@ namespace Pong.GameStates.Models
                   createBallTexture(graphics) , new Vector2(0,0), new Vector2(0,0))
         {
             artist = new BallArtist(this);
-            movement = new BallMovement();
+            movement = new BallMovement(this);
         }
 
         private static Texture2D createBallTexture( GraphicsDevice graphics)
