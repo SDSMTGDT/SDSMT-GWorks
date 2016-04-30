@@ -27,14 +27,18 @@ namespace SDSMTGDT.GWorks.GameStates
             physics = new PhysicsManager(events);
             this.graphicsDevice = graphics;
 
-            settings.update(
-                settings.engineSettings.WINDOW_WIDTH,
-                graphics.Viewport.Width
-            );
-            settings.update(
-                settings.engineSettings.WINDOW_HEIGHT,
-                graphics.Viewport.Height
-            );
+            //sometimes graphics is null when we don't need drawing
+            if (graphics != null) 
+            {
+                settings.update(
+                    settings.engineSettings.WINDOW_WIDTH,
+                    graphics.Viewport.Width
+                );
+                settings.update(
+                    settings.engineSettings.WINDOW_HEIGHT,
+                    graphics.Viewport.Height
+                );
+            }
         }
 
         public void push (GameState state)
