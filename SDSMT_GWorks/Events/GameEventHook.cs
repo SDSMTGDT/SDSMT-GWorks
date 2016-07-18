@@ -18,7 +18,6 @@ namespace SDSMTGDT.GWorks.Events
         /// The event id which identifies the sink for this publisher
         /// </summary>
         public EventID<T> EVENT_ID { get; private set; }
-        internal GameEventActions<T> EVENT_ACTIONS;
 
         /// <summary>
         /// The manager to connect the publisher with the subscribers
@@ -29,7 +28,6 @@ namespace SDSMTGDT.GWorks.Events
         {
             this.manager = manager;
             this.EVENT_ID = eventID;
-            this.EVENT_ACTIONS = manager.getEventActions(EVENT_ID);
         }
 
         /// <summary>
@@ -38,7 +36,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventListener">A function to call when the event fires</param>
         public void registerEventListener(GameEvent<T> eventListener)
         {
-            EVENT_ACTIONS.listeners += eventListener;
+            manager.getEventActions(EVENT_ID).listeners += eventListener;
         }
 
         /// <summary>
@@ -47,7 +45,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventListener">A function to call when the event fires</param>
         public void registerAsyncEventListener(GameEvent<T> eventListener)
         {
-            EVENT_ACTIONS.asyncListeners += eventListener;
+            manager.getEventActions(EVENT_ID).asyncListeners += eventListener;
         }
 
         /// <summary>
@@ -56,7 +54,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventListener">A function currently being called when the event fires</param>
         public void unregisterEventListener(GameEvent<T> eventListener)
         {
-            EVENT_ACTIONS.listeners -= eventListener;
+            manager.getEventActions(EVENT_ID).listeners -= eventListener;
         }
 
         /// <summary>
@@ -65,7 +63,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventListener">A function currently being called when the event fires</param>
         public void unregisterAsyncEventListener(GameEvent<T> eventListener)
         {
-            EVENT_ACTIONS.asyncListeners -= eventListener;
+            manager.getEventActions(EVENT_ID).asyncListeners -= eventListener;
         }
 
         /// <summary>
