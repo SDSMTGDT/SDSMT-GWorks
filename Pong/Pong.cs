@@ -33,15 +33,6 @@ namespace Pong
         {
             base.Initialize();
             gameStateManager = new GameStateManager(graphics.GraphicsDevice);
-
-            gameStateManager.settings.update(
-                gameStateManager.settings.engineSettings.WINDOW_WIDTH,
-                GraphicsDevice.Viewport.Width
-            );
-            gameStateManager.settings.update(
-                gameStateManager.settings.engineSettings.WINDOW_HEIGHT,
-                GraphicsDevice.Viewport.Height
-            );
         }
 
         /// <summary>
