@@ -15,32 +15,32 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
 
     class NorthWall : CollisionZone, Wall
     {
-        internal NorthWall(Rectangle screen, PhysicsManager physics) : 
-            base(new Rectangle(screen.X - 1, screen.Y - 1, screen.Width + 1, 1), physics)
+        internal NorthWall(Rectangle screen, CollisionManager collisions) : 
+            base(new Rectangle(screen.X - 1, screen.Y - 1, screen.Width + 1, 1), collisions)
         {
         }
     }
 
     class SouthWall : CollisionZone, Wall
     {
-        internal SouthWall(Rectangle screen, PhysicsManager physics) : 
-            base(new Rectangle(screen.X - 1, screen.Y + screen.Height, screen.Width + 1, 1), physics)
+        internal SouthWall(Rectangle screen, CollisionManager collisions) : 
+            base(new Rectangle(screen.X - 1, screen.Y + screen.Height, screen.Width + 1, 1), collisions)
         {
         }
     }
 
     class EastWall : CollisionZone, Wall
     {
-        internal EastWall(Rectangle screen, PhysicsManager physics) : 
-            base(new Rectangle(screen.X + screen.Width, screen.Y, 1, screen.Height), physics)
+        internal EastWall(Rectangle screen, CollisionManager collisions) : 
+            base(new Rectangle(screen.X + screen.Width, screen.Y, 1, screen.Height), collisions)
         {
         }
     }
 
     class WestWall : CollisionZone, Wall
     {
-        internal WestWall(Rectangle screen, PhysicsManager physics) : 
-            base(new Rectangle(screen.X - 1, screen.Y, 1, screen.Height), physics)
+        internal WestWall(Rectangle screen, CollisionManager collisions) : 
+            base(new Rectangle(screen.X - 1, screen.Y, 1, screen.Height), collisions)
         {
         }
     }

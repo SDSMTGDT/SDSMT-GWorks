@@ -16,7 +16,7 @@ namespace SDSMTGDT.GWorks.GameStates
         private Stack<GameState> states;
         public SettingsManager settings { get; private set; }
         public EventManager events { get; private set; }
-        public PhysicsManager physics { get; private set; }
+        public CollisionManager collisions { get; private set; }
         public GraphicsDevice graphicsDevice { get; private set; }
 
         public GameStateManager(GraphicsDevice graphics)
@@ -24,7 +24,7 @@ namespace SDSMTGDT.GWorks.GameStates
             states = new Stack<GameState>();
             settings = new Settings.SettingsManager();
             events = new EventManager();
-            physics = new PhysicsManager(events);
+            collisions = new CollisionManager(events);
             this.graphicsDevice = graphics;
 
             //sometimes graphics is null when we don't need drawing

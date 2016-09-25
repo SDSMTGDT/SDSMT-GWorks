@@ -26,9 +26,9 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         public T2 collided { get; private set; }
 
         /// <summary>
-        /// The physics manager which issued this info
+        /// The collisions manager which issued this info
         /// </summary>
-        public PhysicsManager physicsManager { get; private set; }
+        public CollisionManager physicsManager { get; private set; }
 
         /// <summary>
         /// The collision group containing both collidables

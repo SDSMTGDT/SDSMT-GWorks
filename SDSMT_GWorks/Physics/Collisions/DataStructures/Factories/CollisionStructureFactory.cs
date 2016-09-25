@@ -14,7 +14,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures.Factories
     {
         /// <summary>
         /// Override this method to create a new collision structure.
-        /// This method will be called by the physics manager when
+        /// This method will be called by the collisions manager when
         /// creating new collision groups.
         /// </summary>
         /// <returns>A new Collision Structure</returns>

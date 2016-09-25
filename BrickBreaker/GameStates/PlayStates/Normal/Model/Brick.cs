@@ -16,8 +16,8 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
         internal Color color { get; private set; }
         internal float upperRightAngle {get; private set;}
 
-        internal Brick(GraphicsDevice device, Color color, Rectangle bounds, PhysicsManager physics) : 
-            base(bounds, setUpTexture(device, bounds), physics)
+        internal Brick(GraphicsDevice device, Color color, Rectangle bounds, CollisionManager collisions) : 
+            base(bounds, setUpTexture(device, bounds), collisions)
         {
             destroyed = false;
             this.color = color;

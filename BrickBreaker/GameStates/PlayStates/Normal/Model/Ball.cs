@@ -25,8 +25,8 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
         internal BallMovement movement { get; private set; }
         internal BallStarter starter { get; private set; }
 
-        internal Ball(MutableGameState gameState, Rectangle screen, GraphicsDevice graphicsDevice, PhysicsManager physics) : 
-            base (setUpBounds(), setUpTexture(graphicsDevice), physics)
+        internal Ball(MutableGameState gameState, Rectangle screen, GraphicsDevice graphicsDevice, CollisionManager collisions) : 
+            base (setUpBounds(), setUpTexture(graphicsDevice), collisions)
         {
             speedPxPerMillis = new Vector2(0, 0);
 
@@ -38,7 +38,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
             router.addCollisionRoute(new TypeCollisionRoute<Ball, Paddle>(Collisions.handleBallPaddleCollision));
             router.addCollisionRoute(new TypeCollisionRoute<Ball, Brick>(Collisions.handleBallBrickCollision));
 
-            hook.registerEventSubscriber(router);
+            collisionPublisher.registerEventSubscriber(router);
 
             artist = new BallArtist(this);
             movement = new BallMovement(this);

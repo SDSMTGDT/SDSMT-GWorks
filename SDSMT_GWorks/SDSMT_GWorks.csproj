@@ -62,7 +62,7 @@
     <Compile Include="Physics\Collisions\Routes\CollisionRoute.cs" />
     <Compile Include="Physics\Collisions\Routes\CollsionEventRouter.cs" />
     <Compile Include="Physics\Collisions\Routes\TypedCollisionEventInfo.cs" />
-    <Compile Include="Physics\PhysicsManager.cs" />
+    <Compile Include="Physics\CollisionManager.cs" />
     <Compile Include="Physics\Collisions\Routes\TypeCollisionRoute.cs" />
     <Compile Include="Events\GameEventPublisher.cs" />
     <Compile Include="Events\GameEvent.cs" />
@@ -88,6 +88,9 @@
     <Compile Include="Story\StoryNodePossibleEventPublisher.cs" />
     <Compile Include="Story\StoryNodePassedEventInfo.cs" />
     <Compile Include="Story\StoryNodePassedEventPublisher.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GWorks.dgml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,14 +14,15 @@ namespace BrickBreaker.Helpers
     abstract class CollisionZone : Collidable, IDisposable
     {
         protected Rectangle bounds;
-        private PhysicsManager physics;
-        protected GameEventHook<CollisionEventInfo> hook;
+        private CollisionManager collisions;
 
-        internal CollisionZone(Rectangle bounds, PhysicsManager physics)
+        public CollisionEventPublisher collisionPublisher { get; }
+
+        internal CollisionZone(Rectangle bounds, CollisionManager collisions)
         {
             this.bounds = bounds;
-            this.physics = physics;
-            this.hook = physics.obtainCollisionHook(this);
+            this.collisions = collisions;
+            this.collisionPublisher = new CollisionEventPublisher(collisions, this);
         }
 
         public Rectangle getBounds()
@@ -31,7 +32,7 @@ namespace BrickBreaker.Helpers
 
         public void Dispose()
         {
-            physics.unregisterCollidableFromSystem(this);
+            collisions.unregisterCollidable(this);
         }
     }
 }

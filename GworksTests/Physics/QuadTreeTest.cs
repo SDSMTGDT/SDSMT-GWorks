@@ -19,7 +19,7 @@ namespace SDSMTGDT.GWorks.Physics
     class QuadTreeTest
     {
         EventManager testEventManager;
-        PhysicsManager testPhysicsManager;
+        CollisionManager testPhysicsManager;
 
         /// <summary>
         /// Performs set-up operations necessary before each test.
@@ -28,7 +28,7 @@ namespace SDSMTGDT.GWorks.Physics
         public void setup()
         {
             testEventManager = new EventManager();
-            testPhysicsManager = new PhysicsManager(testEventManager);
+            testPhysicsManager = new CollisionManager(testEventManager);
         }
 
         [Test]
@@ -63,13 +63,11 @@ namespace SDSMTGDT.GWorks.Physics
             testPhysicsManager.registerCollidableInGroup(colliderA, collisionGroup);
             testPhysicsManager.registerCollidableInGroup(colliderB, collisionGroup);
 
-            testPhysicsManager.unregisterCollidableFromSystem(colliderA);
+            testPhysicsManager.unregisterCollidable(colliderA);
             Assert.AreEqual(1, testPhysicsManager.collidableCount);
-            Assert.AreEqual(1, testPhysicsManager.eventHookCount);
-            testPhysicsManager.unregisterCollidableFromSystem(colliderB);
+            testPhysicsManager.unregisterCollidable(colliderB);
 
             Assert.AreEqual(0, testPhysicsManager.collidableCount);
-            Assert.AreEqual(0, testPhysicsManager.eventHookCount);
         }
 
         [Test]

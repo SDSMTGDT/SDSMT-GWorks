@@ -21,8 +21,8 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
         public double speedPxPerMilli { get; private set; }
 
 
-        internal Paddle(Rectangle screen, GraphicsDevice graphicsDevice, PhysicsManager physics) : 
-            base (setUpBounds(), setUpTexture(graphicsDevice), physics)
+        internal Paddle(Rectangle screen, GraphicsDevice graphicsDevice, CollisionManager collisions) : 
+            base (setUpBounds(), setUpTexture(graphicsDevice), collisions)
         {
             artist = new PaddleArtist(this);
             movement = new PaddleMovement(this, screen.Width);

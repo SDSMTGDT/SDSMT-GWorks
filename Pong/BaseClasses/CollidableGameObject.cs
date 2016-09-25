@@ -13,8 +13,8 @@ namespace Pong.BaseClasses
         protected Texture2D texture; /*the texture for the object*/
         protected Vector2 position; /* the x and y position of the object*/
 
-        public CollidableGameObject (Rectangle bounds, PhysicsManager physics,
-            Texture2D texture, Vector2 position) : base(bounds, physics)
+        public CollidableGameObject (Rectangle bounds, CollisionManager collisions,
+            Texture2D texture, Vector2 position) : base(bounds, collisions)
         {
             this.texture = texture;
             this.position = position;

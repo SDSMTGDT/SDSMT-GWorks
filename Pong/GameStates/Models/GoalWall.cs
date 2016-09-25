@@ -11,8 +11,8 @@ namespace Pong.GameStates.Models
     class GoalWall : CollidableGameObject
     {
 
-        public GoalWall (Rectangle bounds, PhysicsManager physics) 
-            : base(bounds, physics, null, bounds.Location.ToVector2())
+        public GoalWall (Rectangle bounds, CollisionManager collisions) 
+            : base(bounds, collisions, null, bounds.Location.ToVector2())
         {
 
         }

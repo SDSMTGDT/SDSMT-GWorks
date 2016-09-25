@@ -31,7 +31,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// Handles a CollisionEvent. Loops through each possible route, and sends
         /// the relevant information to the first valid route found
         /// </summary>
-        /// <param name="source">Likely to be the physics manager</param>
+        /// <param name="source">Likely to be the collisions manager</param>
         /// <param name="eventInfo">CollisionEventInfo containing the Collidables</param>
         public void gameEventRecieved(object source, CollisionEventInfo eventInfo)
         {

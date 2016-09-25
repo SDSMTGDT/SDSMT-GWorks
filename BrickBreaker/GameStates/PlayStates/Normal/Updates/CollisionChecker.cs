@@ -6,22 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using BrickBreaker.GameStates.PlayStates.Normal.Model;
 
 namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
 {
     //Pumps collisions because im lazy to do it any other way
-    internal class CollisionPumper : UpdateListener
+    internal class CollisionChecker : UpdateListener
     {
-        private PhysicsManager physics;
+        private CollisionManager collisions;
+        private Ball ball;
         
-        internal CollisionPumper(PhysicsManager physics)
+        internal CollisionChecker(CollisionManager collisions, Ball ball)
         {
-            this.physics = physics;
+            this.collisions = collisions;
+            this.ball = ball;
         }
 
         public void update(GameTime gameTime)
         {
-            physics.checkAllCollisions();
+            collisions.checkCollisions(ball);
         }
     }
 }

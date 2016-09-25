@@ -28,7 +28,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
         //A 2d array of bricks
         private Brick[,] bricks;
 
-        //I decided to implement all wall collisions using the physics system
+        //I decided to implement all wall collisions using the collisions system
         //So we create some walls
         private Wall north, east, south, west;
 
@@ -58,7 +58,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
             screenHeight = manager.settings.access(manager.settings.engineSettings.WINDOW_HEIGHT);
             brickWidth = screenWidth / numBricksWide;
             brickHeight = (screenHeight / 3) / numBricksHigh;
-            collisionGroup = manager.physics.createCollisionGroup("BrickBreaker", new CollisionListFactory());
+            collisionGroup = manager.collisions.createCollisionGroup("BrickBreaker", new CollisionListFactory());
         }
 
         /// <summary>
@@ -70,16 +70,16 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
             Rectangle screen = new Rectangle(0, 0, screenWidth, screenHeight);
             
             //Create walls
-            this.north = new NorthWall(screen, stateManager.physics);
-            this.east = new EastWall(screen, stateManager.physics);
-            this.south = new SouthWall(screen, stateManager.physics);
-            this.west = new WestWall(screen, stateManager.physics);
+            this.north = new NorthWall(screen, stateManager.collisions);
+            this.east = new EastWall(screen, stateManager.collisions);
+            this.south = new SouthWall(screen, stateManager.collisions);
+            this.west = new WestWall(screen, stateManager.collisions);
 
             // pass this for access to game state manager for resouces
-            this.paddle = new Paddle(screen, stateManager.graphicsDevice, stateManager.physics);
+            this.paddle = new Paddle(screen, stateManager.graphicsDevice, stateManager.collisions);
             
             // pass this for access to game state manager for resources
-            this.ball = new Ball(this, screen, stateManager.graphicsDevice, stateManager.physics);
+            this.ball = new Ball(this, screen, stateManager.graphicsDevice, stateManager.collisions);
 
             // create the array of bricks
             this.bricks = new Brick[numBricksHigh, numBricksWide];
@@ -96,11 +96,11 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
                     int x = brickWidth * j;
 
                     bricks[i, j] = new Brick(stateManager.graphicsDevice, Color.Red,
-                        new Rectangle(x, y, brickWidth, brickHeight), stateManager.physics);
+                        new Rectangle(x, y, brickWidth, brickHeight), stateManager.collisions);
                     /*if (i * j % 2 == 0)
                         bricks[i, j].destroyed = true;
                     else*/
-                        stateManager.physics.registerCollidableInGroup(bricks[i, j], collisionGroup);                   
+                        stateManager.collisions.registerCollidableInGroup(bricks[i, j], collisionGroup);                   
                 }
             }
 
@@ -109,15 +109,15 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
             addUpdateListener(paddle.movement);
             addUpdateListener(ball.starter);
 
-            stateManager.physics.registerCollidableInGroup(paddle, collisionGroup);
-            stateManager.physics.registerCollidableInGroup(ball, collisionGroup);
-            stateManager.physics.registerCollidableInGroup(north, collisionGroup);
-            stateManager.physics.registerCollidableInGroup(east, collisionGroup);
-            stateManager.physics.registerCollidableInGroup(south, collisionGroup);
-            stateManager.physics.registerCollidableInGroup(west, collisionGroup);
+            stateManager.collisions.registerCollidableInGroup(paddle, collisionGroup);
+            stateManager.collisions.registerCollidableInGroup(ball, collisionGroup);
+            stateManager.collisions.registerCollidableInGroup(north, collisionGroup);
+            stateManager.collisions.registerCollidableInGroup(east, collisionGroup);
+            stateManager.collisions.registerCollidableInGroup(south, collisionGroup);
+            stateManager.collisions.registerCollidableInGroup(west, collisionGroup);
             
             //Collision pumper just tells the library to check for collisions every tick... because im lazy
-            addUpdateListener(new CollisionPumper(stateManager.physics));
+            addUpdateListener(new CollisionChecker(stateManager.collisions, ball));
         }
     }
 }

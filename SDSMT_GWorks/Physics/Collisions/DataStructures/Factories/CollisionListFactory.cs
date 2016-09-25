@@ -8,7 +8,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures.Factories
 {
     /// <summary>
     /// Encapsulates the information needed to create a CollisionList
-    /// Used by physics manager to create list backed collision groups
+    /// Used by collisions manager to create list backed collision groups
     /// </summary>
     public class CollisionListFactory : CollisionStructureFactory
     {

@@ -12,14 +12,14 @@ namespace Pong.BaseClasses
     abstract class CollisionZone : Collidable
     {
         protected Rectangle bounds;
-        private PhysicsManager physics;
-        protected GameEventHook<CollisionEventInfo> hook;
+        private CollisionManager collisions;
+        public CollisionEventPublisher collisionPublisher { get; }
 
-        protected CollisionZone(Rectangle bounds, PhysicsManager physics)
+        protected CollisionZone(Rectangle bounds, CollisionManager collisions)
         {
             this.bounds = bounds;
-            this.physics = physics;
-            hook = physics.obtainCollisionHook(this);
+            this.collisions = collisions;
+            this.collisionPublisher = new CollisionEventPublisher(collisions, this);
         }
 
         public Rectangle getBounds()
@@ -29,7 +29,7 @@ namespace Pong.BaseClasses
 
         public void dispose()
         {
-            physics.unregisterCollidableFromSystem(this);
+            collisions.unregisterCollidable(this);
         }
     }
 }

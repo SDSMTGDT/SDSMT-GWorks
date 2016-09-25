@@ -12,8 +12,8 @@ namespace Pong.GameStates.Models
     class SideWall : CollidableGameObject
     {
 
-        public SideWall (Rectangle bounds, PhysicsManager physics,
-            GraphicsDevice graphics) :base(bounds, physics, 
+        public SideWall (Rectangle bounds, CollisionManager collisions,
+            GraphicsDevice graphics) :base(bounds, collisions, 
                 createSideWallTexture(graphics, bounds), bounds.Location.ToVector2())
         {
 

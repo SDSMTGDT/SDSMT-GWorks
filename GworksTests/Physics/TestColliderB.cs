@@ -15,12 +15,11 @@ namespace SDSMTGDT.GWorks.Physics
     /// </summary>
     public class TestColliderB : BoundsCollidable
     {
-        public TestColliderB(PhysicsManager soc, Rectangle bounds) : base(bounds)
+        public TestColliderB(CollisionManager collisions, Rectangle bounds) : base(collisions, bounds)
         {
-            var publisher = soc.obtainCollisionHook(this);
             var router = new CollisionEventRouter();
             router.addCollisionRoute(new TypeCollisionRoute<TestColliderB, TestColliderA>(testACollision));
-            publisher.registerEventSubscriber(router);
+            collisionPublisher.registerEventSubscriber(router);
         }
 
         public void testACollision(TypedCollisionEventInfo<TestColliderB, TestColliderA> info)

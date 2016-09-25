@@ -24,9 +24,9 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         public Collidable collided { get; private set; }
 
         /// <summary>
-        /// The physics manager which issued this info
+        /// The collisions manager which issued this info
         /// </summary>
-        public PhysicsManager physicsManager { get; private set; }
+        public CollisionManager physicsManager { get; private set; }
 
         /// <summary>
         /// The collision group containing both collidables
@@ -48,7 +48,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// </summary>
         /// <param name="collider">Collidable 1</param>
         /// <param name="collided">Collidable 2</param>
-        public CollisionEventInfo(Collidable collider, Collidable collided, CollisionGroup group, PhysicsManager manager)
+        public CollisionEventInfo(Collidable collider, Collidable collided, CollisionGroup group, CollisionManager manager)
         {
             this.collider = collider;
             this.collided = collided;

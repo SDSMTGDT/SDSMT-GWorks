@@ -15,8 +15,8 @@ namespace BrickBreaker.Helpers
         private Texture2D texture;
         private Vector2 location;
 
-        internal CollidableGameObject(Rectangle bounds, Texture2D texture, PhysicsManager physics) :
-            base(bounds, physics)
+        internal CollidableGameObject(Rectangle bounds, Texture2D texture, CollisionManager collisions) :
+            base(bounds, collisions)
         {
             this.texture = texture;
             this.location = bounds.Location.ToVector2();

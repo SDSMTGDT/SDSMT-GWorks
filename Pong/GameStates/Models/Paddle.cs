@@ -12,8 +12,8 @@ namespace Pong.GameStates.Models
     class Paddle : MovingCollidableGameObject
     {
 
-        public Paddle (Rectangle bounds, PhysicsManager physics,
-            GraphicsDevice graphics, Vector2 position ) :base( bounds, physics,
+        public Paddle (Rectangle bounds, CollisionManager collisions,
+            GraphicsDevice graphics, Vector2 position ) :base( bounds, collisions,
                 createPaddleTexture(graphics, bounds), position, new Vector2(0,0))
         {
 

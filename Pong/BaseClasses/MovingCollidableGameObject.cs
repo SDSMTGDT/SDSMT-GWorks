@@ -13,9 +13,9 @@ namespace Pong.BaseClasses
     {
         public Vector2 velocity;
 
-        public MovingCollidableGameObject(Rectangle bounds, PhysicsManager physics,
+        public MovingCollidableGameObject(Rectangle bounds, CollisionManager collisions,
             Texture2D texture, Vector2 position, Vector2 startingVelocity)
-            : base(bounds, physics, texture, position)
+            : base(bounds, collisions, texture, position)
         {
             velocity = startingVelocity;
         }

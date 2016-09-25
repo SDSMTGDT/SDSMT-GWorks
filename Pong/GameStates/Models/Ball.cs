@@ -21,8 +21,8 @@ namespace Pong.GameStates.Models
         BallArtist artist;
         BallMovement movement;
 
-        Ball(PhysicsManager physics, GraphicsDevice graphics)
-            : base(new Rectangle(0,0,BALL_SIZE,BALL_SIZE), physics,
+        Ball(CollisionManager collisions, GraphicsDevice graphics)
+            : base(new Rectangle(0,0,BALL_SIZE,BALL_SIZE), collisions,
                   createBallTexture(graphics) , new Vector2(0,0), new Vector2(0,0))
         {
             artist = new BallArtist(this);

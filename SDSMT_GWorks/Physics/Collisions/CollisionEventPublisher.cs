@@ -19,19 +19,19 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// when a collision event is fired
         /// </summary>
         private Collidable collider;
-        private PhysicsManager physics;
+        private CollisionManager collisions;
 
         /// <summary>
         /// Create a new CollisionEventPublisher to forward collision events
         /// to the event manager
         /// </summary>
-        /// <param name="manager">The EventManager to publish events to</param>
+        /// <param name="collisions">The collisions manager to publish events to</param>
         /// <param name="collider">The Collidable to publish events about</param>
-        internal CollisionEventPublisher(EventManager manager, PhysicsManager physics, Collidable collider) :
-            base(manager, collider.ToString() + " Collider")
+        public CollisionEventPublisher(CollisionManager collisions, Collidable collider) :
+            base(collisions.eventManager, collider.ToString() + " Collider")
         {
             this.collider = collider;
-            this.physics = physics;
+            this.collisions = collisions;
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// <param name="group">The group containing one or both of the collidables</param>
         internal void publish(Collidable collided, CollisionGroup group)
         {
-            fireEvent(new CollisionEventInfo(collider, collided, group, physics));
+            fireEvent(new CollisionEventInfo(collider, collided, group, collisions));
         }
 
         /// <summary>

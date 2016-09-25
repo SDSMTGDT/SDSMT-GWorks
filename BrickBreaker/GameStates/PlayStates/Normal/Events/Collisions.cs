@@ -99,7 +99,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Events
             info.collided.destroyed = true;
             info.physicsManager.eventManager.queueAction(() =>
             {
-                info.physicsManager.unregisterCollidableFromSystem(info.collided);
+                info.physicsManager.unregisterCollidable(info.collided);
             });
             Vector2 ballBrickVector = info.getCollisionVector();
             Vector2 current = info.collider.speedPxPerMillis;

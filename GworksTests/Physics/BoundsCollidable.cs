@@ -13,9 +13,12 @@ namespace SDSMTGDT.GWorks.Physics
         private Rectangle bounds;
         public bool collided { get; protected set; } = false;
 
-        public BoundsCollidable(Rectangle bounds)
+        public CollisionEventPublisher collisionPublisher { get; }
+
+        public BoundsCollidable(CollisionManager collisions, Rectangle bounds)
         {
             this.bounds = bounds;
+            this.collisionPublisher = new CollisionEventPublisher(collisions, this);
         }
 
         public Rectangle getBounds()

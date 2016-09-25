@@ -19,5 +19,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// </summary>
         /// <returns>The axis aligned bounding box of the Collidable object</returns>
         Rectangle getBounds();
+
+        CollisionEventPublisher collisionPublisher { get; }
     }
 }
