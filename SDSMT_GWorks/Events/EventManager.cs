@@ -151,6 +151,8 @@ namespace SDSMTGDT.GWorks.Events
 
             while (delayedActions.Count != 0)
             {
+                //Dequeue returns a function 
+                //The second set of parens call the function
                 delayedActions.Dequeue()();
             }
         }

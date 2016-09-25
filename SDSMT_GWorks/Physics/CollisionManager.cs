@@ -94,7 +94,16 @@ namespace SDSMTGDT.GWorks.Physics
             List<CollisionGroup> groups;
             if (!collidableToGroups.TryGetValue(c, out groups) || !groups.Contains(group))
                 return false;
+            // Remove the mapping from the collidable to the group
             groups.Remove(group);
+
+            // If this group was the last group this colliable was associated with, remove the mapping entirely
+            if (groups.Count == 0)
+            {
+                collidableToGroups.Remove(c);
+            }
+
+            // Remove the collidable from the group
             return group.structure.delete(c);
         }
 
@@ -108,10 +117,13 @@ namespace SDSMTGDT.GWorks.Physics
             if (!collidableToGroups.TryGetValue(c, out groups))
                 return;
 
+            // Remove the collidable from each of its collision groups
             foreach(CollisionGroup group in groups)
             {
                 group.structure.delete(c);
             }
+
+            // Remove the mapping from the collidable to its collision groups
             collidableToGroups.Remove(c);
         }
 
@@ -121,7 +133,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         /// <param name="c">The collidable to remove</param>
         public void unregisterCollidable(Collidable c)
-        {
+            {
             unregisterCollidableFromAllGroups(c);
         }
 

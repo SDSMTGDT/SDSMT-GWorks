@@ -40,7 +40,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventInfo">The event information to send out</param>
         protected void fireEvent(T eventInfo)
         {
-            EVENT_ACTIONS.listeners?.Invoke(this, eventInfo);
+            manager.getEventActions(EVENT_ID).listeners?.Invoke(this, eventInfo);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="callback">A callback to call whe the event is finished</param>
         protected void fireAsyncEvent(T eventInfo, AsyncCallback callback)
         {
-            EVENT_ACTIONS.asyncListeners?.BeginInvoke(this, eventInfo, callback, null);
+            manager.getEventActions(EVENT_ID).asyncListeners?.BeginInvoke(this, eventInfo, callback, null);
         }
         
         /// <summary>
