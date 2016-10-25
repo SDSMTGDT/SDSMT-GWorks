@@ -12,7 +12,7 @@ namespace BrickBreaker.Helpers
     //pulls in collsion zones and gameobject
     abstract class CollidableGameObject : CollisionZone, GameObject
     {
-        private Texture2D texture;
+        public Texture2D texture { get; private set; }
         private Vector2 location;
 
         internal CollidableGameObject(Rectangle bounds, Texture2D texture, CollisionManager collisions) :
@@ -25,12 +25,7 @@ namespace BrickBreaker.Helpers
         public Vector2 getLocation()
         {
             return location;
-        }
-
-        public Texture2D getTexture()
-        {
-            return texture;
-        }
+        }        
 
         public void setLocation(float x, float y)
         {

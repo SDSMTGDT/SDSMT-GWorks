@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SDSMTGDT.GWorks.GameStates;
 using SDSMTGDT.GWorks.Physics;
 using SDSMTGDT.GWorks.Physics.Collisions.Routes;
+using SDSMTGDT.GWorks.Spriting;
 using System;
 using System.Collections.Generic;
 using System.Linq;

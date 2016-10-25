@@ -25,7 +25,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Drawing
             foreach (var brick in bricks)
             { 
                 if (!brick.destroyed)
-                    graphics.Draw(brick.getTexture(), brick.getBounds(), brick.color);
+                    graphics.Draw(brick.texture, brick.getBounds(), brick.color);
             }
         }
 

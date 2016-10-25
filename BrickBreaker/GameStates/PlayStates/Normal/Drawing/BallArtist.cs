@@ -21,7 +21,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Drawing
 
         public void draw(GameTime gameTime, SpriteBatch graphics)
         {
-            graphics.Draw(ball.getTexture(), ball.getBounds(), Color.White);
+            graphics.Draw(ball.texture, ball.getBounds(), Color.White);
         }
 
         public int getZIndex()

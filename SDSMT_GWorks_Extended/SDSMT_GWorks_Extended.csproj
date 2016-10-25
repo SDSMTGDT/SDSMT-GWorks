@@ -45,6 +45,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spriting\Animation.cs" />
     <Compile Include="Spriting\AnimationState.cs" />
+    <Compile Include="Spriting\Sprite.cs" />
+    <Compile Include="Spriting\StaticSprite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Spriting.dgml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

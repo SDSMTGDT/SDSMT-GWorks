@@ -11,9 +11,9 @@ namespace BrickBreaker.Helpers
     //Very cruddy Game object
     interface GameObject
     {
+        Texture2D texture { get; }
         Vector2 getLocation();
         void setLocation(float x, float y);
         void move(float x, float y);
-        Texture2D getTexture();
     }
 }

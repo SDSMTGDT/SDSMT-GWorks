@@ -11,16 +11,24 @@ namespace SDSMTGDT.GWorks.Spriting
     public class Animation
     {
         private Texture2D source;
+
         /// <summary>
         /// List of rectangles that define sprites in a composite image.
         /// </summary>
         public IReadOnlyList<Rectangle> locations { get; private set; }
+
         /// <summary>
         /// List of the bounding boxes for each sprite in the animation. Allows
         /// for sprites that are larger or smaller than their frame bounds.
         /// </summary>
         public IReadOnlyList<Rectangle> bounds { get; private set; }
+
+        /// <summary>
+        /// How long each frame lasts. If a frame should be displayed for longer
+        /// than another, add the frame multiple times.
+        /// </summary>
         public TimeSpan frameDuration { get; private set; }
+
         /// <summary>
         /// Property that returns the number of frames in the animation based
         /// on the list of frames in the source image.
@@ -30,7 +38,6 @@ namespace SDSMTGDT.GWorks.Spriting
             {
                 return locations.Count;
             }
-            set { }
         }
 
         /// <summary>
@@ -55,9 +62,12 @@ namespace SDSMTGDT.GWorks.Spriting
         /// <param name="batch">Opened sprite batch for drawing</param>
         /// <param name="dest">Rectangle to draw the frame in</param>
         /// <param name="i">Index of the frame to draw</param>
-        public void draw(SpriteBatch batch, Rectangle dest, int i)
+        public void draw(SpriteBatch batch, Rectangle dest, int i, 
+            Vector2? origin = default(Vector2?), float rotation = 0, 
+            Vector2? scale = default(Vector2?), Color? color = default(Color?), 
+            SpriteEffects effects = SpriteEffects.None, float layerDepth = 0)
         {
-            batch.Draw(source, dest, locations[i], Color.White);
+            batch.Draw(source, null, dest, locations[i], origin, rotation, scale, color, effects, layerDepth);
         }
     }
 }
