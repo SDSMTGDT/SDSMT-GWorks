@@ -67,7 +67,7 @@ namespace SDSMTGDT.GWorks.Spriting
         /// </summary>
         public event Action animationFinished;
 
-        AnimationState(Animation animation, bool looping)
+        public AnimationState(Animation animation, bool looping)
         {
             this.animation = animation;
             this.accumulator = TimeSpan.Zero;

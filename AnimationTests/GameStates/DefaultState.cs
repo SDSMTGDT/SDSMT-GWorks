@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 using SDSMTGDT.GWorks.GameStates;
 using SDSMTGDT.GWorks.Spriting;
 /// <summary>
-/// The DefaultState game state is supposed to handle the 
+/// The DefaultState game state handles the general operations
+/// of the test "game".
 /// </summary>
 namespace AnimationTests.GameStates
 {
     public class DefaultState : MutableGameState
     {
-        AnimationState[] animations;
         internal DefaultState(GameStateManager manager) : base(manager)
         {
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AnimationTests
+namespace SDSMTGDT.GWorks.AnimationTests
 {
     /// <summary>
     /// Starts up the test
