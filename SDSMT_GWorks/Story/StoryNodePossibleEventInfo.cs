@@ -9,10 +9,10 @@ namespace SDSMTGDT.GWorks.Story
 {
     public class StoryNodePossibleEventInfo : GameEventInfo
     {
-        public readonly StoryNode storyNode;
+        public readonly StoryNode StoryNode;
         internal StoryNodePossibleEventInfo(StoryNode storyNode)
         {
-            this.storyNode = storyNode;
+            StoryNode = storyNode;
         }
     }
 }

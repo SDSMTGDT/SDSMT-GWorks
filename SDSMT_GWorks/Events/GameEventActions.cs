@@ -17,7 +17,7 @@ namespace SDSMTGDT.GWorks.Events
     /// <typeparam name="T">type of the event info being handled</typeparam>
     internal class GameEventActions<T> : IGameEventAction where T : GameEventInfo
     {
-        internal GameEvent<T> listeners;
-        internal GameEvent<T> asyncListeners;
+        internal GameEvent<T> Listeners;
+        internal GameEvent<T> AsyncListeners;
     }
 }

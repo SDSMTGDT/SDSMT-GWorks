@@ -47,7 +47,7 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
         /// <param name="graphics">This class handles the drawing of a group
         /// of images in an efficient manner.It will handle drawing our
         /// colorChanger to the screen.</param>
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
             graphics.Draw(rectTexture, bounds, curr);
             byte delta = (byte)Math.Round(gameTime.ElapsedGameTime.Milliseconds * speed);
@@ -81,7 +81,7 @@ namespace SDSMTGDT.GWorks.GameStates.ColorChanger
         /// </summary>
         /// <returns>makes sure that the colorChanger is in the background
         /// </returns>
-        public int getZIndex()
+        public int GetZIndex()
         {
             return int.MaxValue;
         }

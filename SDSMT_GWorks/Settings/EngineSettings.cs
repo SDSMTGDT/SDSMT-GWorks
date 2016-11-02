@@ -5,22 +5,21 @@ using System.Text;
 
 namespace SDSMTGDT.GWorks.Settings
 {
+    //TODO: DECOUPLE FROM MANAGER
     public class EngineSettings
     {
-        private SettingsManager manager;
 
         internal EngineSettings(SettingsManager manager)
         {
-            this.manager = manager;
-            WINDOW_HEIGHT = manager.addSetting<int>();
-            WINDOW_WIDTH = manager.addSetting<int>();
-            VSYNC = manager.addSetting<bool>();
-            VOLUME_MASTER = manager.addSetting<int>();
-            VOLUME_FX = manager.addSetting<int>();
-            VOLUME_MUSIC = manager.addSetting<int>();
-            VOLUME_STEREO = manager.addSetting<bool>();
-            DIRECTORY_CURRENT = manager.addSetting<string>();
-            DIRECTORY_SAVES = manager.addSetting<string>();
+            WINDOW_HEIGHT = manager.AddSetting<int>();
+            WINDOW_WIDTH = manager.AddSetting<int>();
+            VSYNC = manager.AddSetting<bool>();
+            VOLUME_MASTER = manager.AddSetting<int>();
+            VOLUME_FX = manager.AddSetting<int>();
+            VOLUME_MUSIC = manager.AddSetting<int>();
+            VOLUME_STEREO = manager.AddSetting<bool>();
+            DIRECTORY_CURRENT = manager.AddSetting<string>();
+            DIRECTORY_SAVES = manager.AddSetting<string>();
         }
 
         public readonly SettingIndex<int> WINDOW_HEIGHT;

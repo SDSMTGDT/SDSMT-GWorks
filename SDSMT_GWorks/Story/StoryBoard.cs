@@ -1,9 +1,6 @@
-﻿using SDSMTGDT.GWorks.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SDSMTGDT.GWorks.Events;
 
 namespace SDSMTGDT.GWorks.Story
 {
@@ -11,75 +8,75 @@ namespace SDSMTGDT.GWorks.Story
     [Serializable]
     public class StoryBoard 
     {
-        private Dictionary<uint, StoryNode> storyGraph;
-        private uint nodeIdCounter = 0;
-        private LinkedList<StoryNode> possibleNodes;
-        private StoryNodePassedEventPublisher passedPublisher;
-        private GameEventHook<StoryNodePassedEventInfo> passedHook;
-        private StoryNodePossibleEventPublisher possibilityPublisher;
-        private GameEventHook<StoryNodePossibleEventInfo> possibilityHook;
+        private readonly Dictionary<uint, StoryNode> storyGraph;
+        private uint nodeIdCounter;
+        private readonly LinkedList<StoryNode> possibleNodes;
+        private readonly StoryNodePassedEventPublisher passedPublisher;
+        private readonly GameEventHook<StoryNodePassedEventInfo> passedHook;
+        private readonly StoryNodePossibleEventPublisher possibilityPublisher;
+        private readonly GameEventHook<StoryNodePossibleEventInfo> possibilityHook;
         public readonly string DESCRIPTION;
 
         public StoryBoard(EventManager manager, string description)
         {
-            this.storyGraph = new Dictionary<uint, StoryNode>();
-            this.possibleNodes = new LinkedList<StoryNode>();
-            this.passedPublisher = new StoryNodePassedEventPublisher(manager);
-            this.passedHook = new GameEventHook<StoryNodePassedEventInfo>(manager, passedPublisher.EVENT_ID);
-            this.possibilityPublisher = new StoryNodePossibleEventPublisher(manager);
-            this.possibilityHook = new GameEventHook<StoryNodePossibleEventInfo>(manager, possibilityPublisher.EVENT_ID);
-            this.DESCRIPTION = description;
+            storyGraph = new Dictionary<uint, StoryNode>();
+            possibleNodes = new LinkedList<StoryNode>();
+            passedPublisher = new StoryNodePassedEventPublisher(manager);
+            passedHook = new GameEventHook<StoryNodePassedEventInfo>(manager, passedPublisher.EVENT_ID);
+            possibilityPublisher = new StoryNodePossibleEventPublisher(manager);
+            possibilityHook = new GameEventHook<StoryNodePossibleEventInfo>(manager, possibilityPublisher.EVENT_ID);
+            DESCRIPTION = description;
         }
 
-        internal uint registerNewInnerNode(StoryNode storyNode)
+        internal uint RegisterNewInnerNode(StoryNode storyNode)
         {
             uint temp = nodeIdCounter++;
             storyGraph.Add(temp, storyNode);
             return temp;
         }
 
-        internal void updatePossibilities(StoryNode storyNode)
+        internal void UpdatePossibilities(StoryNode storyNode)
         {
             possibleNodes.Remove(storyNode);
-            foreach(StoryNode successor in storyNode.getSuccessors())
+            foreach(StoryNode successor in storyNode.GetSuccessors())
             {
                 if (!possibleNodes.Contains(successor))
                 {
                     bool possible = true;
-                    foreach(StoryNode successorPredecessor in successor.getPredecessors())
+                    foreach(StoryNode successorPredecessor in successor.GetPredecessors())
                     {
-                        if (!successorPredecessor.getState())
+                        if (!successorPredecessor.GetState())
                             possible = false;
                     }
                     if (possible)
                         possibleNodes.AddLast(successor);
                 }
             }
-            passedPublisher.publish(storyNode);
-            possibilityPublisher.publish(storyNode);
+            passedPublisher.Publish(storyNode);
+            possibilityPublisher.Publish(storyNode);
         }
 
-        public void addRootNode(StoryNode rootNode)
+        public void AddRootNode(StoryNode rootNode)
         {
             possibleNodes.AddFirst(rootNode);
         }
 
-        public IEnumerable<StoryNode> getPossibilities()
+        public IEnumerable<StoryNode> GetPossibilities()
         {
             return possibleNodes;
         }
 
-        public StoryNode getStoryNodeById(uint id)
+        public StoryNode GetStoryNodeById(uint id)
         {
             return storyGraph[id];
         }
         
-        public GameEventHook<StoryNodePassedEventInfo> getStoryNodePassedEventHook()
+        public GameEventHook<StoryNodePassedEventInfo> GetStoryNodePassedEventHook()
         {
             return passedHook;
         }
 
-        public GameEventHook<StoryNodePossibleEventInfo> getStoryNodePossibleEventHook()
+        public GameEventHook<StoryNodePossibleEventInfo> GetStoryNodePossibleEventHook()
         {
             return possibilityHook;
         }

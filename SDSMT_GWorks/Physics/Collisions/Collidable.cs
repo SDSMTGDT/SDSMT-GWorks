@@ -18,8 +18,8 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// quick efficient collisions
         /// </summary>
         /// <returns>The axis aligned bounding box of the Collidable object</returns>
-        Rectangle getBounds();
+        Rectangle GetBounds();
 
-        CollisionEventPublisher collisionPublisher { get; }
+        CollisionEventPublisher CollisionPublisher { get; }
     }
 }

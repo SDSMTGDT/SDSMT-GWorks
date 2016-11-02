@@ -27,8 +27,8 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
             artist = new PaddleArtist(this);
             movement = new PaddleMovement(this, screen.Width);
             setLocation(
-                (screen.Width - getBounds().Width) / 2,
-                screen.Height - getBounds().Height
+                (screen.Width - GetBounds().Width) / 2,
+                screen.Height - GetBounds().Height
             );
             this.speedPxPerMilli = .7;
         }

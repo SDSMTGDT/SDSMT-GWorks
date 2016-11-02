@@ -35,16 +35,16 @@ namespace SDSMTGDT.GWorks.Physics
         public void testQuadTreeInsert()
         {
             var collisionGroup = 
-                testPhysicsManager.createCollisionGroup("testGroup",
+                testPhysicsManager.CreateCollisionGroup("testGroup",
                 new CollisionQuadTreeFactory(0, 0, 1000));
             TestColliderA colliderA = new TestColliderA(testPhysicsManager,
                 new Rectangle(500, 500, 100, 100));
             TestColliderB colliderB = new TestColliderB(testPhysicsManager,
                 new Rectangle(500, 500, 50, 50));
-            testPhysicsManager.registerCollidableInGroup(colliderA, collisionGroup);
-            testPhysicsManager.registerCollidableInGroup(colliderB, collisionGroup);
+            testPhysicsManager.RegisterCollidableInGroup(colliderA, collisionGroup);
+            testPhysicsManager.RegisterCollidableInGroup(colliderB, collisionGroup);
 
-            testPhysicsManager.checkCollisions(colliderA);
+            testPhysicsManager.CheckCollisions(colliderA);
 
             Assert.IsTrue(colliderA.collided);
             Assert.IsTrue(colliderB.collided);
@@ -54,20 +54,20 @@ namespace SDSMTGDT.GWorks.Physics
         public void testQuadTreeDelete()
         {
             var collisionGroup =
-                testPhysicsManager.createCollisionGroup("testGroup",
+                testPhysicsManager.CreateCollisionGroup("testGroup",
                 new CollisionQuadTreeFactory(0, 0, 1000));
             TestColliderA colliderA = new TestColliderA(testPhysicsManager,
                 new Rectangle(500, 500, 100, 100));
             TestColliderB colliderB = new TestColliderB(testPhysicsManager,
                 new Rectangle(500, 500, 50, 50));
-            testPhysicsManager.registerCollidableInGroup(colliderA, collisionGroup);
-            testPhysicsManager.registerCollidableInGroup(colliderB, collisionGroup);
+            testPhysicsManager.RegisterCollidableInGroup(colliderA, collisionGroup);
+            testPhysicsManager.RegisterCollidableInGroup(colliderB, collisionGroup);
 
-            testPhysicsManager.unregisterCollidable(colliderA);
-            Assert.AreEqual(1, testPhysicsManager.collidableCount);
-            testPhysicsManager.unregisterCollidable(colliderB);
+            testPhysicsManager.UnregisterCollidable(colliderA);
+            Assert.AreEqual(1, testPhysicsManager.CollidableCount);
+            testPhysicsManager.UnregisterCollidable(colliderB);
 
-            Assert.AreEqual(0, testPhysicsManager.collidableCount);
+            Assert.AreEqual(0, testPhysicsManager.CollidableCount);
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace SDSMTGDT.GWorks.Physics
             int increment = 1;
 
             var collisionGroup =
-                testPhysicsManager.createCollisionGroup("testGroup",
+                testPhysicsManager.CreateCollisionGroup("testGroup",
                 new CollisionQuadTreeFactory(0, 0, 1000));
 
             List<BoundsCollidable> colliders = new List<BoundsCollidable>();
@@ -91,7 +91,7 @@ namespace SDSMTGDT.GWorks.Physics
                         new Rectangle(i, i, 3, 3));
                     colliders.Add(tempCollidable);
                     testPhysicsManager.
-                        registerCollidableInGroup(tempCollidable, collisionGroup);
+                        RegisterCollidableInGroup(tempCollidable, collisionGroup);
                 }
                 else
                 {
@@ -99,13 +99,13 @@ namespace SDSMTGDT.GWorks.Physics
                         new Rectangle(i, i, 3, 3));
                     colliders.Add(tempCollidable);
                     testPhysicsManager.
-                        registerCollidableInGroup(tempCollidable, collisionGroup);
+                        RegisterCollidableInGroup(tempCollidable, collisionGroup);
                 }
             }
 
             foreach( BoundsCollidable col in colliders)
             {
-                testPhysicsManager.checkCollisions(col);
+                testPhysicsManager.CheckCollisions(col);
             }
             foreach( BoundsCollidable col in colliders)
             {

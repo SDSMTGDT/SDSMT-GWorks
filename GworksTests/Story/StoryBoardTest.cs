@@ -38,16 +38,16 @@ namespace SDSMTGDT.GWorks.Story
             var testDescription = "rootA";
             var rootNode = new StoryNode(storyBoard, testDescription);
             bool listenerRan = false;
-            rootNode.addSuccessor(new StoryNode(storyBoard, "secondA"));
-            rootNode.addSuccessor(new StoryNode(storyBoard, "secondB"));
-            storyBoard.addRootNode(rootNode);
-            storyBoard.getStoryNodePassedEventHook().registerEventListener(
+            rootNode.AddSuccessor(new StoryNode(storyBoard, "secondA"));
+            rootNode.AddSuccessor(new StoryNode(storyBoard, "secondB"));
+            storyBoard.AddRootNode(rootNode);
+            storyBoard.GetStoryNodePassedEventHook().RegisterEventListener(
                 (sender, info) => {
-                    Assert.True(info.storyNode.DESCRIPTION == testDescription);
+                    Assert.True(info.StoryNode.DESCRIPTION == testDescription);
                     listenerRan = true;
                 }
             );
-            rootNode.setTrue();
+            rootNode.SetTrue();
             Assert.True(listenerRan);
         }
 
@@ -59,13 +59,13 @@ namespace SDSMTGDT.GWorks.Story
         public void testStoryPossibleEvent()
         {
             var rootNode = new StoryNode(storyBoard, "rootA");
-            rootNode.addSuccessor(new StoryNode(storyBoard, "secondA"));
-            rootNode.addSuccessor(new StoryNode(storyBoard, "secondB"));
-            storyBoard.addRootNode(rootNode);
-            storyBoard.getStoryNodePossibleEventHook().registerEventListener(
+            rootNode.AddSuccessor(new StoryNode(storyBoard, "secondA"));
+            rootNode.AddSuccessor(new StoryNode(storyBoard, "secondB"));
+            storyBoard.AddRootNode(rootNode);
+            storyBoard.GetStoryNodePossibleEventHook().RegisterEventListener(
                 (sender, info) => Assert.Pass()
             );
-            rootNode.setTrue();
+            rootNode.SetTrue();
             Assert.Fail();
         }
     }

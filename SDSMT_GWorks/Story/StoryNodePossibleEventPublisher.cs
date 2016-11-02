@@ -14,10 +14,10 @@ namespace SDSMTGDT.GWorks.Story
             : base(eventManager, "Publishes storyboard events when story points become possible")
         { }
 
-        internal void publish(StoryNode storyNode)
+        internal void Publish(StoryNode storyNode)
         {
             StoryNodePossibleEventInfo info = new StoryNodePossibleEventInfo(storyNode);
-            fireEvent(info);
+            FireEvent(info);
         }
     }
 }

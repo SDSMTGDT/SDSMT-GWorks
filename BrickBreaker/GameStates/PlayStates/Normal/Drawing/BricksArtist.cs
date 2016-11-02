@@ -19,17 +19,17 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Drawing
             this.bricks = bricks;
         }
         
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
 
             foreach (var brick in bricks)
             { 
                 if (!brick.destroyed)
-                    graphics.Draw(brick.texture, brick.getBounds(), brick.color);
+                    graphics.Draw(brick.texture, brick.GetBounds(), brick.color);
             }
         }
 
-        public int getZIndex()
+        public int GetZIndex()
         {
             return 0;
         }

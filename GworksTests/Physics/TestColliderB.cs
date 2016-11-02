@@ -18,8 +18,8 @@ namespace SDSMTGDT.GWorks.Physics
         public TestColliderB(CollisionManager collisions, Rectangle bounds) : base(collisions, bounds)
         {
             var router = new CollisionEventRouter();
-            router.addCollisionRoute(new TypeCollisionRoute<TestColliderB, TestColliderA>(testACollision));
-            collisionPublisher.registerEventSubscriber(router);
+            router.AddCollisionRoute(new TypeCollisionRoute<TestColliderB, TestColliderA>(testACollision));
+            CollisionPublisher.RegisterEventSubscriber(router);
         }
 
         public void testACollision(TypedCollisionEventInfo<TestColliderB, TestColliderA> info)

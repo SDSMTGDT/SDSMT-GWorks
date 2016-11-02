@@ -19,21 +19,18 @@ namespace SDSMTGDT.GWorks.Physics
         /// <summary>
         /// The event manager to forward collision events to.
         /// </summary>
-        public EventManager eventManager { get; private set; }
+        public EventManager EventManager { get; private set; }
 
         /// <summary>
         /// Mapping between collidable objects and the groups they are in.
         /// Its faster maintiaining this dictionary than calling contains on every group.
         /// </summary>
-        private Dictionary<Collidable, List<CollisionGroup>> collidableToGroups;
+        private readonly Dictionary<Collidable, List<CollisionGroup>> collidableToGroups;
 
         /// <summary>
         /// Returns the number of collidables in the current collisions manager.
         /// </summary>
-        public int collidableCount
-        {
-            get { return collidableToGroups.Count; }
-        }
+        public int CollidableCount => collidableToGroups.Count;
 
         /// <summary>
         /// Each collision group has a unique id.
@@ -46,9 +43,9 @@ namespace SDSMTGDT.GWorks.Physics
         /// <param name="eventManager">The EventManager to publish collision information to</param>
         public CollisionManager(EventManager eventManager)
         {
-            this.eventManager = eventManager;
-            this.collidableToGroups = new Dictionary<Collidable, List<CollisionGroup>>();
-            this.collisionGroupCounter = 0;
+            EventManager = eventManager;
+            collidableToGroups = new Dictionary<Collidable, List<CollisionGroup>>();
+            collisionGroupCounter = 0;
         }
 
         /// <summary>
@@ -57,9 +54,9 @@ namespace SDSMTGDT.GWorks.Physics
         /// <param name="name">Name of the collision group</param>
         /// <param name="factory">Factory which provides backing to the collision group</param>
         /// <returns>A new Collision Group.</returns>
-        public CollisionGroup createCollisionGroup(string name, CollisionStructureFactory factory)
+        public CollisionGroup CreateCollisionGroup(string name, CollisionStructureFactory factory)
         {
-            CollisionStructure structure = factory.createCollisionStructure();
+            CollisionStructure structure = factory.CreateCollisionStructure();
             CollisionGroup group = new CollisionGroup(collisionGroupCounter, name, structure);
             collisionGroupCounter++;
             return group;
@@ -71,9 +68,9 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         /// <param name="c">The collidable to add to the group</param>
         /// <param name="group">The group to add the collidable to</param>
-        public void registerCollidableInGroup(Collidable c, CollisionGroup group)
+        public void RegisterCollidableInGroup(Collidable c, CollisionGroup group)
         {
-            group.structure.insert(c);
+            group.Structure.Insert(c);
             List<CollisionGroup> groups;
             if (!collidableToGroups.TryGetValue(c, out groups))
             {
@@ -89,7 +86,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// <param name="c"></param>
         /// <param name="group"></param>
         /// <returns>Whether or not the collidable was found in the group and removed.</returns>
-        public bool unregisterCollidableFromGroup(Collidable c, CollisionGroup group)
+        public bool UnregisterCollidableFromGroup(Collidable c, CollisionGroup group)
         {
             List<CollisionGroup> groups;
             if (!collidableToGroups.TryGetValue(c, out groups) || !groups.Contains(group))
@@ -104,14 +101,14 @@ namespace SDSMTGDT.GWorks.Physics
             }
 
             // Remove the collidable from the group
-            return group.structure.delete(c);
+            return group.Structure.Delete(c);
         }
 
         /// <summary>
         /// Removes a collidable from all collision groups it was registered to.
         /// </summary>
         /// <param name="c">The collidable to remove</param>
-        private void unregisterCollidableFromAllGroups(Collidable c)
+        private void UnregisterCollidableFromAllGroups(Collidable c)
         {
             List<CollisionGroup> groups;
             if (!collidableToGroups.TryGetValue(c, out groups))
@@ -120,7 +117,7 @@ namespace SDSMTGDT.GWorks.Physics
             // Remove the collidable from each of its collision groups
             foreach(CollisionGroup group in groups)
             {
-                group.structure.delete(c);
+                group.Structure.Delete(c);
             }
 
             // Remove the mapping from the collidable to its collision groups
@@ -132,21 +129,21 @@ namespace SDSMTGDT.GWorks.Physics
         /// And unregisters the collidable from its collision groups.
         /// </summary>
         /// <param name="c">The collidable to remove</param>
-        public void unregisterCollidable(Collidable c)
-            {
-            unregisterCollidableFromAllGroups(c);
+        public void UnregisterCollidable(Collidable c)
+        {
+            UnregisterCollidableFromAllGroups(c);
         }
 
         /// <summary>
         /// Collides all registered collidables
         /// </summary>
-        public void checkAllCollisions()
+        public void CheckAllCollisions()
         {
             foreach (var keyValuePair in collidableToGroups)
             {
                 foreach (var collidableGroup in keyValuePair.Value)
                 {
-                    collideWithGroup(keyValuePair.Key, collidableGroup);
+                    CollideWithGroup(keyValuePair.Key, collidableGroup);
                 }
             }
         }
@@ -155,26 +152,26 @@ namespace SDSMTGDT.GWorks.Physics
         /// Collides a collidable with all of its registered collidable groups
         /// </summary>
         /// <param name="c">The collidable to check</param>
-        public bool checkCollisions(Collidable c)
+        public bool CheckCollisions(Collidable c)
         {
             List<CollisionGroup> groups;
             if (!collidableToGroups.TryGetValue(c, out groups))
                 return false;
             foreach(CollisionGroup group in groups)
             {
-                collideWithGroup(c, group);
+                CollideWithGroup(c, group);
             }
             return true;
         }
 
-        public bool updateLocation(Collidable c)
+        public bool UpdateLocation(Collidable c)
         {
             List<CollisionGroup> groups;
             if (!collidableToGroups.TryGetValue(c, out groups))
                 return false;
             foreach (CollisionGroup group in groups)
             {
-                group.structure.update(c);
+                group.Structure.Update(c);
             }
             return true;
         }
@@ -184,7 +181,7 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         /// <param name="c">A collidable to check</param>
         /// <returns>A list of other collidables c is colliding with</returns>
-        public List<Collidable> listCurentCollisions(Collidable c)
+        public List<Collidable> ListCurentCollisions(Collidable c)
         {
             List<CollisionGroup> groups;
             List<Collidable> collisions = new List<Collidable>();
@@ -192,7 +189,7 @@ namespace SDSMTGDT.GWorks.Physics
                 return collisions;
             foreach (CollisionGroup group in groups)
             {
-                collisions.AddRange(group.structure.checkCollision(c));
+                collisions.AddRange(group.Structure.CheckCollision(c));
             }
             return collisions;
         }
@@ -203,11 +200,11 @@ namespace SDSMTGDT.GWorks.Physics
         /// </summary>
         /// <param name="c">The collidable to check</param>
         /// <param name="group">The group of other collidables to check</param>
-        public void collideWithGroup(Collidable c, CollisionGroup group)
+        public void CollideWithGroup(Collidable c, CollisionGroup group)
         {
-            foreach(Collidable other in group.structure.checkCollision(c))
+            foreach(Collidable other in group.Structure.CheckCollision(c))
             {
-                collide(c, other, group);
+                Collide(c, other, group);
             }            
         }
 
@@ -218,10 +215,10 @@ namespace SDSMTGDT.GWorks.Physics
         /// <param name="collider">The first object in the collision</param>
         /// <param name="collided">The second object in the collision</param>
         /// <param name="group">The group containing one or both collidables</param>
-        internal void collide(Collidable collider, Collidable collided, CollisionGroup group)
+        internal void Collide(Collidable collider, Collidable collided, CollisionGroup group)
         {
-            collided.collisionPublisher?.publish(collider, group);
-            collider.collisionPublisher?.publish(collided, group);
+            collided.CollisionPublisher?.Publish(collider, group);
+            collider.CollisionPublisher?.Publish(collided, group);
         }
     }
 }

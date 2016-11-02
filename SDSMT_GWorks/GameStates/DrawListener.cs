@@ -10,9 +10,9 @@ namespace SDSMTGDT.GWorks.GameStates
     public interface DrawListener
     {
         //Draws components to the screen
-        void draw(GameTime gameTime, SpriteBatch graphics);
+        void Draw(GameTime gameTime, SpriteBatch graphics);
    
         //Returns the depth at which to draw, lower is closer to the screen
-        int getZIndex();
+        int GetZIndex();
     }
 }

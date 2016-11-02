@@ -13,12 +13,12 @@ namespace Pong.GameStates.Drawing
     {
         Scoreboard scoreboard;
 
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
             graphics.Draw(scoreboard.texture, scoreboard.bounds, Color.White);
         }
 
-        public int getZIndex()
+        public int GetZIndex()
         {
             return 0;
         }

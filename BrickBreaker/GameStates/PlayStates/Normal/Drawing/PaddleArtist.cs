@@ -19,12 +19,12 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Drawing
             this.paddle = paddle;
         }
 
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
-            graphics.Draw(paddle.texture, paddle.getBounds(), Color.White);
+            graphics.Draw(paddle.texture, paddle.GetBounds(), Color.White);
         }
 
-        public int getZIndex()
+        public int GetZIndex()
         {
             return 0;
         }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,76 +12,64 @@ namespace SDSMTGDT.GWorks.Spriting
         /// </summary>
         private TimeSpan accumulator;
         private int frameNumber;
-        private Animation animation;
-        private bool looping;
+        private readonly Animation animation;
+        private readonly bool looping;
 
         /// <summary>
         /// Returns whether or not the animation has played through
         /// </summary>
-        public bool finished
+        public bool Finished
         {
             get
             {
-                return !looping && accumulator.Ticks > animation.frameDuration.Ticks * animation.frameCount;
+                return !looping && accumulator.Ticks > animation.FrameDuration.Ticks * animation.FrameCount;
             }
         }
 
         /// <summary>
-        /// Returns the current bounds of this animation
+        /// Returns the current Bounds of this animation
         /// </summary>
-        public Rectangle bounds
-        {
-            get
-            {
-                return animation.bounds[frameNumber];
-            }
-        }
+        public Rectangle Bounds => animation.Bounds[frameNumber];
 
         /// <summary>
         /// Returns the height and width of the image
         /// </summary>
-        public Vector2 imageBounds
-        {
-            get
-            {
-                return animation.locations[frameNumber].Size.ToVector2();
-            }
-        }
+        public Vector2 ImageBounds => animation.Locations[frameNumber].Size.ToVector2();
 
         /// <summary>
         /// Fires when the bounding box of the animation changes
         /// </summary>
-        public event Action<Rectangle> boundsChanged;
+        public Action<Rectangle> BoundsChanged;
 
         /// <summary>
         /// Fires when the sprite advances to the next frame in the animation
         /// </summary>
-        public event Action frameChanged;
+        public Action FrameChanged;
 
         /// <summary>
         /// Fires when the animation finishes the last frame in the animation
         /// </summary>
-        public event Action animationFinished;
+        public Action AnimationFinished;
 
         public AnimationState(Animation animation, bool looping)
         {
             this.animation = animation;
-            this.accumulator = TimeSpan.Zero;
+            accumulator = TimeSpan.Zero;
             this.looping = looping;
-            frameChanged += () =>
+            FrameChanged += () =>
             {
-                if (finished)
-                    animationFinished();
+                if (Finished)
+                    AnimationFinished();
             };
         }
 
         /// <summary>
         /// Resets the animation to its initial state.
         /// </summary>
-        public void reset()
+        public void Reset()
         {
-            this.frameNumber = 0;
-            this.accumulator = TimeSpan.Zero;
+            frameNumber = 0;
+            accumulator = TimeSpan.Zero;
         }
 
         /// <summary>
@@ -93,28 +77,28 @@ namespace SDSMTGDT.GWorks.Spriting
         /// It may advance the current frame.
         /// </summary>
         /// <param name="dt">The amount of time to advance</param>
-        public void update(GameTime dt)
+        public void Update(GameTime dt)
         {
             accumulator += dt.ElapsedGameTime;
-            if (!finished)
+            if (!Finished)
             {
                 int oldFrame = frameNumber;
-                frameNumber = (int)(accumulator.Ticks / animation.frameDuration.Ticks % animation.frameCount);
+                frameNumber = (int)(accumulator.Ticks / animation.FrameDuration.Ticks % animation.FrameCount);
                 if (oldFrame != frameNumber)
                 {
-                    frameChanged();
-                    if (animation.bounds[oldFrame] != animation.bounds[frameNumber])
-                        boundsChanged(animation.bounds[frameNumber]);
+                    FrameChanged();
+                    if (animation.Bounds[oldFrame] != animation.Bounds[frameNumber])
+                        BoundsChanged(animation.Bounds[frameNumber]);
                 }
             }
         }       
 
-        public void draw(SpriteBatch batch, Rectangle destination,
+        public void Draw(SpriteBatch batch, Rectangle destination,
             Vector2? origin = default(Vector2?), float rotation = 0,
             Vector2? scale = default(Vector2?), Color? color = default(Color?),
             SpriteEffects effects = SpriteEffects.None, float layerDepth = 0)
         {
-            animation.draw(batch, destination, frameNumber, origin, rotation, scale, color, effects, layerDepth);
+            animation.Draw(batch, destination, frameNumber, origin, rotation, scale, color, effects, layerDepth);
         }
     }
 }

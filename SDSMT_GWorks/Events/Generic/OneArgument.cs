@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SDSMTGDT.GWorks.Events
+﻿namespace SDSMTGDT.GWorks.Events.Generic
 {
     /// <summary>
     /// This class defines an event with one piece of information packaged.
@@ -18,13 +12,13 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="item1"> the information that will sent</param>
         public GenericGameEventInfo(T1 item1)
         {
-            this.item1 = item1;
+            Item1 = item1;
         }
 
         /// <summary>
         /// Container for the piece of information.
         /// </summary>
-        public T1 item1 { get; set; }
+        public T1 Item1 { get; set; }
     }
 
     /// <summary>
@@ -49,10 +43,10 @@ namespace SDSMTGDT.GWorks.Events
         /// This method packages the event's info then fires the event.
         /// </summary>
         /// <param name="item1">the information that will be sent.</param>
-        public void publish(T1 item1)
+        public void Publish(T1 item1)
         {
             GenericGameEventInfo<T1> info = new GenericGameEventInfo<T1>(item1);
-            fireEvent(info);
+            FireEvent(info);
         }
 
         /// <summary>
@@ -60,10 +54,10 @@ namespace SDSMTGDT.GWorks.Events
         /// after a delay.
         /// </summary>
         /// <param name="item1">the information that will be sent</param>
-        public void publishDelayedEvent(T1 item1)
+        public void PublishDelayedEvent(T1 item1)
         {
             GenericGameEventInfo<T1> info = new GenericGameEventInfo<T1>(item1);
-            queueEvent(info);
+            QueueEvent(info);
         }
     }
 

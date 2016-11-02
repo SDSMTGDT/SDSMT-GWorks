@@ -27,7 +27,7 @@ namespace SDSMTGDT.GWorks.Events
         public void initEventManager()
         {
             gameStateManager = new GameStateManager(null);
-            eventManager = gameStateManager.events;
+            eventManager = gameStateManager.Events;
         }
 
         /// <summary>
@@ -40,20 +40,20 @@ namespace SDSMTGDT.GWorks.Events
             bool firstPassed = false, secondPassed = false;
             var stringPublisher = new GenericGameEventPublisher<string>(eventManager, "test string publisher");
             string testValue = "test";
-            stringPublisher.registerEventListener((sender, info) =>
+            stringPublisher.RegisterEventListener((sender, info) =>
                 {
-                    Assert.AreEqual(testValue, info.item1);
+                    Assert.AreEqual(testValue, info.Item1);
                     firstPassed = true;
                 });
-            stringPublisher.publish(testValue);
+            stringPublisher.Publish(testValue);
             var intPublisher = new GenericGameEventPublisher<int>(eventManager, "test int publisher");
             int testInteger = 23;
-            intPublisher.registerEventListener((sender, info) => 
+            intPublisher.RegisterEventListener((sender, info) => 
             {
-                Assert.AreEqual(testInteger, info.item1);
+                Assert.AreEqual(testInteger, info.Item1);
                 secondPassed = true;
             });
-            intPublisher.publish(testInteger);
+            intPublisher.Publish(testInteger);
             if (!firstPassed || !secondPassed)
                 Assert.Fail();
         }
@@ -69,29 +69,29 @@ namespace SDSMTGDT.GWorks.Events
             var stringPublisher = new GenericGameEventPublisher<string, string>(eventManager, "test string publisher");
             string testValue1 = "test";
             string testValue2 = "test2";
-            stringPublisher.registerEventListener((sender, info) =>
+            stringPublisher.RegisterEventListener((sender, info) =>
             {
-                Assert.AreEqual(testValue1, info.item1);
-                Assert.AreEqual(testValue2, info.item2);
+                Assert.AreEqual(testValue1, info.Item1);
+                Assert.AreEqual(testValue2, info.Item2);
                 firstPassed = true;
             });
-            stringPublisher.publish(testValue1,testValue2);
+            stringPublisher.Publish(testValue1,testValue2);
             var intPublisher = new GenericGameEventPublisher<int, int>(eventManager, "test int publisher");
             int testInteger1 = 23;
             int testInteger2 = 24;
-            intPublisher.registerEventListener((sender, info) =>
+            intPublisher.RegisterEventListener((sender, info) =>
             {
-                Assert.AreEqual(testInteger1, info.item1);
-                Assert.AreEqual(testInteger2, info.item2);
+                Assert.AreEqual(testInteger1, info.Item1);
+                Assert.AreEqual(testInteger2, info.Item2);
                 secondPassed = true;
             });
-            intPublisher.publish(testInteger1, testInteger2);
+            intPublisher.Publish(testInteger1, testInteger2);
             if (!firstPassed || !secondPassed)
                 Assert.Fail();
         }
 
         /// <summary>
-        /// Registers an event that does not activate immediately. This event
+        /// Registers an event that does not Activate immediately. This event
         /// is then fired and a listener is tested to ensure it updated
         /// correctly.
         /// </summary>
@@ -101,23 +101,23 @@ namespace SDSMTGDT.GWorks.Events
             bool passedFirst = false, passedSecond = false;
             var stringPublisher = new GenericGameEventPublisher<string>(eventManager, "test string publisher");
             string testValue = "test";
-            stringPublisher.registerEventListener(
+            stringPublisher.RegisterEventListener(
                 (sender, info) => {
-                    Assert.AreEqual(testValue, info.item1);
+                    Assert.AreEqual(testValue, info.Item1);
                     passedFirst = true;
                 }
             );
-            stringPublisher.publishDelayedEvent(testValue);
+            stringPublisher.PublishDelayedEvent(testValue);
             var intPublisher = new GenericGameEventPublisher<int>(eventManager, "test int publisher");
             int testInteger = 23;
-            intPublisher.registerEventListener(
+            intPublisher.RegisterEventListener(
                 (sender, info) => {
-                    Assert.AreEqual(testInteger, info.item1);
+                    Assert.AreEqual(testInteger, info.Item1);
                     passedSecond = true;
                 }
             );
-            intPublisher.publishDelayedEvent(testInteger);
-            gameStateManager.update(new Microsoft.Xna.Framework.GameTime());
+            intPublisher.PublishDelayedEvent(testInteger);
+            gameStateManager.Update(new Microsoft.Xna.Framework.GameTime());
             if (!passedFirst || !passedSecond)
                 Assert.Fail();
         }
@@ -132,19 +132,19 @@ namespace SDSMTGDT.GWorks.Events
             bool firstPassed = false, secondPassed = false;
             var stringPublisher = new GenericGameEventPublisher<string>(eventManager, "test string publisher");
             string testValue = "test";
-            stringPublisher.registerEventListener(
+            stringPublisher.RegisterEventListener(
                 (sender, info) => 
                 {
-                    Assert.AreEqual(testValue, info.item1);
+                    Assert.AreEqual(testValue, info.Item1);
                     firstPassed = true;
                 });
-            stringPublisher.registerEventListener(
+            stringPublisher.RegisterEventListener(
                 (sender, info) =>
                 {
-                    Assert.AreEqual(testValue, info.item1);
+                    Assert.AreEqual(testValue, info.Item1);
                     secondPassed = true;
                 });
-            stringPublisher.publish(testValue);
+            stringPublisher.Publish(testValue);
             if (!firstPassed || !secondPassed)
                 Assert.Fail();
         }
@@ -160,20 +160,20 @@ namespace SDSMTGDT.GWorks.Events
             bool firstPassed = false, secondPassed = false;
             var stringPublisher = new GenericGameEventPublisher<string>(eventManager, "test string publisher");
             string testValue = "test";
-            stringPublisher.registerEventListener(
+            stringPublisher.RegisterEventListener(
                 (sender, info) =>
                 {
-                    Assert.AreEqual(testValue, info.item1);
+                    Assert.AreEqual(testValue, info.Item1);
                     firstPassed = true;
                 });
-            stringPublisher.registerEventListener(
+            stringPublisher.RegisterEventListener(
                 (sender, info) =>
                 {
-                    Assert.AreEqual(testValue, info.item1);
+                    Assert.AreEqual(testValue, info.Item1);
                     secondPassed = true;
                 });
-            stringPublisher.publishDelayedEvent(testValue);
-            gameStateManager.update(new Microsoft.Xna.Framework.GameTime());
+            stringPublisher.PublishDelayedEvent(testValue);
+            gameStateManager.Update(new Microsoft.Xna.Framework.GameTime());
             if (!firstPassed || !secondPassed)
                 Assert.Fail();
         }

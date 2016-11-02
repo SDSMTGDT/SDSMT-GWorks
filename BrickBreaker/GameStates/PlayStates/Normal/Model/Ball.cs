@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Graphics;
 using SDSMTGDT.GWorks.GameStates;
 using SDSMTGDT.GWorks.Physics;
 using SDSMTGDT.GWorks.Physics.Collisions.Routes;
-using SDSMTGDT.GWorks.Spriting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,14 +31,14 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Model
             speedPxPerMillis = new Vector2(0, 0);
 
             CollisionEventRouter router = new CollisionEventRouter();
-            router.addCollisionRoute(new TypeCollisionRoute<Ball, EastWall>(Collisions.handleBallEastWallCollision));
-            router.addCollisionRoute(new TypeCollisionRoute<Ball, WestWall>(Collisions.handleBallWestWallCollision));
-            router.addCollisionRoute(new TypeCollisionRoute<Ball, NorthWall>(Collisions.handleBallNorthWallCollision));
-            router.addCollisionRoute(new TypeCollisionRoute<Ball, SouthWall>(Collisions.handleBallSouthWallCollision));
-            router.addCollisionRoute(new TypeCollisionRoute<Ball, Paddle>(Collisions.handleBallPaddleCollision));
-            router.addCollisionRoute(new TypeCollisionRoute<Ball, Brick>(Collisions.handleBallBrickCollision));
+            router.AddCollisionRoute(new TypeCollisionRoute<Ball, EastWall>(Collisions.handleBallEastWallCollision));
+            router.AddCollisionRoute(new TypeCollisionRoute<Ball, WestWall>(Collisions.handleBallWestWallCollision));
+            router.AddCollisionRoute(new TypeCollisionRoute<Ball, NorthWall>(Collisions.handleBallNorthWallCollision));
+            router.AddCollisionRoute(new TypeCollisionRoute<Ball, SouthWall>(Collisions.handleBallSouthWallCollision));
+            router.AddCollisionRoute(new TypeCollisionRoute<Ball, Paddle>(Collisions.handleBallPaddleCollision));
+            router.AddCollisionRoute(new TypeCollisionRoute<Ball, Brick>(Collisions.handleBallBrickCollision));
 
-            collisionPublisher.registerEventSubscriber(router);
+            CollisionPublisher.RegisterEventSubscriber(router);
 
             artist = new BallArtist(this);
             movement = new BallMovement(this);

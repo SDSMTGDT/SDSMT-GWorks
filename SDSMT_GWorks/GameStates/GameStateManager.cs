@@ -13,64 +13,64 @@ namespace SDSMTGDT.GWorks.GameStates
 {
     public class GameStateManager
     {
-        private Stack<GameState> states;
-        public SettingsManager settings { get; private set; }
-        public EventManager events { get; private set; }
-        public CollisionManager collisions { get; private set; }
-        public GraphicsDevice graphicsDevice { get; private set; }
+        private readonly Stack<GameState> states;
+        public SettingsManager Settings { get; }
+        public EventManager Events { get; }
+        public CollisionManager Collisions { get; private set; }
+        public GraphicsDevice GraphicsDevice { get; private set; }
 
         public GameStateManager(GraphicsDevice graphics)
         {
             states = new Stack<GameState>();
-            settings = new Settings.SettingsManager();
-            events = new EventManager();
-            collisions = new CollisionManager(events);
-            this.graphicsDevice = graphics;
+            Settings = new Settings.SettingsManager();
+            Events = new EventManager();
+            Collisions = new CollisionManager(Events);
+            GraphicsDevice = graphics;
 
             //sometimes graphics is null when we don't need drawing
             if (graphics != null) 
             {
-                settings.update(
-                    settings.engineSettings.WINDOW_WIDTH,
+                Settings.Update(
+                    Settings.EngineSettings.WINDOW_WIDTH,
                     graphics.Viewport.Width
                 );
-                settings.update(
-                    settings.engineSettings.WINDOW_HEIGHT,
+                Settings.Update(
+                    Settings.EngineSettings.WINDOW_HEIGHT,
                     graphics.Viewport.Height
                 );
             }
         }
 
-        public void push (GameState state)
+        public void Push (GameState state)
         {
-            state.onAddState();
+            state.OnAddState();
             states.Push(state);
         }
 
-        public GameState pop ()
+        public GameState Pop ()
         {
-            states.Peek().onRemoveState();
+            states.Peek().OnRemoveState();
             return states.Pop();
         }
 
-        public GameState top ()
+        public GameState Top ()
         {
             return states.Peek();
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (states.Count != 0)
-                states.Peek().update(gameTime);
-            events.update(gameTime);
+                states.Peek().Update(gameTime);
+            Events.Update(gameTime);
         }
 
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
             if (states.Count == 0)
                 return;
             graphics.Begin();
-            states.Peek().draw(gameTime, graphics);
+            states.Peek().Draw(gameTime, graphics);
             graphics.End();
         }
     }

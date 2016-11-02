@@ -26,7 +26,7 @@ namespace Pong.GameStates.Updates
         /// adjust the ball's position based on its velocity.
         /// </summary>
         /// <param name="gameTime"> time since last update</param>
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             ball.move(gameTime.ElapsedGameTime.Milliseconds);
         }

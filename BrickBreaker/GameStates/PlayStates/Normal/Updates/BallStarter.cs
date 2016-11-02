@@ -36,15 +36,15 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
             this.playState = playState;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             //Create new ball and move it when the player presses space
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
                 var rand = new Random();
                 ball.setLocation(
-                    (screen.Width - ball.getBounds().Width) / 2,
-                    (screen.Height - ball.getBounds().Height) / 2
+                    (screen.Width - ball.GetBounds().Width) / 2,
+                    (screen.Height - ball.GetBounds().Height) / 2
                 );
 
                 Vector2 ballVel = new Vector2(rand.Next(-50, 50), rand.Next(50 , 100));
@@ -57,12 +57,12 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
                 //The alteration must happen after iteration over the update listeners
                 //So, we use the event manager to queue an action to happen after the updates
                 //have been run.
-                playState.stateManager.events.queueAction(() => {
-                    playState.addDrawListener(ball.artist);
-                    playState.addUpdateListener(ball.movement);
+                playState.StateManager.Events.QueueAction(() => {
+                    playState.AddDrawListener(ball.artist);
+                    playState.AddUpdateListener(ball.movement);
                     //playState.addUpdateListener(new ManualBallMovement(ball));
                     //Don't allow this listener to run while the ball is in play
-                    playState.removeUpdateListener(this);
+                    playState.RemoveUpdateListener(this);
                 });
             }
         }
@@ -73,15 +73,15 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
         internal void resetBallStarter()
         {
             ball.setLocation(
-                (screen.Width - ball.getBounds().Width) / 2,
-                (screen.Height - ball.getBounds().Height) / 2
+                (screen.Width - ball.GetBounds().Width) / 2,
+                (screen.Height - ball.GetBounds().Height) / 2
             );
             ball.speedPxPerMillis = new Vector2(0, 0);
 
-            playState.stateManager.events.queueAction(() => {
-                playState.removeDrawListener(ball.artist);
-                playState.removeUpdateListener(ball.movement);
-                playState.addUpdateListener(this);
+            playState.StateManager.Events.QueueAction(() => {
+                playState.RemoveDrawListener(ball.artist);
+                playState.RemoveUpdateListener(ball.movement);
+                playState.AddUpdateListener(this);
             });
         }
     }

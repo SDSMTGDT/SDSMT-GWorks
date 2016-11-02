@@ -20,18 +20,18 @@ namespace SDSMTGDT.GWorks.Events.Generic
         /// <param name="item2">The second piece of information packaged</param>
         public GenericGameEventInfo(T1 item1, T2 item2)
         {
-            this.item1 = item1;
-            this.item2 = item2;
+            Item1 = item1;
+            Item2 = item2;
         }
 
         /// <summary>
         /// Container for the first piece of information.
         /// </summary>
-        public T1 item1 { get; set; }
+        public T1 Item1 { get; set; }
         /// <summary>
         /// Container for the second piece of information.
         /// </summary>
-        public T2 item2 { get; set; }
+        public T2 Item2 { get; set; }
     }
 
     /// <summary>
@@ -60,10 +60,10 @@ namespace SDSMTGDT.GWorks.Events.Generic
         /// </summary>
         /// <param name="item1">First piece of information to be packaged</param>
         /// <param name="item2">Second piece of information to be packaged</param>
-        public void publish(T1 item1, T2 item2)
+        public void Publish(T1 item1, T2 item2)
         {
             var info = new GenericGameEventInfo<T1, T2>(item1, item2);
-            fireEvent(info);
+            FireEvent(info);
         }
         
         /// <summary>
@@ -72,10 +72,10 @@ namespace SDSMTGDT.GWorks.Events.Generic
         /// </summary>
         /// <param name="item1">First piece of information to be packaged</param>
         /// <param name="item2">Second piece of information to be packaged</param>
-        public void publishDelayedEvent(T1 item1, T2 item2)
+        public void PublishDelayedEvent(T1 item1, T2 item2)
         {
             GenericGameEventInfo<T1, T2> info = new GenericGameEventInfo<T1, T2>(item1, item2);
-            queueEvent(info);
+            QueueEvent(info);
         }
     }
 

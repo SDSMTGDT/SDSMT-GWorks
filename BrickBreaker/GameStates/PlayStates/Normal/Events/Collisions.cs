@@ -31,41 +31,41 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Events
 
         internal static void handleBallNorthWallCollision(TypedCollisionEventInfo<Ball, NorthWall> info)
         {
-            var curr = info.collider.speedPxPerMillis;
+            var curr = info.Collider.speedPxPerMillis;
             curr.Y *= -1;
-            info.collider.speedPxPerMillis = curr;
-            while (info.collided.getBounds().Intersects(info.collider.getBounds()))
+            info.Collider.speedPxPerMillis = curr;
+            while (info.Collided.GetBounds().Intersects(info.Collider.GetBounds()))
             {
-                info.collider.move(info.collider.speedPxPerMillis.X, info.collider.speedPxPerMillis.Y);
+                info.Collider.move(info.Collider.speedPxPerMillis.X, info.Collider.speedPxPerMillis.Y);
             }
         }
 
         internal static void handleBallEastWallCollision(TypedCollisionEventInfo<Ball, EastWall> info)
         {
-            var curr = info.collider.speedPxPerMillis;
+            var curr = info.Collider.speedPxPerMillis;
             curr.X *= -1;
-            info.collider.speedPxPerMillis = curr;
-            while (info.collided.getBounds().Intersects(info.collider.getBounds()))
+            info.Collider.speedPxPerMillis = curr;
+            while (info.Collided.GetBounds().Intersects(info.Collider.GetBounds()))
             {
-                info.collider.move(info.collider.speedPxPerMillis.X, info.collider.speedPxPerMillis.Y);
+                info.Collider.move(info.Collider.speedPxPerMillis.X, info.Collider.speedPxPerMillis.Y);
             }
         }
 
         internal static void handleBallWestWallCollision(TypedCollisionEventInfo<Ball, WestWall> info)
         {
-            var curr = info.collider.speedPxPerMillis;
+            var curr = info.Collider.speedPxPerMillis;
             curr.X *= -1;
-            info.collider.speedPxPerMillis = curr;
-            while (info.collided.getBounds().Intersects(info.collider.getBounds()))
+            info.Collider.speedPxPerMillis = curr;
+            while (info.Collided.GetBounds().Intersects(info.Collider.GetBounds()))
             {
-                info.collider.move(info.collider.speedPxPerMillis.X, info.collider.speedPxPerMillis.Y);
+                info.Collider.move(info.Collider.speedPxPerMillis.X, info.Collider.speedPxPerMillis.Y);
 
             }
         }
 
         internal static void handleBallSouthWallCollision(TypedCollisionEventInfo<Ball, SouthWall> info)
         {
-            info.collider.starter.resetBallStarter();
+            info.Collider.starter.resetBallStarter();
         }
 
 
@@ -77,56 +77,56 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Events
             info.collider.speedPxPerMillis = curr;
             */
 
-            var collVector = -info.getCollisionVector(); // paddle to ball
+            var collVector = -info.GetCollisionVector(); // paddle to ball
 
-            int paddleWidth = info.collided.getBounds().Width;
+            int paddleWidth = info.Collided.GetBounds().Width;
             float maxRotation = (float)(Math.PI / 4);
 
             float rotation = (-maxRotation + 
-                ((collVector.X + paddleWidth / 2) / (paddleWidth + info.collider.getBounds().Width)) * 
+                ((collVector.X + paddleWidth / 2) / (paddleWidth + info.Collider.GetBounds().Width)) * 
                 (2 * maxRotation));
 
-            info.collider.speedPxPerMillis = Vector2.Transform(-Vector2.UnitY * info.collider.speedPxPerMillis.Length(), Matrix.CreateRotationZ(rotation));
+            info.Collider.speedPxPerMillis = Vector2.Transform(-Vector2.UnitY * info.Collider.speedPxPerMillis.Length(), Matrix.CreateRotationZ(rotation));
 
-            while(info.collided.getBounds().Intersects(info.collider.getBounds()))
+            while(info.Collided.GetBounds().Intersects(info.Collider.GetBounds()))
             {
-                info.collider.move(info.collider.speedPxPerMillis.X, info.collider.speedPxPerMillis.Y);
+                info.Collider.move(info.Collider.speedPxPerMillis.X, info.Collider.speedPxPerMillis.Y);
             }
         }
 
         internal static void handleBallBrickCollision(TypedCollisionEventInfo<Ball, Brick> info)
         {
-            info.collided.destroyed = true;
-            info.physicsManager.eventManager.queueAction(() =>
+            info.Collided.destroyed = true;
+            info.PhysicsManager.EventManager.QueueAction(() =>
             {
-                info.physicsManager.unregisterCollidable(info.collided);
+                info.PhysicsManager.UnregisterCollidable(info.Collided);
             });
-            Vector2 ballBrickVector = info.getCollisionVector();
-            Vector2 current = info.collider.speedPxPerMillis;
+            Vector2 ballBrickVector = info.GetCollisionVector();
+            Vector2 current = info.Collider.speedPxPerMillis;
             
             if (doSegmentsIntersect(
-                info.collider.getBounds().Center,
+                info.Collider.GetBounds().Center,
                 ballBrickVector,
-                new Point(info.collided.getBounds().X, info.collided.getBounds().Y + info.collided.getBounds().Height),
-                new Vector2(info.collided.getBounds().Width, 0)
+                new Point(info.Collided.GetBounds().X, info.Collided.GetBounds().Y + info.Collided.GetBounds().Height),
+                new Vector2(info.Collided.GetBounds().Width, 0)
             ))
             {
                 current.Y = Math.Abs(current.Y);
             }
             else if (doSegmentsIntersect(
-                info.collider.getBounds().Center,
+                info.Collider.GetBounds().Center,
                 ballBrickVector,
-                new Point(info.collided.getBounds().X, info.collided.getBounds().Y),
-                new Vector2(info.collided.getBounds().Width, 0)
+                new Point(info.Collided.GetBounds().X, info.Collided.GetBounds().Y),
+                new Vector2(info.Collided.GetBounds().Width, 0)
             ))
             {
                 current.Y = -Math.Abs(current.Y);
             }
             else if (doSegmentsIntersect(
-                info.collider.getBounds().Center,
+                info.Collider.GetBounds().Center,
                 ballBrickVector,
-                new Point(info.collided.getBounds().X + info.collided.getBounds().Width, info.collided.getBounds().Y),
-                new Vector2(0, info.collided.getBounds().Height)
+                new Point(info.Collided.GetBounds().X + info.Collided.GetBounds().Width, info.Collided.GetBounds().Y),
+                new Vector2(0, info.Collided.GetBounds().Height)
             ))
             {
                 current.X = Math.Abs(current.X);
@@ -136,10 +136,10 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Events
                 current.X = -Math.Abs(current.X);
             }
 
-            info.collider.speedPxPerMillis = current;
-            while (info.collider.getBounds().Intersects(info.collided.getBounds()))
+            info.Collider.speedPxPerMillis = current;
+            while (info.Collider.GetBounds().Intersects(info.Collided.GetBounds()))
             {
-                info.collider.move(info.collider.speedPxPerMillis.X, info.collider.speedPxPerMillis.Y);
+                info.Collider.move(info.Collider.speedPxPerMillis.X, info.Collider.speedPxPerMillis.Y);
             }
         }
     }

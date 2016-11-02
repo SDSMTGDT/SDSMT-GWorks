@@ -17,94 +17,94 @@ namespace SDSMTGDT.GWorks.Events
         /// <summary>
         /// The event id which identifies the sink for this publisher
         /// </summary>
-        public EventID<T> EVENT_ID { get; private set; }
+        public EventID<T> EVENT_ID { get; }
 
         /// <summary>
         /// The manager to connect the publisher with the subscribers
         /// </summary>
-        protected EventManager manager;
+        protected EventManager Manager;
 
         public GameEventHook(EventManager manager, EventID<T> eventID)
         {
-            this.manager = manager;
-            this.EVENT_ID = eventID;
+            Manager = manager;
+            EVENT_ID = eventID;
         }
 
         /// <summary>
         /// Registers an event listener with this publisher
         /// </summary>
         /// <param name="eventListener">A function to call when the event fires</param>
-        public void registerEventListener(GameEvent<T> eventListener)
+        public void RegisterEventListener(GameEvent<T> eventListener)
         {
-            manager.getEventActions(EVENT_ID).listeners += eventListener;
+            Manager.GetEventActions(EVENT_ID).Listeners += eventListener;
         }
 
         /// <summary>
         /// Registers a threaded event listener with this publisher
         /// </summary>
         /// <param name="eventListener">A function to call when the event fires</param>
-        public void registerAsyncEventListener(GameEvent<T> eventListener)
+        public void RegisterAsyncEventListener(GameEvent<T> eventListener)
         {
-            manager.getEventActions(EVENT_ID).asyncListeners += eventListener;
+            Manager.GetEventActions(EVENT_ID).AsyncListeners += eventListener;
         }
 
         /// <summary>
         /// Removes an event listener corresponding to this publisher
         /// </summary>
         /// <param name="eventListener">A function currently being called when the event fires</param>
-        public void unregisterEventListener(GameEvent<T> eventListener)
+        public void UnregisterEventListener(GameEvent<T> eventListener)
         {
-            manager.getEventActions(EVENT_ID).listeners -= eventListener;
+            Manager.GetEventActions(EVENT_ID).Listeners -= eventListener;
         }
 
         /// <summary>
         /// Removes a threaded event listener from the manager corresponding to this publisher
         /// </summary>
         /// <param name="eventListener">A function currently being called when the event fires</param>
-        public void unregisterAsyncEventListener(GameEvent<T> eventListener)
+        public void UnregisterAsyncEventListener(GameEvent<T> eventListener)
         {
-            manager.getEventActions(EVENT_ID).asyncListeners -= eventListener;
+            Manager.GetEventActions(EVENT_ID).AsyncListeners -= eventListener;
         }
 
         /// <summary>
         /// Registers an object oriented event listener with this publisher through the manager
         /// </summary>
         /// <param name="eventSubscriber">An object containing a method to call when the event fires</param>
-        public void registerEventSubscriber(GameEventSubscriber<T> eventSubscriber)
+        public void RegisterEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            registerEventListener(eventSubscriber.gameEventRecieved);
+            RegisterEventListener(eventSubscriber.GameEventRecieved);
         }
 
         /// <summary>
         /// Registers an object oriented threaded event listener with this publisher through the manager
         /// </summary>
         /// <param name="eventSubscriber">An object containing a method to call when the event fires</param>
-        public void registerAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
+        public void RegisterAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            registerAsyncEventListener(eventSubscriber.gameEventRecieved);
+            RegisterAsyncEventListener(eventSubscriber.GameEventRecieved);
         }
 
         /// <summary>
         /// Removes an object oriented event listener from the manager corresponding to this publisher
         /// </summary>
         /// <param name="eventSubscriber">An object containing a method which is being called when the event fires</param>
-        public void unregisterEventSubscriber(GameEventSubscriber<T> eventSubscriber)
+        public void UnregisterEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            unregisterEventListener(eventSubscriber.gameEventRecieved);
+            UnregisterEventListener(eventSubscriber.GameEventRecieved);
         }
 
         /// <summary>
         /// Removes an object oriented threaded event listener from the manager corresponding to this publisher
         /// </summary>
         /// <param name="eventSubscriber">An object containing a method which is being called when the event fires</param>
-        public void unregisterAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
+        public void UnregisterAsyncEventSubscriber(GameEventSubscriber<T> eventSubscriber)
         {
-            unregisterAsyncEventListener(eventSubscriber.gameEventRecieved);
+            UnregisterAsyncEventListener(eventSubscriber.GameEventRecieved);
         }
 
         public virtual void Dispose()
         {
-            manager.removeEvent(EVENT_ID);
+            Manager.RemoveEvent(EVENT_ID);
             //this.EVENT_ID = null;
             //We do not set the event ID to null
             //if fire is called once this is disposed

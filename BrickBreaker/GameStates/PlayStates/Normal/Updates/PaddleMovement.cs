@@ -30,12 +30,12 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
             this.screenWidth = screenWidth;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             var loc = paddle.getLocation();
             float xLoc = loc.X;
             if (Keyboard.GetState().IsKeyDown(Keys.Right) &&
-                xLoc + paddle.getBounds().Width < screenWidth)
+                xLoc + paddle.GetBounds().Width < screenWidth)
             {
                 paddle.move((float)(paddle.speedPxPerMilli * gameTime.ElapsedGameTime.Milliseconds), 0);
             }

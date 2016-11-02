@@ -23,7 +23,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
             this.ball = ball;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             Vector2 dir = new Vector2(0, 0);
             if (Keyboard.GetState().IsKeyDown(Keys.W))

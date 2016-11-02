@@ -18,8 +18,8 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// The collider will be sent along with the object it collided with,
         /// when a collision event is fired
         /// </summary>
-        private Collidable collider;
-        private CollisionManager collisions;
+        private readonly Collidable collider;
+        private readonly CollisionManager collisions;
 
         /// <summary>
         /// Create a new CollisionEventPublisher to forward collision events
@@ -28,7 +28,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// <param name="collisions">The collisions manager to publish events to</param>
         /// <param name="collider">The Collidable to publish events about</param>
         public CollisionEventPublisher(CollisionManager collisions, Collidable collider) :
-            base(collisions.eventManager, collider.ToString() + " Collider")
+            base(collisions.EventManager, collider.ToString() + " Collider")
         {
             this.collider = collider;
             this.collisions = collisions;
@@ -40,16 +40,16 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// </summary>
         /// <param name="collided">The collidable the collider collided with</param>
         /// <param name="group">The group containing one or both of the collidables</param>
-        internal void publish(Collidable collided, CollisionGroup group)
+        internal void Publish(Collidable collided, CollisionGroup group)
         {
-            fireEvent(new CollisionEventInfo(collider, collided, group, collisions));
+            FireEvent(new CollisionEventInfo(collider, collided, group, collisions));
         }
 
         /// <summary>
         /// Returns the collidable that this publisher is registered to
         /// </summary>
         /// <returns>The collidable this publisher is registered to</returns>
-        internal Collidable getCollidable()
+        internal Collidable GetCollidable()
         {
             return collider;
         }

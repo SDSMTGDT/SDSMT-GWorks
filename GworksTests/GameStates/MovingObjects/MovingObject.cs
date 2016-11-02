@@ -51,7 +51,7 @@ namespace SDSMTGDT.GWorks.GameStates.MovingObjects
         /// <param name="graphics">This class handles the drawing of a group
         /// of images in an efficient manner. It will handle drawing our
         /// movingObject to the screen.</param>
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
             graphics.Draw(movingTexture, bounds, movingColor);
         }
@@ -62,7 +62,7 @@ namespace SDSMTGDT.GWorks.GameStates.MovingObjects
         /// </summary>
         /// <returns>the maximum depth of our object divided by two. Used to
         /// allow the moving Object to draw over the background.</returns>
-        public int getZIndex()
+        public int GetZIndex()
         {
             return int.MaxValue / 2;
         }
@@ -75,7 +75,7 @@ namespace SDSMTGDT.GWorks.GameStates.MovingObjects
         /// game began, and since the last check against the time was made.
         /// Used to determine how far the movingObject has moved since the
         /// last check.</param>
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if ((bounds.Y + bounds.Height) > (port.Height - 20))
                 direction = !direction;

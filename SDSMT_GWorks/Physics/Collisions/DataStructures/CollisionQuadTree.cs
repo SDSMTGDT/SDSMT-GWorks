@@ -25,7 +25,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// <summary>
         /// The collidables held in this node
         /// </summary>
-        private List<Collidable> collidables;
+        private readonly List<Collidable> collidables;
 
         /// <summary>
         /// The boundary of this node in the collision quad tree. Must be a power of 2.
@@ -54,7 +54,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
                 CAPACITY = int.MaxValue;
             }
 
-            this.collidables = new List<Collidable>(CAPACITY);
+            collidables = new List<Collidable>(CAPACITY);
         }
 
         /// <summary>
@@ -63,10 +63,10 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// is only visible via CollisionStructure (which is internal).
         /// </summary>
         /// <param name="c">The collidable to insert</param>
-        void CollisionStructure.insert(Collidable c)
+        void CollisionStructure.Insert(Collidable c)
         {
             //If the collidable doesn't belong here, return
-            if (!boundary.Intersects(c.getBounds()))
+            if (!boundary.Intersects(c.GetBounds()))
             {
                 return;
             }
@@ -81,14 +81,14 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
             //If the children are uninitialized, initialize them.
             if (northWest == null)
             {
-                split();
+                Split();
             }
 
             //Find a spot for the collidable below
-            ((CollisionStructure)northWest).insert(c);
-            ((CollisionStructure)northEast).insert(c);
-            ((CollisionStructure)southWest).insert(c);
-            ((CollisionStructure)southEast).insert(c);
+            ((CollisionStructure)northWest).Insert(c);
+            ((CollisionStructure)northEast).Insert(c);
+            ((CollisionStructure)southWest).Insert(c);
+            ((CollisionStructure)southEast).Insert(c);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// </summary>
         /// <param name="c">The collidable to remove</param>
         /// <returns></returns>
-        bool CollisionStructure.delete(Collidable c)
+        bool CollisionStructure.Delete(Collidable c)
         {
             if(collidables.Remove(c))
             {
@@ -113,13 +113,13 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
 
             //Start off false, if we successfully delete in any of our children, return true
             bool status = false;
-            if ((northWest.boundary.Intersects(c.getBounds())) && ((CollisionStructure)northWest).delete(c))
+            if ((northWest.boundary.Intersects(c.GetBounds())) && ((CollisionStructure)northWest).Delete(c))
                 status = true;
-            if ((northEast.boundary.Intersects(c.getBounds())) && ((CollisionStructure)northEast).delete(c))
+            if ((northEast.boundary.Intersects(c.GetBounds())) && ((CollisionStructure)northEast).Delete(c))
                 status = true;
-            if ((southWest.boundary.Intersects(c.getBounds())) && ((CollisionStructure)southWest).delete(c))
+            if ((southWest.boundary.Intersects(c.GetBounds())) && ((CollisionStructure)southWest).Delete(c))
                 status = true;
-            if ((southEast.boundary.Intersects(c.getBounds())) && ((CollisionStructure)southEast).delete(c))
+            if ((southEast.boundary.Intersects(c.GetBounds())) && ((CollisionStructure)southEast).Delete(c))
                 status = true;
 
             return status;
@@ -130,12 +130,12 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// </summary>
         /// <param name="c">The collidable to update</param>
         /// <returns>Returns true if the collidable was found, deleted, and reinserted</returns>
-        bool CollisionStructure.update(Collidable c)
+        bool CollisionStructure.Update(Collidable c)
         {
-            bool exists = ((CollisionStructure)this).delete(c);
+            bool exists = ((CollisionStructure)this).Delete(c);
             if (!exists)
                 return false;
-            ((CollisionStructure)this).insert(c);
+            ((CollisionStructure)this).Insert(c);
             return true;
         }
 
@@ -147,10 +147,10 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// <param name="c">The collidable to check</param>
         /// <returns>A unique list of intersecting colliables, 
         /// the passed collidable may be in this list</returns>
-        IEnumerable<Collidable> CollisionStructure.checkCollision(Collidable c)
+        IEnumerable<Collidable> CollisionStructure.CheckCollision(Collidable c)
         {
             // If the collidable isn't in this quad return null
-            if (!boundary.Intersects(c.getBounds()))
+            if (!boundary.Intersects(c.GetBounds()))
             {
                 return null;
             }
@@ -161,7 +161,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
             // Test our collidables against c
             foreach (var other in collidables)
             {
-                if (c != other && c.getBounds().Intersects(other.getBounds()))
+                if (c != other && c.GetBounds().Intersects(other.GetBounds()))
                 {
                     collisions.Add(other);
                 }
@@ -169,25 +169,25 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
 
             if (northWest != null)
             {
-                var possCollisions = ((CollisionStructure)northWest).checkCollision(c);
+                var possCollisions = ((CollisionStructure)northWest).CheckCollision(c);
                 if (possCollisions != null)
                     collisions.AddRange(possCollisions);
             }
             if (northEast != null)
             {
-                var possCollisions = ((CollisionStructure)northEast).checkCollision(c);
+                var possCollisions = ((CollisionStructure)northEast).CheckCollision(c);
                 if (possCollisions != null)
                     collisions.AddRange(possCollisions);
             }
             if (southWest != null)
             {
-                var possCollisions = ((CollisionStructure)southWest).checkCollision(c);
+                var possCollisions = ((CollisionStructure)southWest).CheckCollision(c);
                 if (possCollisions != null)
                     collisions.AddRange(possCollisions);
             }
             if (southEast != null)
             {
-                var possCollisions = ((CollisionStructure)southEast).checkCollision(c);
+                var possCollisions = ((CollisionStructure)southEast).CheckCollision(c);
                 if (possCollisions != null)
                     collisions.AddRange(possCollisions);
             }
@@ -199,7 +199,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// <summary>
         /// Splits the current quad into four more quads
         /// </summary>
-        private void split()
+        private void Split()
         {
             northWest = new CollisionQuadTree(
                 boundary.X, boundary.Y,

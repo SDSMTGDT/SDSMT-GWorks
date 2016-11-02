@@ -14,12 +14,12 @@ namespace Pong.GameStates.Drawing
         Paddle paddle;
 
 
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
-            graphics.Draw(paddle.getTexture(), paddle.getBounds(), Color.AliceBlue);
+            graphics.Draw(paddle.getTexture(), paddle.GetBounds(), Color.AliceBlue);
         }
 
-        public int getZIndex()
+        public int GetZIndex()
         {
             return 0;
         }

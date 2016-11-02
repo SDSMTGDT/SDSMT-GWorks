@@ -18,7 +18,7 @@ namespace Pong.GameStates.Updates
             this.scoreboard = scoreboard;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             
         }

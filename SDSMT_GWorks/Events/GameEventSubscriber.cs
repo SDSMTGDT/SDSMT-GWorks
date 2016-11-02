@@ -12,6 +12,6 @@ namespace SDSMTGDT.GWorks.Events
     /// <typeparam name="T">The type of GameEventInfo to handle</typeparam>
     public interface GameEventSubscriber<T> where T : GameEventInfo
     {
-        void gameEventRecieved(object source, T eventInfo);
+        void GameEventRecieved(object source, T eventInfo);
     }
 }

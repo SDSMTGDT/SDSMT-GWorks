@@ -11,7 +11,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
     /// function based on the type of the second Collidable (the collided)
     /// in the event.
     /// </summary>
-    /// <typeparam name="CollidedType">The type to check the first Collidable against</typeparam>
+    /// <typeparam name="ColliderType">The type to check the first Collidable against</typeparam>
     /// <typeparam name="CollidedType">The type to check the second Collidable against</typeparam>
     public class TypeCollisionRoute<ColliderType, CollidedType> : CollisionRoute
         where ColliderType : Collidable where CollidedType : Collidable
@@ -20,7 +20,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// Function to call when the second Collidable is of type passed in 
         /// to TypeCollisionRouter
         /// </summary>
-        private CollisionReaction<ColliderType, CollidedType> reaction;
+        private readonly CollisionReaction<ColliderType, CollidedType> reaction;
 
         /// <summary>
         /// Constructs a TypeCollisionRoute with the given function to call
@@ -32,9 +32,9 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
             this.reaction = reaction;
         }
 
-        public bool activate(CollisionEventInfo info)
+        public bool Activate(CollisionEventInfo info)
         {
-            return info.collider is ColliderType && info.collided is CollidedType;
+            return info.Collider is ColliderType && info.Collided is CollidedType;
         }
 
         /// <summary>
@@ -44,12 +44,12 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// <param name="collider">First Collidable</param>
         /// <param name="collided">Second Collidable</param>
         /// <returns></returns>
-        public bool activate(Collidable collider, Collidable collided)
+        public bool Activate(Collidable collider, Collidable collided)
         {
             return collider is ColliderType && collided is CollidedType;
         }
 
-        public void run(CollisionEventInfo info)
+        public void Run(CollisionEventInfo info)
         {
             reaction(new TypedCollisionEventInfo<ColliderType, CollidedType>(info));
         }

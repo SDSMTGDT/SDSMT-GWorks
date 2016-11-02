@@ -21,7 +21,7 @@ namespace Pong.GameStates.Updates
             this.paddle = paddle;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {

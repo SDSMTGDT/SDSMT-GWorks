@@ -15,14 +15,14 @@ namespace SDSMTGDT.GWorks.Events
     public struct EventID<T> where T : GameEventInfo
     {
         /// <summary>
-        /// 
+        /// Autoincrementing ID number corresponding to this event
         /// </summary>
-        public uint id { get; private set; }
-        public string description { get; private set; }
+        public uint ID { get; private set; }
+        public string Description { get; private set; }
         internal EventID(uint id, string description)
         {
-            this.id = id;
-            this.description = description;
+            ID = id;
+            Description = description;
         }
     }
 }

@@ -32,12 +32,12 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// </summary>
         /// <param name="c">The passed collidable</param>
         /// <returns>An enumerable collection of the intersecting collidables</returns>
-        IEnumerable<Collidable> CollisionStructure.checkCollision(Collidable c)
+        IEnumerable<Collidable> CollisionStructure.CheckCollision(Collidable c)
         {
             LinkedList<Collidable> collisions = new LinkedList<Collidable>();
             foreach (Collidable other in collidables)
             {
-                if (c != other && other.getBounds().Intersects(c.getBounds()))
+                if (c != other && other.GetBounds().Intersects(c.GetBounds()))
                 {
                     collisions.AddLast(other);
                 }
@@ -50,7 +50,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// </summary>
         /// <param name="c">The passed collidable</param>
         /// <returns>True if the collidable was found and removed, else false</returns>
-        bool CollisionStructure.delete(Collidable c)
+        bool CollisionStructure.Delete(Collidable c)
         {
             return collidables.Remove(c);
         }
@@ -60,7 +60,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// </summary>
         /// <param name="c">The collidable to update</param>
         /// <returns>Returns true if the structure contains the collidable</returns>
-        bool CollisionStructure.update(Collidable c)
+        bool CollisionStructure.Update(Collidable c)
         {
             return collidables.Contains(c);
         }
@@ -69,7 +69,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// Adds the passed collidable to the list
         /// </summary>
         /// <param name="c">The passed collidable</param>
-        void CollisionStructure.insert(Collidable c)
+        void CollisionStructure.Insert(Collidable c)
         {
             collidables.AddLast(c);
         }

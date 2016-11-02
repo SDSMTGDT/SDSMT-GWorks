@@ -17,21 +17,21 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// Insert a collidable into the structure
         /// </summary>
         /// <param name="c">The collidable to insert</param>
-        void insert(Collidable c);
+        void Insert(Collidable c);
 
         /// <summary>
         /// Remove a collidable from the structure
         /// </summary>
         /// <param name="c">The collidable to remove</param>
         /// <returns>True if the collidable was found and removed, else false</returns>
-        bool delete(Collidable c);
+        bool Delete(Collidable c);
 
         /// <summary>
         /// Update a collidable in the structure
         /// </summary>
         /// <param name="c">The collidable to update</param>
         /// <returns>True if the collidable was found and updated, else false</returns>
-        bool update(Collidable c);
+        bool Update(Collidable c);
 
         /// <summary>
         /// Collides a collidable with the collidables in the structure.
@@ -39,7 +39,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures
         /// <param name="c">The collidable to check against</param>
         /// <returns>A enumerable collection containing the collidables 
         /// that intersect the passed in collidable</returns>
-        IEnumerable<Collidable> checkCollision(Collidable c);
+        IEnumerable<Collidable> CheckCollision(Collidable c);
 
     }
 }

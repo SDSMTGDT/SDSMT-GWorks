@@ -18,12 +18,12 @@ namespace Pong.GameStates.Drawing
             this.ball = ball;
         }
 
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
-            graphics.Draw(ball.getTexture(), ball.getBounds(), Color.White);
+            graphics.Draw(ball.getTexture(), ball.GetBounds(), Color.White);
         }
 
-        public int getZIndex()
+        public int GetZIndex()
         {
             return 0;
         }

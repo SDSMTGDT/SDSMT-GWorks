@@ -51,24 +51,24 @@ namespace SDSMTGDT.DungeonCrawler
             MovingObject movingObject = new MovingObject(graphics.GraphicsDevice,
                 new Rectangle(50, 0, 50, 50));
 
-            testState.addUpdateListener(movingObject);
-            testState.addDrawListener(movingObject);
+            testState.AddUpdateListener(movingObject);
+            testState.AddDrawListener(movingObject);
 
             //Create new Screen color changers and add them to the game state
             //The Graphics Device creates the texture,
             //The second parameter sets the area to draw in
-            testState.addDrawListener(new ScreenColorChanger(
+            testState.AddDrawListener(new ScreenColorChanger(
                 graphics.GraphicsDevice,
                 first
             ));
-            testState.addDrawListener(new ScreenColorChanger(
+            testState.AddDrawListener(new ScreenColorChanger(
                 graphics.GraphicsDevice,
                 second
             ));
 
             //Create a new diagnostic display at (20, 20)
-            testState.addDrawListener(new DiagnosticDisplay(20, 20, diagnosticFont));
-            gStateManager.push(testState);
+            testState.AddDrawListener(new DiagnosticDisplay(20, 20, diagnosticFont));
+            gStateManager.Push(testState);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace SDSMTGDT.DungeonCrawler
                 Exit();
 
             // TODO: Add your update logic here
-            gStateManager.update(gameTime);
+            gStateManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -115,7 +115,7 @@ namespace SDSMTGDT.DungeonCrawler
         protected override void Draw(GameTime gameTime)
         {
             graphics.GraphicsDevice.Clear(Color.White);
-            gStateManager.draw(gameTime, spriteBatch);
+            gStateManager.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }

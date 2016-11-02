@@ -13,51 +13,51 @@ namespace SDSMTGDT.GWorks.Settings
         // Setting stores a generic value, and fires an event when the value is updated
         private class Setting<T> : ISetting
         {
-            private T _value = default(T);
-            public T value {
-                get { return _value; }
-                set { _value = value; settingUpdated?.Invoke(value); }
+            private T value = default(T);
+            public T Value {
+                get { return value; }
+                set { this.value = value; SettingUpdated?.Invoke(value); }
             } 
-            public event Action<T> settingUpdated;
+            public event Action<T> SettingUpdated;
         }
 
         // Contains the settings associated with the game
-        private List<ISetting> settings;
+        private readonly List<ISetting> settings;
 
         // Contains the indexes for the default game settings
-        public EngineSettings engineSettings { get; private set; }
+        public EngineSettings EngineSettings { get; private set; }
 
         public SettingsManager()
         {
             settings = new List<ISetting>();
-            engineSettings = new EngineSettings(this);
+            EngineSettings = new EngineSettings(this);
         }
 
-        public SettingIndex<T> addSetting<T>()
+        public SettingIndex<T> AddSetting<T>()
         {
             settings.Add(new Setting<T>());
             SettingIndex<T> newSetting = settings.Count - 1;
             return newSetting;
         }
 
-        public void update<T>(SettingIndex<T> index, T value)
+        public void Update<T>(SettingIndex<T> index, T value)
         {
-            ((Setting<T>)settings[index]).value = value;
+            ((Setting<T>)settings[index]).Value = value;
         }
 
-        public T access<T>(SettingIndex<T> index)
+        public T Access<T>(SettingIndex<T> index)
         {
-            return ((Setting<T>)settings[index]).value;
+            return ((Setting<T>)settings[index]).Value;
         }
 
-        public void addUpdateListener<T>(SettingIndex<T> index, Action<T> updateListener)
+        public void AddUpdateListener<T>(SettingIndex<T> index, Action<T> updateListener)
         {
-            ((Setting<T>)settings[index]).settingUpdated += updateListener;
+            ((Setting<T>)settings[index]).SettingUpdated += updateListener;
         }        
 
-        public bool removeUpdateListener<T>(SettingIndex<T> index, Action<T> updateListener)
+        public bool RemoveUpdateListener<T>(SettingIndex<T> index, Action<T> updateListener)
         {
-            ((Setting<T>)settings[index]).settingUpdated -= updateListener;
+            ((Setting<T>)settings[index]).SettingUpdated -= updateListener;
             return true;
         }
     }

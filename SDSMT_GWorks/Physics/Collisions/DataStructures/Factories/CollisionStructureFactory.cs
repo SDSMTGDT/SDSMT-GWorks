@@ -18,6 +18,6 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures.Factories
         /// creating new collision groups.
         /// </summary>
         /// <returns>A new Collision Structure</returns>
-        internal abstract CollisionStructure createCollisionStructure();
+        internal abstract CollisionStructure CreateCollisionStructure();
     }
 }

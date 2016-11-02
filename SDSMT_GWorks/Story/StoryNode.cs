@@ -1,18 +1,14 @@
-﻿using SDSMTGDT.GWorks.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SDSMTGDT.GWorks.Story
 {
     [Serializable]
     public class StoryNode
     {
-        private StoryBoard storyBoard;
-        private LinkedList<StoryNode> predecessors;
-        private LinkedList<StoryNode> successors;
+        private readonly StoryBoard storyBoard;
+        private readonly LinkedList<StoryNode> predecessors;
+        private readonly LinkedList<StoryNode> successors;
         private bool state;
         public readonly uint STORY_NODE_ID;
         public readonly string DESCRIPTION;
@@ -20,46 +16,46 @@ namespace SDSMTGDT.GWorks.Story
         public StoryNode(StoryBoard storyBoard,string description)
         {
             this.storyBoard = storyBoard;
-            this.predecessors = new LinkedList<StoryNode>();
-            this.successors = new LinkedList<StoryNode>();
-            this.state = false;
-            this.STORY_NODE_ID = storyBoard.registerNewInnerNode(this);
-            this.DESCRIPTION = description;
+            predecessors = new LinkedList<StoryNode>();
+            successors = new LinkedList<StoryNode>();
+            state = false;
+            STORY_NODE_ID = storyBoard.RegisterNewInnerNode(this);
+            DESCRIPTION = description;
         }
 
-        public void setTrue()
+        public void SetTrue()
         {
             foreach(StoryNode predecessor in predecessors)
             {
-                if (predecessor.getState() == false)
+                if (predecessor.GetState() == false)
                     throw new InvalidStoryStateException();
             }
-            this.state = true;
-            storyBoard.updatePossibilities(this);
+            state = true;
+            storyBoard.UpdatePossibilities(this);
         }
         
-        public bool getState()
+        public bool GetState()
         {
             return state;
         }
 
-        public IEnumerable<StoryNode> getPredecessors()
+        public IEnumerable<StoryNode> GetPredecessors()
         {
             return predecessors;
         }
 
-        public IEnumerable<StoryNode> getSuccessors()
+        public IEnumerable<StoryNode> GetSuccessors()
         {
             return successors;
         }
 
-        public void addSuccessor(StoryNode successor)
+        public void AddSuccessor(StoryNode successor)
         {
             successors.AddLast(successor);
-            successor.addPredecessor(this);
+            successor.AddPredecessor(this);
         }
 
-        private void addPredecessor(StoryNode predecessor)
+        private void AddPredecessor(StoryNode predecessor)
         {
             predecessors.AddLast(predecessor);
         }

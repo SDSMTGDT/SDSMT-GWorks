@@ -22,9 +22,9 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
             this.ball = ball;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            collisions.checkCollisions(ball);
+            collisions.CheckCollisions(ball);
         }
     }
 }

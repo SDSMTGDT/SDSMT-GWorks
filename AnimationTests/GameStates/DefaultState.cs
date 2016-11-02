@@ -15,19 +15,19 @@ namespace AnimationTests.GameStates
 
         }
 
-        public override void onAddState()
+        public override void OnAddState()
         {
-            base.onAddState();
+            base.OnAddState();
         }
 
-        public override void draw(GameTime gameTime, SpriteBatch graphics)
+        public override void Draw(GameTime gameTime, SpriteBatch graphics)
         {
-            base.draw(gameTime, graphics);
+            base.Draw(gameTime, graphics);
         }
 
-        public override void update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            base.update(gameTime);
+            base.Update(gameTime);
         }
     }
 }

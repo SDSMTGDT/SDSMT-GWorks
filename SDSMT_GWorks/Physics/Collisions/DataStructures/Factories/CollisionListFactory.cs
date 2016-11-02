@@ -12,7 +12,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures.Factories
     /// </summary>
     public class CollisionListFactory : CollisionStructureFactory
     {
-        internal override CollisionStructure createCollisionStructure()
+        internal override CollisionStructure CreateCollisionStructure()
         {
             return new CollisionList();
         }

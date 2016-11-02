@@ -11,16 +11,16 @@ namespace SDSMTGDT.GWorks.Settings
     //The last method allows access of the index via casting
     public struct SettingIndex<T>
     {
-        private int index { get; }
+        private int Index { get; }
 
         public SettingIndex(int index)
         {
-            this.index = index;
+            Index = index;
         }
 
         public static implicit operator int (SettingIndex<T> instance)
         {
-            return instance.index;
+            return instance.Index;
         }
 
         public static implicit operator SettingIndex<T>(int v)

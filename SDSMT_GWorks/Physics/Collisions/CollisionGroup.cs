@@ -16,17 +16,17 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// <summary>
         /// The unique id for this group
         /// </summary>
-        public uint GROUP_ID { get; private set; }
+        public uint GROUP_ID { get; }
 
         /// <summary>
         /// The name of this group
         /// </summary>
-        public string name { get; private set; }
+        public string Name { get; }
   
         /// <summary>
         /// The backing structure for this group
         /// </summary>
-        internal CollisionStructure structure { get; private set; }
+        internal CollisionStructure Structure { get; }
 
         /// <summary>
         /// Creates a collision group with the given id, name, and collision structure.
@@ -36,9 +36,9 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// <param name="structure">The backing collision structure for this collision group</param>
         internal CollisionGroup(uint id, string name, CollisionStructure structure)
         {
-            this.GROUP_ID = id;
-            this.name = name;
-            this.structure = structure;
+            GROUP_ID = id;
+            Name = name;
+            Structure = structure;
         }
     }
 }

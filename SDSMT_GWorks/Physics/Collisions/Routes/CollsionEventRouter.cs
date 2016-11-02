@@ -17,14 +17,14 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// <summary>
         /// A list of possible routes for collision info to be sent through
         /// </summary>
-        private LinkedList<CollisionRoute> routes;
+        private readonly LinkedList<CollisionRoute> routes;
 
         /// <summary>
         /// Creates a new CollisionEventRouter
         /// </summary>
         public CollisionEventRouter()
         {
-            this.routes = new LinkedList<CollisionRoute>();
+            routes = new LinkedList<CollisionRoute>();
         }
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// </summary>
         /// <param name="source">Likely to be the collisions manager</param>
         /// <param name="eventInfo">CollisionEventInfo containing the Collidables</param>
-        public void gameEventRecieved(object source, CollisionEventInfo eventInfo)
+        public void GameEventRecieved(object source, CollisionEventInfo eventInfo)
         {
             foreach (CollisionRoute route in routes)
             {
-                if (route.activate(eventInfo))
+                if (route.Activate(eventInfo))
                 {
-                    route.run(eventInfo);
+                    route.Run(eventInfo);
                     return;
                 }
             }
@@ -49,7 +49,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// Adds a possible collision route to handle collision info
         /// </summary>
         /// <param name="route">A new collision route</param>
-        public void addCollisionRoute(CollisionRoute route)
+        public void AddCollisionRoute(CollisionRoute route)
         {
             routes.AddLast(route);
         }
@@ -58,7 +58,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.Routes
         /// Removes a collision route from the router
         /// </summary>
         /// <param name="route">An existing collision route</param>
-        public void removeCollisionRoute(CollisionRoute route)
+        public void RemoveCollisionRoute(CollisionRoute route)
         {
             routes.Remove(route);
         }

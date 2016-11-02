@@ -54,32 +54,32 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
         /// <param name="manager">Game state manager which will run this state</param>
         internal NormalPlayState(GameStateManager manager) : base(manager)
         {
-            screenWidth = manager.settings.access(manager.settings.engineSettings.WINDOW_WIDTH);
-            screenHeight = manager.settings.access(manager.settings.engineSettings.WINDOW_HEIGHT);
+            screenWidth = manager.Settings.Access(manager.Settings.EngineSettings.WINDOW_WIDTH);
+            screenHeight = manager.Settings.Access(manager.Settings.EngineSettings.WINDOW_HEIGHT);
             brickWidth = screenWidth / numBricksWide;
             brickHeight = (screenHeight / 3) / numBricksHigh;
-            collisionGroup = manager.collisions.createCollisionGroup("BrickBreaker", new CollisionListFactory());
+            collisionGroup = manager.Collisions.CreateCollisionGroup("BrickBreaker", new CollisionListFactory());
         }
 
         /// <summary>
         /// This method is called when the game state is pushed to the game state manager
         /// </summary>
-        public override void onAddState()
+        public override void OnAddState()
         {
             //Generate a screen rectangle for wall collidables
             Rectangle screen = new Rectangle(0, 0, screenWidth, screenHeight);
             
             //Create walls
-            this.north = new NorthWall(screen, stateManager.collisions);
-            this.east = new EastWall(screen, stateManager.collisions);
-            this.south = new SouthWall(screen, stateManager.collisions);
-            this.west = new WestWall(screen, stateManager.collisions);
+            this.north = new NorthWall(screen, StateManager.Collisions);
+            this.east = new EastWall(screen, StateManager.Collisions);
+            this.south = new SouthWall(screen, StateManager.Collisions);
+            this.west = new WestWall(screen, StateManager.Collisions);
 
             // pass this for access to game state manager for resouces
-            this.paddle = new Paddle(screen, stateManager.graphicsDevice, stateManager.collisions);
+            this.paddle = new Paddle(screen, StateManager.GraphicsDevice, StateManager.Collisions);
             
             // pass this for access to game state manager for resources
-            this.ball = new Ball(this, screen, stateManager.graphicsDevice, stateManager.collisions);
+            this.ball = new Ball(this, screen, StateManager.GraphicsDevice, StateManager.Collisions);
 
             // create the array of bricks
             this.bricks = new Brick[numBricksHigh, numBricksWide];
@@ -95,29 +95,29 @@ namespace BrickBreaker.GameStates.PlayStates.Normal
                     //Get the x coordinate of the new brick
                     int x = brickWidth * j;
 
-                    bricks[i, j] = new Brick(stateManager.graphicsDevice, Color.Red,
-                        new Rectangle(x, y, brickWidth, brickHeight), stateManager.collisions);
+                    bricks[i, j] = new Brick(StateManager.GraphicsDevice, Color.Red,
+                        new Rectangle(x, y, brickWidth, brickHeight), StateManager.Collisions);
                     /*if (i * j % 2 == 0)
                         bricks[i, j].destroyed = true;
                     else*/
-                        stateManager.collisions.registerCollidableInGroup(bricks[i, j], collisionGroup);                   
+                        StateManager.Collisions.RegisterCollidableInGroup(bricks[i, j], collisionGroup);                   
                 }
             }
 
-            addDrawListener(paddle.artist);
-            addDrawListener(new BricksArtist(bricks));
-            addUpdateListener(paddle.movement);
-            addUpdateListener(ball.starter);
+            AddDrawListener(paddle.artist);
+            AddDrawListener(new BricksArtist(bricks));
+            AddUpdateListener(paddle.movement);
+            AddUpdateListener(ball.starter);
 
-            stateManager.collisions.registerCollidableInGroup(paddle, collisionGroup);
-            stateManager.collisions.registerCollidableInGroup(ball, collisionGroup);
-            stateManager.collisions.registerCollidableInGroup(north, collisionGroup);
-            stateManager.collisions.registerCollidableInGroup(east, collisionGroup);
-            stateManager.collisions.registerCollidableInGroup(south, collisionGroup);
-            stateManager.collisions.registerCollidableInGroup(west, collisionGroup);
+            StateManager.Collisions.RegisterCollidableInGroup(paddle, collisionGroup);
+            StateManager.Collisions.RegisterCollidableInGroup(ball, collisionGroup);
+            StateManager.Collisions.RegisterCollidableInGroup(north, collisionGroup);
+            StateManager.Collisions.RegisterCollidableInGroup(east, collisionGroup);
+            StateManager.Collisions.RegisterCollidableInGroup(south, collisionGroup);
+            StateManager.Collisions.RegisterCollidableInGroup(west, collisionGroup);
             
             //Collision pumper just tells the library to check for collisions every tick... because im lazy
-            addUpdateListener(new CollisionChecker(stateManager.collisions, ball));
+            AddUpdateListener(new CollisionChecker(StateManager.Collisions, ball));
         }
     }
 }

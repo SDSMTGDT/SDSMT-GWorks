@@ -24,7 +24,7 @@ namespace SDSMTGDT.GWorks.GameStates.Diagnostic
             this.indent = new Vector2(100, 0);
         }
 
-        public void draw(GameTime gameTime, SpriteBatch graphics)
+        public void Draw(GameTime gameTime, SpriteBatch graphics)
         {
             double FPS = 1000D / (gameTime.ElapsedGameTime.Milliseconds);
             Rectangle screenSize = graphics.GraphicsDevice.Viewport.Bounds;
@@ -36,7 +36,7 @@ namespace SDSMTGDT.GWorks.GameStates.Diagnostic
             graphics.DrawString(font, diagnostic3, position + 2 * lineOffset + indent, Color.Black);
         }
 
-        public int getZIndex()
+        public int GetZIndex()
         {
             return 0;
         }

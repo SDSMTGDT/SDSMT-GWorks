@@ -11,9 +11,9 @@ namespace SDSMTGDT.GWorks.Spriting
     public interface Sprite
     {
         /// <summary>
-        /// Returns the user-defined bounds for this sprite
+        /// Returns the user-defined Bounds for this sprite
         /// </summary>
-        Rectangle bounds
+        Rectangle Bounds
         {
             get;
         }
@@ -21,16 +21,16 @@ namespace SDSMTGDT.GWorks.Spriting
         /// <summary>
         /// Returns the height and width of the underlying image
         /// </summary>
-        Vector2 imageBounds
+        Vector2 ImageBounds
         {
             get;
         }
 
-        void draw(SpriteBatch batch, Rectangle dest,
+        void Draw(SpriteBatch batch, Rectangle dest,
             Vector2? origin = default(Vector2?), float rotation = 0,
             Vector2? scale = default(Vector2?), Color? color = default(Color?),
             SpriteEffects effects = SpriteEffects.None, float layerDepth = 0);
 
-        void update(GameTime dt);
+        void Update(GameTime dt);
     }
 }

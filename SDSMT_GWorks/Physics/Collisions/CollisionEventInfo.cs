@@ -16,32 +16,32 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// <summary>
         /// The main collidable in the collision
         /// </summary>
-        public Collidable collider { get; private set; }
+        public Collidable Collider { get; }
 
         /// <summary>
         /// The other collidable in the collision
         /// </summary>
-        public Collidable collided { get; private set; }
+        public Collidable Collided { get; }
 
         /// <summary>
         /// The collisions manager which issued this info
         /// </summary>
-        public CollisionManager physicsManager { get; private set; }
+        public CollisionManager PhysicsManager { get; }
 
         /// <summary>
         /// The collision group containing both collidables
         /// </summary>
-        public CollisionGroup collisionGroup { get; private set; }
+        public CollisionGroup CollisionGroup { get; }
 
         /// <summary>
         /// Captures the rectangle of the collider at the time of the collision
         /// </summary>
-        public Rectangle colliderBounds { get; private set; }
+        public Rectangle ColliderBounds { get; }
 
         /// <summary>
         /// Captures the rectangle of the collided at the time of the collision
         /// </summary>
-        public Rectangle collidedBounds { get; private set; }
+        public Rectangle CollidedBounds { get; }
         
         /// <summary>
         /// Creates a CollisionEventInfo which holds two Collidables engaged in a collision
@@ -50,30 +50,30 @@ namespace SDSMTGDT.GWorks.Physics.Collisions
         /// <param name="collided">Collidable 2</param>
         public CollisionEventInfo(Collidable collider, Collidable collided, CollisionGroup group, CollisionManager manager)
         {
-            this.collider = collider;
-            this.collided = collided;
-            this.collisionGroup = group;
-            this.physicsManager = manager;
-            this.colliderBounds = new Rectangle(collider.getBounds().Location, collider.getBounds().Size);
-            this.collidedBounds = new Rectangle(collided.getBounds().Location, collided.getBounds().Size);
+            Collider = collider;
+            Collided = collided;
+            CollisionGroup = group;
+            PhysicsManager = manager;
+            ColliderBounds = new Rectangle(collider.GetBounds().Location, collider.GetBounds().Size);
+            CollidedBounds = new Rectangle(collided.GetBounds().Location, collided.GetBounds().Size);
         }
 
         /// <summary>
         /// Returns the intersection of the two bounding boxes
         /// </summary>
         /// <returns>The intersection of the collidable's bounding boxes</returns>
-        public Rectangle getIntersection()
+        public Rectangle GetIntersection()
         {
-            return Rectangle.Intersect(colliderBounds, collidedBounds);
+            return Rectangle.Intersect(ColliderBounds, CollidedBounds);
         }
 
         /// <summary>
         /// Calculates the vector from the center of the collider to the center of the collided
         /// </summary>
         /// <returns>A vector from the center of the collider to the center of the collided</returns>
-        public Vector2 getCollisionVector()
+        public Vector2 GetCollisionVector()
         {
-            return (collidedBounds.Center - colliderBounds.Center).ToVector2();
+            return (CollidedBounds.Center - ColliderBounds.Center).ToVector2();
         }
     }
 }

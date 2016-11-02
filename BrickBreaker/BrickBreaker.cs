@@ -59,7 +59,7 @@ namespace BrickBreaker
             gameStateManager = new GameStateManager(graphics.GraphicsDevice);
             
             //Create a new play state and push it. This is where the magic happens
-            gameStateManager.push(new NormalPlayState(gameStateManager));
+            gameStateManager.Push(new NormalPlayState(gameStateManager));
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace BrickBreaker
                 Exit();
 
             // Tell the game state manager to update everything
-            gameStateManager.update(gameTime);
+            gameStateManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -108,7 +108,7 @@ namespace BrickBreaker
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // Tell the game sate manager to draw everything
-            gameStateManager.draw(gameTime, spriteBatch);
+            gameStateManager.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }

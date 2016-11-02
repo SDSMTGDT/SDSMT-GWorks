@@ -31,7 +31,7 @@ namespace SDSMTGDT.GWorks.AnimationTests
         {
             gameStateManager = new GameStateManager(graphics.GraphicsDevice);
 
-            gameStateManager.push(new DefaultState(gameStateManager));
+            gameStateManager.Push(new DefaultState(gameStateManager));
 
             base.Initialize();
         }
@@ -67,7 +67,7 @@ namespace SDSMTGDT.GWorks.AnimationTests
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            gameStateManager.update(gameTime);
+            gameStateManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -81,7 +81,7 @@ namespace SDSMTGDT.GWorks.AnimationTests
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            gameStateManager.draw(gameTime, spriteBatch);
+            gameStateManager.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }

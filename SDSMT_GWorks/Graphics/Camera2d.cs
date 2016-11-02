@@ -18,14 +18,14 @@ namespace SDSMTGDT.GWorks.Graphics
         //makes a camera with a zoom of 1, no rotation, centered on the origin.
         public Camera2d()
         {
-            zoom = 1.0f;
-            rotation = 0.0f;
-            position = Vector2.Zero;
+            Zoom = 1.0f;
+            Rotation = 0.0f;
+            Position = Vector2.Zero;
         }
 
         //Properties allow us to add functionality later if we need to
         //The camera centers around position
-        public Vector2 position
+        public Vector2 Position
         {
             get;
             set;
@@ -34,58 +34,55 @@ namespace SDSMTGDT.GWorks.Graphics
         //Represents a linear transformation [scales, rotates]
         //Applys to every point drawn
         //Translates from game space to screen space
-        private Matrix transformation
+        private Matrix Transformation
         {
             get;
             set;
         }
 
         //allows us to translate from the screen space to the game space
-        private Matrix inverseTransformation
-        {
-            get { return Matrix.Invert(transformation); }
-        }
+        private Matrix InverseTransformation => Matrix.Invert(Transformation);
 
 
-        public float zoom
+        public float Zoom
         {
             get;
             set;
         }
 
         //takes in an amount of radians and rotates the camera anti clockwise
-        public float rotation
+        public float Rotation
         {
             get;
             set;
         }
 
         //changes the position by the given amount.
-        public void move(Vector2 amount)
+        public void Move(Vector2 amount)
         {
-            position += amount;
+            Position += amount;
         }
 
         //When a change is made,we need a new transformation matrix to
         //get the same result from the new starting values
-        public Matrix get_transformation(GraphicsDevice graphicsDevice)
+        public Matrix GetTransformation(GraphicsDevice graphicsDevice)
         {
-            transformation =       
-            Matrix.CreateTranslation(new Vector3(-position.X, -position.Y, 0)) *
-                                         Matrix.CreateRotationZ(rotation) *
-                                         Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
+            Transformation =       
+            Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
+                                         Matrix.CreateRotationZ(Rotation) *
+                                         Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                                          Matrix.CreateTranslation(
                                          new Vector3(graphicsDevice.Viewport.Width * 0.5f,
                                          graphicsDevice.Viewport.Height * 0.5f, 0)
             );
-            return transformation;
+            return Transformation;
         }
 
         //When we create a new transformation matrix, we need to create
         //a new inverse transformation to mate it
-        public Matrix getInverseTranformation()
+        public Matrix GetInverseTranformation()
         {
-            return inverseTransformation;
+            return InverseTransformation;
         }
     }
 }

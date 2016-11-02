@@ -16,7 +16,7 @@ namespace SDSMTGDT.GWorks.Events
         /// <summary>
         /// Interface to allow DelayedEvents to be stored in a queue
         /// </summary>
-        private interface IDelayedEvent { void fireEvent(); }
+        private interface IDelayedEvent { void FireEvent(); }
         
         /// <summary>
         /// Provide a closure for capturing the variables needed to fire a 
@@ -25,23 +25,21 @@ namespace SDSMTGDT.GWorks.Events
         /// <typeparam name="T">type of the event info being handled</typeparam>
         private class DelayedEvent<T> : IDelayedEvent where T : GameEventInfo
         {
-            private EventManager manager;
-            internal object sender { get; private set; }
-            internal EventID<T> eventID { get; private set; }
-            internal T eventInfo { get; private set; }
-            private GameEventActions<T> eventActions;
+            internal EventID<T> EventID { get; }
+            private readonly object sender;
+            private readonly T eventInfo;
+            private readonly GameEventActions<T> eventActions;
             internal DelayedEvent(EventManager manager, object sender, EventID<T> eventID, T eventInfo)
             {
-                this.manager = manager;
                 this.sender = sender;
-                this.eventID = eventID;
+                this.EventID = eventID;
                 this.eventInfo = eventInfo;
-                this.eventActions = manager.getEventActions(eventID);
+                this.eventActions = manager.GetEventActions(eventID);
             }
             
-            public void fireEvent()
+            public void FireEvent()
             {
-                eventActions.listeners?.Invoke(sender, eventInfo);
+                eventActions.Listeners?.Invoke(sender, eventInfo);
             }
         }
 
@@ -51,28 +49,28 @@ namespace SDSMTGDT.GWorks.Events
         private class EventIDFactory
         {
             uint eventIdCounter = 0;
-            internal EventID<T> createEventID<T>(string description) where T : GameEventInfo
+            internal EventID<T> CreateEventId<T>(string description) where T : GameEventInfo
             {
                 return new EventID<T>(eventIdCounter++, description);
             }
         }
 
         //Maps eventID ids to subscribers
-        private Dictionary<uint, IGameEventAction> eventMap;
+        private readonly Dictionary<uint, IGameEventAction> eventMap;
 
-        internal GameEventActions<T> getEventActions<T>(EventID<T> eventID) where T : GameEventInfo
+        internal GameEventActions<T> GetEventActions<T>(EventID<T> eventID) where T : GameEventInfo
         {
-            return (GameEventActions<T>)eventMap[eventID.id];
+            return (GameEventActions<T>)eventMap[eventID.ID];
         }
 
         //Allows for delayed execution of events
-        private LinkedList<IDelayedEvent> delayedEvents;
+        private readonly LinkedList<IDelayedEvent> delayedEvents;
 
         //Allows for changing game states etc after they run
-        private Queue<Action> delayedActions;
+        private readonly Queue<Action> delayedActions;
 
         //Creates eventIDs
-        private EventIDFactory eventIDFactory;
+        private readonly EventIDFactory eventIDFactory;
 
         /// <summary>
         /// Constructor for an EventManager.
@@ -92,10 +90,10 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="description">description of the event</param>
         /// <returns>returns an object with the id and description
         /// attached.</returns>
-        internal EventID<T> registerEvent<T>(string description) where T : GameEventInfo
+        internal EventID<T> RegisterEvent<T>(string description) where T : GameEventInfo
         {
-            EventID<T> eventID = eventIDFactory.createEventID<T>(description);
-            eventMap.Add(eventID.id, new GameEventActions<T>());
+            EventID<T> eventID = eventIDFactory.CreateEventId<T>(description);
+            eventMap.Add(eventID.ID, new GameEventActions<T>());
             return eventID;
         }
 
@@ -104,14 +102,14 @@ namespace SDSMTGDT.GWorks.Events
         /// </summary>
         /// <typeparam name="T">A type of GameEventInfo associated with the EventID</typeparam>
         /// <param name="eventID">The eventID to remove from the map</param>
-        internal void removeEvent<T>(EventID<T> eventID) where T : GameEventInfo
+        internal void RemoveEvent<T>(EventID<T> eventID) where T : GameEventInfo
         {
-            eventMap.Remove(eventID.id);
+            eventMap.Remove(eventID.ID);
             var node = delayedEvents.First;
             while (node != null)
             {
                 var nextNode = node.Next;
-                if (node.Value is DelayedEvent<T> && ((DelayedEvent<T>)node.Value).eventID.id == eventID.id)
+                if (node.Value is DelayedEvent<T> && ((DelayedEvent<T>)node.Value).EventID.ID == eventID.ID)
                 {
                     delayedEvents.Remove(node);
                 }
@@ -127,13 +125,13 @@ namespace SDSMTGDT.GWorks.Events
         /// <param name="eventID">Contains the id and description of the
         /// event</param>
         /// <param name="eventInfo">The info being sent</param>
-        internal void queueEvent<T>(object sender, EventID<T> eventID, T eventInfo)
+        internal void QueueEvent<T>(object sender, EventID<T> eventID, T eventInfo)
             where T : GameEventInfo
         {
             delayedEvents.AddLast(new DelayedEvent<T>(this, sender, eventID, eventInfo));
         }
 
-        public void queueAction(Action a)
+        public void QueueAction(Action a)
         {
             delayedActions.Enqueue(a);
         }
@@ -141,11 +139,11 @@ namespace SDSMTGDT.GWorks.Events
         /// <summary>
         /// Handles firing delayed events.
         /// </summary>
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             while (delayedEvents.Count != 0)
             {
-                delayedEvents.First().fireEvent();
+                delayedEvents.First().FireEvent();
                 delayedEvents.RemoveFirst();
             }
 
@@ -161,7 +159,7 @@ namespace SDSMTGDT.GWorks.Events
         /// Returns the amount of registered events in the eventMap.
         /// </summary>
         /// <returns>The amount of currently active events</returns>
-        public int getEventCount()
+        public int GetEventCount()
         {
             return eventMap.Count;
         }

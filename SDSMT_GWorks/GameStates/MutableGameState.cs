@@ -9,35 +9,35 @@ namespace SDSMTGDT.GWorks.GameStates
 {
     public class MutableGameState : GameState
     {
-        private LinkedList<DrawListener> drawListeners;
-        private LinkedList<UpdateListener> updateListeners;
+        private readonly LinkedList<DrawListener> drawListeners;
+        private readonly LinkedList<UpdateListener> updateListeners;
 
         public MutableGameState(GameStateManager manager) : base(manager)
         {
-            this.updateListeners = new LinkedList<UpdateListener>();
-            this.drawListeners = new LinkedList<DrawListener>();
+            updateListeners = new LinkedList<UpdateListener>();
+            drawListeners = new LinkedList<DrawListener>();
         }
 
-        public override void draw(GameTime gameTime, SpriteBatch graphics)
+        public override void Draw(GameTime gameTime, SpriteBatch graphics)
         {
             foreach (DrawListener dl in drawListeners)
             {
-                dl.draw(gameTime, graphics);
+                dl.Draw(gameTime, graphics);
             }
         }
 
-        public override void update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             foreach (UpdateListener ul in updateListeners)
             {
-                ul.update(gameTime);
+                ul.Update(gameTime);
             }
         }
 
-        public void addDrawListener(DrawListener dl)
+        public void AddDrawListener(DrawListener dl)
         {
             LinkedListNode<DrawListener> dlNode = drawListeners.First;
-            while(dlNode != null && dl.getZIndex() < dlNode.Value.getZIndex())
+            while(dlNode != null && dl.GetZIndex() < dlNode.Value.GetZIndex())
             {
                 dlNode = dlNode.Next;
             }
@@ -51,17 +51,17 @@ namespace SDSMTGDT.GWorks.GameStates
             }
         }
 
-        public bool removeDrawListener(DrawListener dl)
+        public bool RemoveDrawListener(DrawListener dl)
         {
             return drawListeners.Remove(dl);
         }
 
-        public void addUpdateListener(UpdateListener ul)
+        public void AddUpdateListener(UpdateListener ul)
         {
             updateListeners.AddLast(ul);
         }
 
-        public bool removeUpdateListener(UpdateListener ul)
+        public bool RemoveUpdateListener(UpdateListener ul)
         {
             return updateListeners.Remove(ul);
         }

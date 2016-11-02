@@ -13,23 +13,23 @@ namespace Pong.BaseClasses
     {
         protected Rectangle bounds;
         private CollisionManager collisions;
-        public CollisionEventPublisher collisionPublisher { get; }
+        public CollisionEventPublisher CollisionPublisher { get; }
 
         protected CollisionZone(Rectangle bounds, CollisionManager collisions)
         {
             this.bounds = bounds;
             this.collisions = collisions;
-            this.collisionPublisher = new CollisionEventPublisher(collisions, this);
+            this.CollisionPublisher = new CollisionEventPublisher(collisions, this);
         }
 
-        public Rectangle getBounds()
+        public Rectangle GetBounds()
         {
             return bounds;
         }
 
         public void dispose()
         {
-            collisions.unregisterCollidable(this);
+            collisions.UnregisterCollidable(this);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace BrickBreaker.GameStates.PlayStates.Normal.Updates
             this.ball = ball;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             var movement = ball.speedPxPerMillis * gameTime.ElapsedGameTime.Milliseconds;
             ball.move(movement.X, movement.Y);

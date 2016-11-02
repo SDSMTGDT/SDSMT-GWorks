@@ -64,7 +64,7 @@ namespace SDSMTGDT.DungeonCrawler
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            gStateManager.update(gameTime);
+            gStateManager.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -76,7 +76,7 @@ namespace SDSMTGDT.DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            gStateManager.draw(gameTime, spriteBatch);
+            gStateManager.Draw(gameTime, spriteBatch);
             base.Draw(gameTime);
         }
     }

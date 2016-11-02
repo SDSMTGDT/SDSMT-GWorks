@@ -12,7 +12,9 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures.Factories
     /// </summary>
     public class CollisionQuadTreeFactory : CollisionStructureFactory
     {
-        private int x, y, size;
+        private readonly int x;
+        private readonly int y;
+        private readonly int size;
 
         public CollisionQuadTreeFactory(int x, int y, int size)
         {
@@ -21,7 +23,7 @@ namespace SDSMTGDT.GWorks.Physics.Collisions.DataStructures.Factories
             this.size = size;
         }
 
-        internal override CollisionStructure createCollisionStructure()
+        internal override CollisionStructure CreateCollisionStructure()
         {
             return new CollisionQuadTree(x, y, size);
         }

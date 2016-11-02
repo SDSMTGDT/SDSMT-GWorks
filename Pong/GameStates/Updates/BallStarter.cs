@@ -33,10 +33,10 @@ namespace Pong.GameStates.Updates
             this.scoreboard = scoreboard;
         }
 
-        public void update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            ball.setPosition(playState.stateManager.graphicsDevice.Viewport.Width / 2,
-                playState.stateManager.graphicsDevice.Viewport.Height / 2);
+            ball.setPosition(playState.StateManager.GraphicsDevice.Viewport.Width / 2,
+                playState.StateManager.GraphicsDevice.Viewport.Height / 2);
 
             if ( chooseDirection() == true)
             {

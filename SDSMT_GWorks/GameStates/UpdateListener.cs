@@ -8,6 +8,6 @@ namespace SDSMTGDT.GWorks.GameStates
 {
     public interface UpdateListener
     {
-        void update(GameTime gameTime);
+        void Update(GameTime gameTime);
     }
 }

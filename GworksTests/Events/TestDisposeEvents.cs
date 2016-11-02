@@ -24,7 +24,7 @@ namespace SDSMTGDT.GWorks.Events
         public void initEventManager()
         {
             gameStateManager = new GameStateManager(null);
-            eventManager = gameStateManager.events;
+            eventManager = gameStateManager.Events;
         }
 
         [Test]
@@ -38,20 +38,20 @@ namespace SDSMTGDT.GWorks.Events
             //create our publisher
             GenericGameEventPublisher<int> myPublisher = 
                 new GenericGameEventPublisher<int>
-                (gameStateManager.events, "Test publisher");
+                (gameStateManager.Events, "Test publisher");
             //register the listener
-            myPublisher.registerEventListener((sender, info) =>
+            myPublisher.RegisterEventListener((sender, info) =>
             {
-                Assert.AreEqual(testValue, info.item1);
+                Assert.AreEqual(testValue, info.Item1);
             });
             //have the publisher publish something
-            myPublisher.publish(100);
+            myPublisher.Publish(100);
             //check the number of events in the event map
-            eventCountFirst = eventManager.getEventCount();
+            eventCountFirst = eventManager.GetEventCount();
             //dispose of the publisher
             myPublisher.Dispose();
             //check the number of events in the event map after disposal
-            eventCountSecond = eventManager.getEventCount();
+            eventCountSecond = eventManager.GetEventCount();
             //assert that the value has changed.
             Assert.AreEqual(eventCountFirst, 1);
             Assert.AreEqual(eventCountSecond, 0);

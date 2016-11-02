@@ -10,38 +10,40 @@ namespace SDSMTGDT.GWorks.GameStates
 {
     public abstract class GameState
     {
-        public GameStateManager stateManager;
-        private Queue<Action> afterRunQueue;
+        public GameStateManager StateManager { get; }
+
+        //TODO: implement this
+        private Queue<Action> AfterRunQueue { get; }
 
         public GameState(GameStateManager manager)
         {
-            this.stateManager = manager;
-            this.afterRunQueue = new Queue<Action>();
+            StateManager = manager;
+            AfterRunQueue = new Queue<Action>();
         }
  
-        public abstract void draw (
+        public abstract void Draw (
             GameTime gameTime,
             SpriteBatch graphics
         );
 
-        public abstract void update(GameTime gameTime);
+        public abstract void Update(GameTime gameTime);
 
-        public virtual void onAddState()
+        public virtual void OnAddState()
         {
 
         }
 
-        public virtual void onRemoveState()
+        public virtual void OnRemoveState()
         {
 
         }
 
-        public virtual void onLoadState(ContentManager content)
+        public virtual void OnLoadState(ContentManager content)
         {
 
         }
 
-        public virtual void onUnloadState()
+        public virtual void OnUnloadState()
         {
             
         }
