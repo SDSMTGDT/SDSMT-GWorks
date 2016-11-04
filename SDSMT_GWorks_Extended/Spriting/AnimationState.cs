@@ -88,7 +88,7 @@ namespace SDSMTGDT.GWorks.Spriting
                 {
                     FrameChanged();
                     if (animation.Bounds[oldFrame] != animation.Bounds[frameNumber])
-                        BoundsChanged(animation.Bounds[frameNumber]);
+                        BoundsChanged?.Invoke(animation.Bounds[frameNumber]);
                 }
             }
         }       

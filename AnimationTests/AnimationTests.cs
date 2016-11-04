@@ -31,7 +31,7 @@ namespace SDSMTGDT.GWorks.AnimationTests
         {
             gameStateManager = new GameStateManager(graphics.GraphicsDevice);
 
-            gameStateManager.Push(new DefaultState(gameStateManager));
+            gameStateManager.Push(new DefaultState(this.gameStateManager,this.Content));
 
             base.Initialize();
         }
